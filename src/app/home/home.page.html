@@ -1,14 +1,55 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button>Voltar</ion-back-button>
+    </ion-buttons>
+    <ion-title>SumBoard</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+<ion-content padding class="mec">
+  <h1>Sistemas operacionais</h1>
+    <ion-item class="input">
+      <ion-label><ion-icon name="search"></ion-icon></ion-label>
+      <ion-input placeholder="Pesquisar"></ion-input>
+    </ion-item>
+    <ion-list>
+ 
+        <ng-container *ngIf="!dia || dia.length == 0">
+          <div *ngFor="let n of [0,1,2]" padding>
+            <ion-skeleton-text></ion-skeleton-text>
+            <p>
+              <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+            </p>
+          </div>
+        </ng-container>
+        
+
+        <ion-card *ngFor="let item of dia">
+            <ion-card-header>
+              <ion-card-subtitle>Data</ion-card-subtitle>
+              <ion-card-title>{{ item.data }}</ion-card-title>
+            </ion-card-header>
+          
+            <ion-card-content >
+                  
+              <ion-col size="2" *ngFor="let mensa of item.mensagens">
+                  <div style="display: inline-block" button [routerLink]="['/resumo-edit', mensa.id]">
+                    <ion-icon name="folder"></ion-icon>
+                    {{mensa.tag}}
+                  </div>
+              </ion-col>
+            </ion-card-content>
+          </ion-card>
+
+        
+     
+      </ion-list>
+     
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button [routerLink]="['/resumo-insert']" routerDirection="forward">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+  
 </ion-content>

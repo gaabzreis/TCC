@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{this.todo.tag}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content padding>
+  <h1 style="text-align: center;">{{this.todo.titulo}}</h1>
+
+  <h3>Resumo escrito</h3>
+  <hr>
+  <p>{{this.todo.conteudo}}</p>
+  <br><br>
+  <h3>Fotos do resumo</h3>
+  <hr>
+  <p>{{this.todo}}</p>
+</ion-content>
