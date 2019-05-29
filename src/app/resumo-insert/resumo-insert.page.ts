@@ -3,11 +3,11 @@ import { ResumoService } from './../resumo.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ToastController } from '@ionic/angular';
 
-export interface Todo {
-  id?: string;
-  task: string;
-  priority: number;
-  createdAt: number;
+export interface Resumo {
+  data: String;
+  conteudo: String;
+  tag: String;
+  titulo: String
 }
 @Component({
   selector: 'app-resumo-insert',

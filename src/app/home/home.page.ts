@@ -6,11 +6,12 @@ import { ToastController } from '@ionic/angular';
 import { map } from "rxjs/operators";
 import { AngularFirestore, AngularFirestoreCollection  } from 'angularfire2/firestore';
 
-export interface Todo {
-  id?: string;
-  task: string;
-  priority: number;
-  createdAt: number;
+export interface Resumo {
+  id? : String;
+  data: String;
+  conteudo: String;
+  tag: String;
+  titulo: String
 }
 
 @Component({
@@ -19,7 +20,7 @@ export interface Todo {
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit  {
-  todos: Todo[];
+  todos: Resumo[];
   dia: {};
 
   constructor(public router: Router, private provider: ResumoService, public toastController: ToastController) {

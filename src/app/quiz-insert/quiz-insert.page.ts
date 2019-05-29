@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizService } from './../quiz.service';
+import { QuizService, Resposta, Quiz } from './../quiz.service';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -13,7 +13,7 @@ export class QuizInsertPage implements OnInit {
   tag: String
   titulo: String
   pergunta: String
-  respostas : {} = [{
+  respostas : Resposta[] = [{
     descricao: "",
     acerto: false
   }]
@@ -78,7 +78,12 @@ export class QuizInsertPage implements OnInit {
         }
       ]
     });
-    let conteudo = {titulo: this.titulo, tag: this.tag, pergunta: this.pergunta, respotas: this.respostas}
+    let conteudo : Quiz = {
+      titulo: this.titulo, 
+      tag: this.tag, 
+      pergunta: this.pergunta, 
+      respostas: this.respostas
+    }
 
     this.provider.addQuiz(conteudo).then(() => {
       toast.present();

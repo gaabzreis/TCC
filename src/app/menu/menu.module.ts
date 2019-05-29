@@ -19,11 +19,11 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadChildren: './home/home.module#HomePageModule',
+        loadChildren: '../home/home.module#HomePageModule',
       },
       {
         path: 'quiz',
-        loadChildren: './quiz/quiz.module#QuizPageModule'
+        loadChildren: '../quiz/quiz.module#QuizPageModule'
       }
     ]
   }

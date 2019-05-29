@@ -4,11 +4,11 @@ import { NavController, LoadingController } from '@ionic/angular';
 import { ResumoService } from './../resumo.service';
 
 
-export interface Todo {
-  id?: string;
-  task: string;
-  priority: number;
-  createdAt: number;
+export interface Resumo {
+  data: String;
+  conteudo: String;
+  tag: String;
+  titulo: String
 }
 
 @Component({
@@ -19,10 +19,11 @@ export interface Todo {
 
 
 export class ResumoEditPage implements OnInit {
-  todo: Todo = {
-    task: 'test',
-    createdAt: new Date().getTime(),
-    priority: 2
+  todo: Resumo = {
+    data: "",
+    conteudo: "",
+    tag: "",
+    titulo: ""
   };
   fotos: String[] = []
   todoId: String

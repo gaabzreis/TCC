@@ -7,11 +7,13 @@ export interface Quiz {
   titulo: String;
   pergunta: String;
   tag: String;
-  respostas: {
-    resposta: String,
-    acerto: false
-  };
+  respostas: Resposta[]
 
+}
+
+export interface Resposta{
+  descricao: String;
+  acerto: boolean;
 }
 
 @Injectable({

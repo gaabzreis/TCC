@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizService } from './../quiz.service';
+import { QuizService, Resposta, Quiz } from './../quiz.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ToastController, AlertController  } from '@ionic/angular';
@@ -9,17 +9,6 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 /* import {Math } from 'mathjs' */
 
-export interface Quiz {
-  id?: string;
-  titulo: String;
-  pergunta: String;
-  tag: String;
-  respostas: {
-    resposta: String,
-    acerto: false
-  };
-}
-
 @Component({
   selector: 'app-quiz-listar',
   templateUrl: './quiz-listar.page.html',
@@ -28,8 +17,8 @@ export interface Quiz {
 export class QuizListarPage implements OnInit {
   todo : Quiz[]
   mostrar: Quiz[]
-  res: String
-  rand2 : String[]
+  res: Quiz[]
+  rand2 : number[]
   respostas: {} = [{
     descricao: "",
     acerto: false
@@ -61,9 +50,9 @@ export class QuizListarPage implements OnInit {
         loading.dismiss();
         if(tag.find(x => x === atual.tag) && cont < index){
           cont++
-          let delimiter = atual.respotas.length
+          let delimiter = atual.respostas.length
           let randomico = Math.floor(Math.random() * (delimiter - 0))
-          atual.respotas = atual.respotas.map((e, index) => {
+          atual.respostas = atual.respostas.map((e, index) => {
             if(index == 0){
               this.rand2 = [randomico]
             }
@@ -77,14 +66,14 @@ export class QuizListarPage implements OnInit {
               this.rand2 = [...this.rand2, rand1]
             }
             
-            return {descricao:  atual.respotas[this.rand2[index]].descricao, acerto: atual.respotas[this.rand2[index]].acerto}
+            return {descricao:  atual.respostas[this.rand2[index]].descricao, acerto: atual.respostas[this.rand2[index]].acerto}
           })
           return [...prev, atual]
         }
         return [...prev]
       }, [])
       this.respostas = this.res.map(e => {
-        return e.respotas.map(y => {
+        return e.respostas.map(y => {
           return {descricao: y.descricao, acerto: y.acerto, marcado: false}
         }) 
       })

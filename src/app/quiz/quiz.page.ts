@@ -1,4 +1,4 @@
-import { QuizService } from './../quiz.service';
+import { QuizService, Quiz, Resposta } from './../quiz.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -14,11 +14,11 @@ import { NavController, LoadingController } from '@ionic/angular';
   styleUrls: ['./quiz.page.scss'],
 })
 export class QuizPage implements OnInit {
-  tagSelect: String
-  todo : Todo[]
-  qtdQuiz: Number[]
+  tagSelect: String[]
+  todo : Quiz[]
+  qtdQuiz: number[]
   index: String
-  somenteTag: Todo[]
+  somenteTag: Quiz[]
   constructor(public toastController: ToastController, private provider : QuizService, private route: ActivatedRoute, private loadingController: LoadingController) { } 
 
   ngOnInit() {
