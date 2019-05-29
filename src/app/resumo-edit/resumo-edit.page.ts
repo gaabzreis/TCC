@@ -24,6 +24,7 @@ export class ResumoEditPage implements OnInit {
     createdAt: new Date().getTime(),
     priority: 2
   };
+  fotos: String[] = []
   todoId: String
   constructor(private route: ActivatedRoute, private loadingController: LoadingController, private provider: ResumoService) { }
 
@@ -42,7 +43,11 @@ export class ResumoEditPage implements OnInit {
     this.provider.getByFilter(this.todoId).subscribe(res => {
       loading.dismiss();
       this.todo = res;
-      console.log(this.todo)
+      let randomValue = Math.floor(Math.random() * (10 - 1))
+      for(let i = 0; i < randomValue; i++){
+        this.fotos = [...this.fotos, ""]
+      }
+      console.log(this.fotos)
     });
   }
 

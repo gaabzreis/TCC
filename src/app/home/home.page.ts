@@ -6,7 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { map } from "rxjs/operators";
 import { AngularFirestore, AngularFirestoreCollection  } from 'angularfire2/firestore';
 
-export interface Resumo {
+export interface Todo {
   id?: string;
   task: string;
   priority: number;
@@ -20,12 +20,12 @@ export interface Resumo {
 })
 export class HomePage implements OnInit  {
   todos: Todo[];
-  dia: Dia[];
+  dia: {};
 
   constructor(public router: Router, private provider: ResumoService, public toastController: ToastController) {
   }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.provider.getAll().subscribe(res => {
       this.todos = res
       this.dia = this.todos.reduce((prev, current) => {

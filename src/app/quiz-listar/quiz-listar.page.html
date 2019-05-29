@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/menu/quiz"></ion-back-button>
+        
+      </ion-buttons>
+      <ion-title>Quiz gerado</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content padding class="mec">
+  <h1 style="text-align: center">Quiz gerado</h1>
+  <div *ngIf="!verGab">
+    <div  *ngFor="let item of res; index as b" [attr.data-index]="b" >
+      <hr>
+      <div class="tituloQuestionario">
+        {{item.titulo}}
+      </div>
+      <div class="tagQuestionario">
+          {{item.tag}}
+      </div>
+      <div class="perguntaQuestionario">
+          {{b + 1}}) {{item.pergunta}}
+      </div>
+      <div class="respostas" *ngFor="let resps of item.respotas;index as i " [attr.data-index]="i">
+        <ion-list>  
+          <ion-radio-group >
+              <ion-item>
+                <ion-label>{{resps.descricao}} </ion-label>
+                <ion-checkbox slot="start" color="success"  [(ngModel)]="respostas[b][i].marcado"></ion-checkbox>
+              </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="verGab">
+      <div  *ngFor="let item of res; index as b" [attr.data-index]="b" >
+          <div class="tituloQuestionario">
+            {{item.titulo}}
+          </div>
+          <div class="tagQuestionario">
+              {{item.tag}}
+          </div>
+          <div class="perguntaQuestionario">
+              {{item.pergunta}}
+          </div>
+          <div class="respostas" *ngFor="let resps of item.respotas;index as i " [attr.data-index]="i">
+            <ion-list>  
+              <ion-radio-group >
+                  <ion-item>
+                    <ion-label>{{resps.descricao}} </ion-label>
+                    <ion-checkbox slot="start" color="success" [(checked)]="resps.acerto" disabled="true"></ion-checkbox>
+                  </ion-item>
+              </ion-radio-group>
+            </ion-list>
+          </div>
+        </div>
+  </div>
+</ion-content>
+<ion-footer>
+    <ion-button *ngIf="!verGab" expand="block" color="success" style="margin: 10px;" (click)="responder()" >Responder</ion-button>
+    <ion-button *ngIf="verGab" expand="block" color="primary" style="margin: 10px;" [routerLink]="['/menu/quiz']" >Gerar novo quiz</ion-button>
+</ion-footer>

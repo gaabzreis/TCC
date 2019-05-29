@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        
+      </ion-buttons>
+      <ion-title>SumBoard</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content padding class="mec">
+  <h1 style="text-align: center">Sistemas operacionais - Questionários</h1>
+  <div style="text-align: center;
+  border: 1px solid red;
+  padding: 44px;
+  font-size: 15px;
+  font-weight: 600;
+  color: red;
+  border-radius: 9px;
+  margin-top: 35px;" *ngIf="todo.length == 0 || !todo ">
+      Que Pena! Não há quiz para serem gerados! Crie um para auxiliar seus colegas
+  </div>   
+  <div style="text-align: center;" *ngIf="todo.length > 0">
+
+
+  <ion-item>
+    <ion-label>Selecione a tag</ion-label>
+    <ion-select multiple="true" cancelText="Cancelar" okText="Selecionar" [(ngModel)]="tagSelect" >
+      <ion-select-option [(value)]="item.tag" *ngFor="let item of somenteTag" >{{item.tag}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Selecione a quantidade de perguntas</ion-label>
+    <ion-select (click)="teste()" [(ngModel)]="index">
+      <ion-select-option [(value)]="item" *ngFor="let item of qtdQuiz">{{item}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-button shape="round" class="gerarQuiz" fill="outline" *ngIf="tagSelect && index" [routerLink]="['/quiz-listar', tagSelect + '@' + index ]">Gerar quiz</ion-button>
+  </div>   
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button [routerLink]="['/quiz-insert']" routerDirection="forward">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+  
+</ion-content>

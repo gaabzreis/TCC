@@ -1,0 +1,26 @@
+.tituloQuestionario{
+    margin-top: 10px;
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+}
+hr {
+    height: 2px !important;
+    width: 500px !important;
+    background: rgb(130, 224, 154) !important;
+    display: block !important;
+    font-size: 2em !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+.tagQuestionario{
+    font-size: 15px;
+    color: grey;
+    margin-bottom: 15px;
+    width: 100%;
+    padding-left:70%; 
+}
+.perguntaQuestionario{
+    text-align: justify;
+    margin-bottom: 5px;
+}

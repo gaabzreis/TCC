@@ -1,19 +1,21 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button>Voltar</ion-back-button>
+  <ion-toolbar  color="primary">
+    
+    <ion-buttons slot="start" >
+        <ion-menu-button></ion-menu-button>
+      
     </ion-buttons>
-    <ion-title>SumBoard</ion-title>
+    <ion-title>Summboard</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding class="mec">
+<ion-content padding class="mec" color="light">
   <h1>Sistemas operacionais</h1>
     <ion-item class="input">
       <ion-label><ion-icon name="search"></ion-icon></ion-label>
       <ion-input placeholder="Pesquisar"></ion-input>
     </ion-item>
-    <ion-list>
+    <ion-list color="light">
  
         <ng-container *ngIf="!dia || dia.length == 0">
           <div *ngFor="let n of [0,1,2]" padding>

@@ -12,9 +12,11 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ResumoService } from './resumo.service';
+import { QuizService } from './quiz.service';
 
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,7 +37,8 @@ import { Toast } from '@ionic-native/toast/ngx';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ResumoService,
     Toast,
-    Camera
+    Camera,
+    QuizService
   ],
   bootstrap: [AppComponent]
 })

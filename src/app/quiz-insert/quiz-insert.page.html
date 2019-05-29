@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/menu/quiz"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Inserir novo quiz</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+    <div style="padding: 10px; text-align: center; margin-bottom: 10px;">
+      <h1>Inserir novo Quiz</h1>
+    </div>
+    <ion-item>
+        <ion-label position="floating">Tag</ion-label>
+        <ion-input [(ngModel)]="tag" placeholder="Questão em uma palavra (EX. Limites)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Título</ion-label>
+      <ion-input [(ngModel)]="titulo" placeholder="Título da questão (EX. Cálculo)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Pergunta</ion-label>
+      <ion-textarea lines="2" [(ngModel)]="pergunta"></ion-textarea>
+    </ion-item>
+    <div style="text-align: center; margin-top: 50px; font-weight: 600; height: 50px;">
+        <ion-label >Respostas</ion-label>
+        <ion-button (click)="removeContador()" style="float: right;" color="danger"><ion-icon name="remove"></ion-icon></ion-button>
+        <ion-button (click)="addContador()" style="float: right;" color="success"><ion-icon name="add"></ion-icon></ion-button>
+    </div>
+    
+    <div *ngFor="let teste of valores">
+      
+      <ion-item>
+        <ion-checkbox slot="start" color="success" [(ngModel)]="respostas[teste - 1].acerto"></ion-checkbox>
+        <ion-label position="floating">Resposta {{teste}}</ion-label>
+        
+        <ion-input [(ngModel)]="respostas[teste - 1].descricao" ></ion-input>
+    </ion-item>
+  </div>
+    
+</ion-content>
+<ion-footer>
+    <ion-button expand="block" color="success" style="margin: 10px;" (click)="salvar()" >Salvar</ion-button>
+</ion-footer>
