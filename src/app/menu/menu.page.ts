@@ -27,7 +27,12 @@ export class MenuPage implements OnInit {
           icon: 'help'
         },
       ]
-    }
+    },
+    {
+      title: 'Sair',
+      url: '../login',
+      icon: 'log-out'
+    },
    
   ];
  
