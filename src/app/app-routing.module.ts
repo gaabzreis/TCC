@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'quiz-listar/:conteudo', loadChildren: './quiz-listar/quiz-listar.module#QuizListarPageModule' },
   { path: 'forum', loadChildren: './forum/forum.module#ForumPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'cadastre', loadChildren: './cadastre/cadastre.module#CadastrePageModule' },
 ];
 
 @NgModule({

@@ -44,5 +44,8 @@ export class LoginPage implements OnInit {
     
     
   }
+  cadastre(){
+    this.router.navigate(["cadastre"])
+  }
 
 }
