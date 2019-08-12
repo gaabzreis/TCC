@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizService, Resposta, Quiz } from './../quiz.service';
+import { QuizService, Resposta, Quiz } from './../services/quiz.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ToastController, AlertController  } from '@ionic/angular';

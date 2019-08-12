@@ -11,8 +11,6 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ResumoService } from './resumo.service';
-import { QuizService } from './quiz.service';
 
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
@@ -35,10 +33,8 @@ import { Toast } from '@ionic-native/toast/ngx';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    ResumoService,
     Toast,
-    Camera,
-    QuizService
+    Camera
   ],
   bootstrap: [AppComponent]
 })

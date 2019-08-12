@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
-import { ResumoService } from './../resumo.service';
+import { ResumoService } from './../services/resumo.service';
 
 
 export interface Resumo {

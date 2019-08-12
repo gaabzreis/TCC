@@ -12,9 +12,12 @@ const routes: Routes = [
   { path: 'quiz-insert', loadChildren: './quiz-insert/quiz-insert.module#QuizInsertPageModule' },
   { path: 'quiz-listar', loadChildren: './quiz-listar/quiz-listar.module#QuizListarPageModule' },
   { path: 'quiz-listar/:conteudo', loadChildren: './quiz-listar/quiz-listar.module#QuizListarPageModule' },
-  { path: 'forum', loadChildren: './forum/forum.module#ForumPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'cadastre', loadChildren: './cadastre/cadastre.module#CadastrePageModule' },
+  { path: 'sala-aula', loadChildren: './sala-aula/sala-aula.module#SalaAulaPageModule' },
+  { path: 'resumo', loadChildren: './resumo/resumo.module#ResumoPageModule' },
+  { path: 'sala-insert', loadChildren: './sala-insert/sala-insert.module#SalaInsertPageModule' },
+  { path: 'sala-insert/:sala-aula', loadChildren: './sala-insert/sala-insert.module#SalaInsertPageModule' },
 ];
 
 @NgModule({

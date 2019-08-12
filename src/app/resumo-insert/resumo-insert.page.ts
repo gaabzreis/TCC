@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ResumoService } from './../resumo.service';
+import { ResumoService } from './../services/resumo.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ToastController } from '@ionic/angular';
 

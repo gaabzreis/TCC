@@ -13,20 +13,20 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
-  {
+   {
     path: '',
     component: MenuPage,
     children: [
       {
-        path: 'home',
-        loadChildren: '../home/home.module#HomePageModule',
+        path: 'sala-aula',
+        loadChildren: '../sala-aula/sala-aula.module#SalaAulaPageModule',
       },
       {
-        path: 'quiz',
-        loadChildren: '../quiz/quiz.module#QuizPageModule'
+        path: 'home',
+        loadChildren: '../home/home.module#HomePageModule',
       }
     ]
-  }
+  } 
 ];
  
 @NgModule({

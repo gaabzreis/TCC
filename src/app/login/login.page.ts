@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginServiceService, User } from './../login-service.service';
+import { LoginServiceService, User } from './../services/login-service.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
@@ -34,6 +34,7 @@ export class LoginPage implements OnInit {
     this.provider.getAll().subscribe(res => {
       users = res;
       if(users.find(x => x.email == this.login && x.senha == this.senha)){
+        sessionStorage.setItem('idUser',users.find(x => x.email == this.login && x.senha == this.senha).id)
         this.router.navigate(["menu/home"])
       }
       else{

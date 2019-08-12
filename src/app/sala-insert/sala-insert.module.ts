@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ForumPage } from './forum.page';
+import { SalaInsertPage } from './sala-insert.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ForumPage
+    component: SalaInsertPage
   }
 ];
 
@@ -21,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ForumPage]
+  declarations: [SalaInsertPage]
 })
-export class ForumPageModule {}
+export class SalaInsertPageModule {}

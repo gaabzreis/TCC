@@ -4,7 +4,7 @@ import { map } from "rxjs/operators";
 import { Observable } from 'rxjs';
 
 export interface User{
-  id?: String;
+  id?: string;
   curso: String;
   email: String;
   nome: String;

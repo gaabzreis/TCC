@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CadastrarUserService, User } from './../cadastrar-user.service';
+import {CadastrarUserService, User } from './../services/cadastrar-user.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 

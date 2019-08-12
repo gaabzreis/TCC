@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ForumPage } from './forum.page';
+import { SalaInsertPage } from './sala-insert.page';
 
-describe('ForumPage', () => {
-  let component: ForumPage;
-  let fixture: ComponentFixture<ForumPage>;
+describe('SalaInsertPage', () => {
+  let component: SalaInsertPage;
+  let fixture: ComponentFixture<SalaInsertPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ForumPage ],
+      declarations: [ SalaInsertPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ForumPage);
+    fixture = TestBed.createComponent(SalaInsertPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

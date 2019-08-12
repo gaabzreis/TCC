@@ -1,4 +1,4 @@
-import { ResumoService } from './../resumo.service';
+import { ResumoService } from './../services/resumo.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';

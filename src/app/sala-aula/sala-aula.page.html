@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    
+    <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      
+    </ion-buttons>
+    <ion-title>SumBoard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="mec">
+  <h1 style="text-align: center">Salas de aula</h1>
+  <ion-searchbar animated Placeholder="Procurar"></ion-searchbar>
+  <ng-container *ngIf="!salasP">
+    <div *ngFor="let n of [0,1,2]" padding>
+      <ion-skeleton-text></ion-skeleton-text>
+      <p>
+        <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+      </p>
+    </div>
+  </ng-container>
+  <hr>
+ <div *ngIf="salasP">
+    <h2>Salas de aulas - inscrito</h2>
+    <ion-list *ngFor="let salaP of salasP">
+    
+      <ion-item-sliding id="item100">
+        <ion-item href="#">
+          <ion-label>
+            <h2>{{salaP.descricao}}</h2>
+            <p>Professor: {{salaP.professor}}</p>
+            <p>{{salaP.periodo}}º Período - Sala: {{salaP.sala}}</p>
+          </ion-label>
+          <ion-note slot="end" >
+            <span *ngFor="let horario of salaP.horariosAula">
+              {{horario.diaSemana}} - {{horario.horarioI}} ~ {{horario.horarioF}} <br>
+            </span>
+             
+          </ion-note>
+        </ion-item>
+    
+        <ion-item-options side="start" *ngIf=" idUser == salaP.adm">
+          <ion-item-option color="danger" (click)="delete(salaP)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+          <ion-item-option color="warning" (click)="edit(salaP)">
+            <ion-icon slot="icon-only" name="create" md="md-create"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+    
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="sair(salaP)">
+            Sair
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    
+    
+    
+      
+    </ion-list>
+  </div> 
+
+  <ng-container *ngIf="!salasT ">
+      <div *ngFor="let n of [0,1,2]" padding>
+        <ion-skeleton-text></ion-skeleton-text>
+        <p>
+          <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+        </p>
+      </div>
+    </ng-container>
+  <div *ngIf="salasT">
+      <h2>Salas de aulas</h2>
+      <ion-list *ngFor="let salaT of salasT; let i = index">
+      
+        <ion-item-sliding id="item100">
+          <ion-item href="#">
+            <ion-label>
+              <h2>{{salaT.descricao}}</h2>
+              <p>Professor: {{salaT.professor}}</p>
+              <p>{{salaT.periodo}}º Período - Sala: {{salaT.sala}}</p>
+            </ion-label>
+            <ion-note slot="end" >
+              <span *ngFor="let horario of salaT.horariosAula">
+                {{horario.diaSemana}} - {{horario.horarioI}} ~ {{horario.horarioF}} <br>
+              </span>
+               
+            </ion-note>
+          </ion-item>      
+          <ion-item-options side="end">
+            <ion-item-option color="primary" (click)="seInscrever(salaT)">
+              Se inscrever
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      
+      
+      
+        
+      </ion-list>
+    </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/sala-insert']" routerDirection="forward">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

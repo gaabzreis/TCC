@@ -1,4 +1,4 @@
-import { QuizService, Quiz, Resposta } from './../quiz.service';
+import { QuizService, Quiz, Resposta } from './../services/quiz.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
