@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-title>Nova Atividade</ion-title>
+      <ion-buttons slot="primary">
+          <ion-button (click)="dismiss()">
+              Salvar
+          </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<ion-item>
+<ion-label position="stacked">Nome:</ion-label>
+<ion-input></ion-input>
+</ion-item>
+
+<ion-item>
+<ion-label position="stacked">Disciplina:</ion-label>
+<ion-input></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label position="stacked">Entrega:</ion-label>
+  <ion-datetime min="1990-02" displayFormat="DDDD, DD MMM"></ion-datetime>
+</ion-item>
+
+<ion-item>
+<ion-label position="stacked">Descrição:</ion-label>
+<ion-textarea rows="6"></ion-textarea>
+</ion-item>
+
+<ion-item>
+  <ion-label position="stacked">Lista:</ion-label>
+  <ion-segment (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="todo" checked>
+      <ion-label>TO DO</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="in-progress">
+      <ion-label>IN PROGRESS</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="done">
+      <ion-label>DONE</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-item>
+
+
+</ion-content>

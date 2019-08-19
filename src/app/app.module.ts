@@ -15,11 +15,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 
+import { NovaAtividadePageModule } from './kanban/nova-atividade/nova-atividade.module';
+
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,  
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, NovaAtividadePageModule,
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyB2QuPU2P-uacuDhWwbanldt0o4N8jEdMM",
       authDomain: "teste-tcc-3363f.firebaseapp.com",

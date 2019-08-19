@@ -19,6 +19,11 @@ export class MenuPage implements OnInit {
       icon: 'book'
     },
     {
+      title: 'Kanban',
+      url: '/menu/kanban',
+      icon: 'list-box'
+    },
+    {
       title: 'Sair',
       url: '../login',
       icon: 'log-out'

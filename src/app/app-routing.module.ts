@@ -18,6 +18,8 @@ const routes: Routes = [
   { path: 'resumo', loadChildren: './resumo/resumo.module#ResumoPageModule' },
   { path: 'sala-insert', loadChildren: './sala-insert/sala-insert.module#SalaInsertPageModule' },
   { path: 'sala-insert/:sala-aula', loadChildren: './sala-insert/sala-insert.module#SalaInsertPageModule' },
+  { path: 'kanban-home', loadChildren: './kanban/kanban-home/kanban-home.module#KanbanHomePageModule' },
+  { path: 'nova-atividade', loadChildren: './kanban/nova-atividade/nova-atividade.module#NovaAtividadePageModule' }
 ];
 
 @NgModule({
