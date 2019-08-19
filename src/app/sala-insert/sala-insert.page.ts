@@ -29,8 +29,8 @@ export class SalaInsertPage implements OnInit {
 
   ngOnInit() {
     let id = this.router.snapshot.params["sala-aula"]
-    
-    if(id != ""){
+    console.log(id)
+    if(id != undefined){
       this.provider.getByFilter(id).subscribe(res => {
         this.salaEdicao = res
         this.descricao = this.salaEdicao.descricao
@@ -41,9 +41,14 @@ export class SalaInsertPage implements OnInit {
         this.qtdMeses = this.salaEdicao.qtdMeses
         this.sala = this.salaEdicao.sala
         this.horarios = this.salaEdicao.horariosAula
-        this.horarios.forEach(x => {
-          this.valores.push(1)
+        this.valores = []
+        this.horarios.forEach((x, index) => {
+          console.log(index)
+          
+          this.valores.push(index + 1)
+          this.contador = index + 1
         })
+        console.log(this.horarios)
       })
     }
   }

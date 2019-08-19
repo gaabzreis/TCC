@@ -22,12 +22,21 @@ const routes: Routes = [
         loadChildren: '../sala-aula/sala-aula.module#SalaAulaPageModule',
       },
       {
+        path: 'user-perfil',
+        loadChildren: '../user-perfil/user-perfil.module#UserPerfilPageModule',
+      },
+      {
         path: 'home',
         loadChildren: '../home/home.module#HomePageModule',
       },
       {
         path: 'kanban',
         loadChildren: '../kanban/kanban-home/kanban-home.module#KanbanHomePageModule',
+        
+      },
+      {
+        path: 'sala-aula',
+        loadChildren: '../sala-home/sala-home.module#SalaHomePageModule',
       }
     ]
   } 

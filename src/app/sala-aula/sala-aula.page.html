@@ -11,7 +11,7 @@
 
 <ion-content padding class="mec">
   <!-- <h1 style="text-align: center">Salas de aula</h1> -->
-  <ion-searchbar animated Placeholder="Procurar"></ion-searchbar>
+  <ion-searchbar animated Placeholder="Procurar" (keyup)="pesquisar($event)"></ion-searchbar>
   <ng-container *ngIf="!salasP">
     <div *ngFor="let n of [0,1,2]" padding>
       <ion-skeleton-text></ion-skeleton-text>
@@ -26,7 +26,7 @@
     <ion-list *ngFor="let salaP of salasP">
     
       <ion-item-sliding id="item100">
-        <ion-item href="#">
+        <ion-item [routerLink]="['/menu-sala/sala-home', salaP.id]">
           <ion-label>
             <h2>{{salaP.descricao}}</h2>
             <p>Professor: {{salaP.professor}}</p>
@@ -100,6 +100,11 @@
         
       </ion-list>
     </div>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="scanCode()" routerDirection="forward">
+      <ion-icon name="qr-scanner"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button [routerLink]="['/sala-insert']" routerDirection="forward">
       <ion-icon name="add"></ion-icon>

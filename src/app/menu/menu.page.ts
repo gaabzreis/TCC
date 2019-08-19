@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.page.scss'],
 })
 export class MenuPage implements OnInit {
- 
+  
   pages = [
     {
       title: 'Home',
@@ -22,6 +22,11 @@ export class MenuPage implements OnInit {
       title: 'Kanban',
       url: '/menu/kanban',
       icon: 'list-box'
+    },
+    {
+      title: 'Perfil',
+      url: '/menu/user-perfil',
+      icon: 'person'
     },
     {
       title: 'Sair',

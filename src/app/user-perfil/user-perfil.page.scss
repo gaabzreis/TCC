@@ -1,0 +1,20 @@
+ion-item [disabled] {
+    background-color: rgba(128, 125, 125, 0.363);
+    font-weight: 600;
+    color: black;
+    border-radius: 5px;
+    opacity: 1 !important;
+}
+
+ion-item label + [disabled]{
+    color: black;
+}
+
+.primary{
+    background: green;
+    padding: 10px;
+    color: white;
+    width: 165px;
+    margin-left: auto;
+    margin-right: auto;
+}

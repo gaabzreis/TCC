@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    
+    <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      
+    </ion-buttons>
+    <ion-title>SumBoard - Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="mec">
+  <div style="text-align: center;">
+    <h1>Perfil</h1>
+    
+  </div>
+  <ng-container *ngIf="!user">
+      <div *ngFor="let n of [0,1,2]" padding>
+        <ion-skeleton-text></ion-skeleton-text>
+        <p>
+          <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+        </p>
+      </div>
+    </ng-container>
+    <ion-card *ngIf="user">
+      <div style="text-align: center;">
+        <img src="../../assets/perfil-image.jpg" style="width: 105px; margin-left:35%; margin-top: 15px;" />
+        <ion-card-header>
+          <ion-card-subtitle>Exibir perfil</ion-card-subtitle>
+          <div class="primary"> Sua pontuação - {{user.pontos}}</div>
+          <ion-card-title>Perfil do usuário </ion-card-title>
+        </ion-card-header>
+      </div>
+      <ion-card-content *ngIf="!edit">
+        <ion-item>
+          <ion-label position="floating">Nome</ion-label>
+          <ion-input [(ngModel)]="user.nome" disabled></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Instituição</ion-label>
+          <ion-input [(ngModel)]="user.instituicao" disabled></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">E-mail</ion-label>
+          <ion-input [(ngModel)]="user.email" disabled></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Curso</ion-label>
+          <ion-input [(ngModel)]="user.curso" disabled></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Senha</ion-label>
+          <ion-input [(ngModel)]="user.senha" type="password" disabled></ion-input>
+        </ion-item>
+        
+      </ion-card-content>
+      <ion-card-content *ngIf="edit">
+        <ion-item>
+          <ion-label position="floating">Nome</ion-label>
+          <ion-input [(ngModel)]="user.nome"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Instituição</ion-label>
+          <ion-input [(ngModel)]="user.instituicao"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">E-mail</ion-label>
+          <ion-input [(ngModel)]="user.email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Curso</ion-label>
+          <ion-input [(ngModel)]="user.curso"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Senha</ion-label>
+          <ion-input [(ngModel)]="user.senha" type="password"></ion-input>
+        </ion-item>
+        
+      </ion-card-content>
+    </ion-card>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button routerDirection="forward" (click)="editar()">
+            <ion-icon ios="ios-create" md="md-create" *ngIf="!edit" ></ion-icon>
+            <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" *ngIf="edit"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+</ion-content>

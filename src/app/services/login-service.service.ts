@@ -50,4 +50,7 @@ export class LoginServiceService {
   addUser(todo: User) {
     return this.todosCollection.add(todo);
   }
+  update(key, data){
+    return this.todosCollection.doc(key).update(data)
+  }
 }

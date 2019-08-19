@@ -1,15 +1,17 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-back-button defaultHref="/menu/sala-aula"></ion-back-button>
     </ion-buttons>
-    <ion-title>Inserir nova sala de aula</ion-title>
+    <ion-title *ngIf="!salaEdicao">Inserir nova sala de aula</ion-title>
+    <ion-title *ngIf="salaEdicao">Editar sala de aula</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div style="padding: 10px; text-align: center; margin-bottom: 10px;">
-    <h1>Inserir nova sala de aula</h1>
+    <h1 *ngIf="!salaEdicao">Inserir nova sala de aula</h1>
+    <h1 *ngIf="salaEdicao">Editar sala de aula</h1>
   </div>
   <ion-item>
     <ion-label position="floating">Nome aula</ion-label>
@@ -47,7 +49,7 @@
   <div *ngFor="let i of valores">
     <ion-item>
       <ion-label>Dias da semana</ion-label>
-      <ion-select placeholder="Select One" [(ngModel)]="horarios[i - 1].diaSemana">
+      <ion-select placeholder="Selecione o dia" [(ngModel)]="horarios[i - 1].diaSemana" >
         <ion-select-option value="seg">Segunda</ion-select-option>
         <ion-select-option value="ter">Terça</ion-select-option>
         <ion-select-option value="qua">Quarta</ion-select-option>

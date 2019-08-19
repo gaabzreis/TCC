@@ -4,6 +4,7 @@ import { ToastController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router/';
 import { ActivatedRoute } from '@angular/router/src/router_state';
 
+
 @Component({
   selector: 'app-sala-aula',
   templateUrl: './sala-aula.page.html',
@@ -31,24 +32,7 @@ export class SalaAulaPage implements OnInit {
         }
       })
       
-      this.salasT = this.salitas.filter(x => {
-        if(x.adm != this.idUser && (x.integrantes == undefined || !x.integrantes.find(y => y == this.idUser))){
-          return x
-        }
-      })
-      this.salasP.map(x => {
-        return x.horariosAula = x.horariosAula.map(y => {
-          
-          return  {diaSemana: y.diaSemana, horarioI: y.horarioI, horarioF: y.horarioF}
-        })
-      })
-
-      this.salasT.map(x => {
-        return x.horariosAula = x.horariosAula.map(y => {
-          
-          return  {diaSemana: y.diaSemana, horarioI: y.horarioI, horarioF: y.horarioF}
-        })
-      })
+      this.todasSalasSemUsuario()
       
       
     })
@@ -140,5 +124,33 @@ export class SalaAulaPage implements OnInit {
 
   edit(obj){
     this.router.navigate(["sala-insert", obj.id])
+  }
+
+  todasSalasSemUsuario(){
+    this.salasT = this.salitas.filter(x => {
+      if(x.adm != this.idUser && (x.integrantes == undefined || !x.integrantes.find(y => y == this.idUser))){
+        return x
+      }
+    })
+
+    this.salasT.sort((a,b) => {
+      if(a.universidade == b.universidade){
+        return 0
+      }
+      return (a.universidade > b.universidade ? -1 : 1 )
+    })
+  }
+
+  pesquisar(ev){
+    if(ev.target.value == ""){
+      this.todasSalasSemUsuario()
+    }
+    else{
+      this.salasT = this.salitas.filter(x => {
+      return x.descricao.indexOf(ev.target.value) >=0 && x.adm != this.idUser && !x.integrantes.find(y => y == this.idUser) 
+      })
+    }
+    
+    console.log(ev.target.value)
   }
 }

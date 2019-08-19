@@ -19,11 +19,7 @@ const routes: Routes = [
   { path: 'sala-insert', loadChildren: './sala-insert/sala-insert.module#SalaInsertPageModule' },
   { path: 'sala-insert/:sala-aula', loadChildren: './sala-insert/sala-insert.module#SalaInsertPageModule' },
   { path: 'kanban-home', loadChildren: './kanban/kanban-home/kanban-home.module#KanbanHomePageModule' },
-  { path: 'nova-atividade', loadChildren: './kanban/nova-atividade/nova-atividade.module#NovaAtividadePageModule' },
-  { path: 'user-perfil', loadChildren: './user-perfil/user-perfil.module#UserPerfilPageModule' },
-  { path: 'sala-home', loadChildren: './sala-home/sala-home.module#SalaHomePageModule' },
-  { path: 'sala-home/:sala-aula', loadChildren: './sala-home/sala-home.module#SalaHomePageModule' },
-  { path: 'menu-sala', loadChildren: './menu-sala/menu-sala.module#MenuSalaPageModule' },
+  { path: 'nova-atividade', loadChildren: './kanban/nova-atividade/nova-atividade.module#NovaAtividadePageModule' }
 ];
 
 @NgModule({

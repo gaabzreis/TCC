@@ -16,12 +16,15 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 
 import { NovaAtividadePageModule } from './kanban/nova-atividade/nova-atividade.module';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, NovaAtividadePageModule,
+  imports: [BrowserModule, IonicModule.forRoot(),QRCodeModule, AppRoutingModule, NovaAtividadePageModule, 
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyB2QuPU2P-uacuDhWwbanldt0o4N8jEdMM",
       authDomain: "teste-tcc-3363f.firebaseapp.com",
@@ -29,15 +32,19 @@ import { NovaAtividadePageModule } from './kanban/nova-atividade/nova-atividade.
       projectId: "teste-tcc-3363f",
       storageBucket: "teste-tcc-3363f.appspot.com",
       messagingSenderId: "1059435639373"
-  }),
-  AngularFirestoreModule],
+    }),
+    AngularFirestoreModule
+    
+  ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Toast,
-    Camera
+    Camera,
+    BarcodeScanner
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+ 
 })
 export class AppModule {}
