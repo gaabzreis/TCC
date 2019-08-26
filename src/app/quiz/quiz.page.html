@@ -39,7 +39,7 @@
   <ion-button shape="round" class="gerarQuiz" fill="outline" *ngIf="tagSelect && index" [routerLink]="['/quiz-listar', tagSelect + '@' + index ]">Gerar quiz</ion-button>
   </div>   
       <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button [routerLink]="['/quiz-insert']" routerDirection="forward">
+        <ion-fab-button [routerLink]="['/quiz-insert', idSala]" routerDirection="forward">
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>
       </ion-fab>

@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ResumoService } from './../services/resumo.service';
+import { ResumoService, Resumo } from './../services/resumo.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ToastController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router/';
 
-export interface Resumo {
-  data: String;
-  conteudo: String;
-  tag: String;
-  titulo: String
-}
 @Component({
   selector: 'app-resumo-insert',
   templateUrl: './resumo-insert.page.html',
@@ -20,7 +15,9 @@ export class ResumoInsertPage implements OnInit {
   titulo: String
   conteudo: String
   data: String
-  constructor(private provider: ResumoService, private camera: Camera,public toastController: ToastController) { }
+  idSala = this.routeres.snapshot.params["sala-aula"]
+  idResumo = sessionStorage.getItem('resumo')
+  constructor(private routeres: ActivatedRoute, private provider: ResumoService, private camera: Camera,public toastController: ToastController) { }
 
   ngOnInit() {
   }
@@ -41,7 +38,7 @@ export class ResumoInsertPage implements OnInit {
     this.data = this.data.split('-')[2].substr(0,2) + "/"+ this.data.split('-')[1] + "/"+ this.data.split('-')[0]
     console.log(this.data)
     let todo = {
-      conteudo: this.conteudo, titulo: this.titulo, data: this.data, tag: this.tag
+      conteudo: this.conteudo, titulo: this.titulo, data: this.data, tag: this.tag, idSala: this.idSala
     };
     console.log(todo)
     this.provider.addResumo(todo).then(() => {

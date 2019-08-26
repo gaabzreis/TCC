@@ -24,7 +24,7 @@ export class CadastrePage implements OnInit {
 
   async cadastrar(){
     let confi = true
-    let regEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+    let regEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i
     const toast = await this.toastController.create({
       message: '',
       duration: 5000,
@@ -38,7 +38,8 @@ export class CadastrePage implements OnInit {
         }
       ]
     });
-    if(regEmail.test(this.email)){
+    console.log(regEmail.test(this.email))
+    if(!regEmail.test(this.email)){
       confi = false
       toast.message = 'Digite um e-mail válido'
       toast.present();
@@ -57,9 +58,9 @@ export class CadastrePage implements OnInit {
         curso: this.curso
       }
       toast.message = 'Usuário salvo com sucesso.'
-      this.provider.addUser(conteudo).then(() => {
+      /* this.provider.addUser(conteudo).then(() => {
         toast.present();
-      })
+      }) */
     }
 
     

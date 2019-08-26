@@ -1,4 +1,11 @@
+import { ResumoService, Resumo } from './../services/resumo.service';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ToastController } from '@ionic/angular';
+import { map } from "rxjs/operators";
+import { ActivatedRoute } from '@angular/router/';
+import {sala, SalaAulaService} from '../services/sala-aula.service';
 
 @Component({
   selector: 'app-resumo',
@@ -6,10 +13,91 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./resumo.page.scss'],
 })
 export class ResumoPage implements OnInit {
+  todos: Resumo[];
+  dia: any[];
+  sala: sala
+  idSala = this.routeres.snapshot.params["sala-aula"]
+  busca: Resumo[]
+  backup: any[]
+  constructor(public router: Router, private provider: ResumoService, private providerSala : SalaAulaService,
+    public toastController: ToastController, public routeres : ActivatedRoute) { }
 
-  constructor() { }
+  ngOnInit() { 
+    this.providerSala.getByFilter(this.idSala).subscribe(res => {
+      this.sala = res
+    })   
+    this.provider.getAll().subscribe(res => {
+      this.todos = res.filter(x => x.idSala == this.idSala)
+      this.dia = this.todos.reduce((prev, current) => {
+        
+        if (!prev.find(x => x.data === current.data)) {
+          return [
+            ...prev,
+            {
+              data: current.data,
+              mensagens: [
+                {
+                  id: current.id,
+                  tag: current.tag,
+                },
+              ],
+            },
+          ]
+        }
 
-  ngOnInit() {
+        return prev.map(x => {
+
+          if (x.data !== current.data) {
+            return x
+          }
+
+          return {
+            data: x.data,
+            mensagens: [
+              ...x.mensagens,
+              {
+                id: current.id,
+                tag: current.tag,
+              },
+            ]
+          }
+
+        })
+
+      }, [])
+      
+      
+      this.backup = this.dia
+    })
+     
+
+    
+  }
+  newContact() {
+    this.router.navigate(['/resumo-edit']);
+  }
+
+  editContact(contact: any) {
+    // Maneira 1
+    this.router.navigate(['/home']);
+
+    // Maneira 2
+    // this.navCtrl.push('ContactEditPage', { key: contact.key });
+  }
+
+  pesquisar(ev){
+    if(ev.target.value == ""){
+      this.ngOnInit()
+      
+    }
+    else{
+      console.log(this.backup)
+      
+      for(let i = 0; i < this.backup.length; i++){
+        this.dia[i].mensagens = this.backup[i].mensagens.filter(y => y.tag.indexOf(ev.target.value) > -1)
+      }
+    }
+    
   }
 
 }

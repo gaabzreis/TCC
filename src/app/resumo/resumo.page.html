@@ -10,10 +10,10 @@
 </ion-header>
 
 <ion-content padding class="mec" color="light">
-  <h1>Sistemas operacionais</h1>
+  <h1 *ngIf="sala">{{sala.descricao}}</h1>
     <ion-item class="input">
       <ion-label><ion-icon name="search"></ion-icon></ion-label>
-      <ion-input placeholder="Pesquisar"></ion-input>
+      <ion-searchbar animated Placeholder="Procurar" (keyup)="pesquisar($event)"></ion-searchbar>
     </ion-item>
     <ion-list color="light">
  
@@ -26,30 +26,28 @@
           </div>
         </ng-container>
         
-
-        <ion-card *ngFor="let item of dia">
-            <ion-card-header>
-              <ion-card-subtitle>Data</ion-card-subtitle>
-              <ion-card-title>{{ item.data }}</ion-card-title>
-            </ion-card-header>
-          
-            <ion-card-content >
-                  
-              <ion-col size="2" *ngFor="let mensa of item.mensagens">
-                  <div style="display: inline-block" button [routerLink]="['/resumo-edit', mensa.id]">
-                    <ion-icon name="folder"></ion-icon>
-                    {{mensa.tag}}
-                  </div>
-              </ion-col>
-            </ion-card-content>
-          </ion-card>
-
+          <ion-card  *ngFor="let item of dia">
+              <ion-card-header>
+                <ion-card-subtitle>Data</ion-card-subtitle>
+                <ion-card-title>{{ item.data }}</ion-card-title>
+              </ion-card-header>
+            
+              <ion-card-content >
+                    
+                <ion-col size="2" *ngFor="let mensa of item.mensagens">
+                    <div style="display: inline-block" button [routerLink]="['/resumo-edit', mensa.id]">
+                      <ion-icon name="folder"></ion-icon>
+                      {{mensa.tag}}
+                    </div>
+                </ion-col>
+              </ion-card-content>
+            </ion-card>
         
      
       </ion-list>
      
       <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button [routerLink]="['/resumo-insert']" routerDirection="forward">
+        <ion-fab-button [routerLink]="['/resumo-insert', idSala]" routerDirection="forward">
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>
       </ion-fab>

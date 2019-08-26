@@ -20,4 +20,9 @@
       <div *ngFor="let item of fotos" class="foto"></div>
   </div>
   
+  <ion-fab *ngIf="idUser == this.todo.criador" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/resumo-insert']" (click)="setarId()" routerDirection="forward">
+      <ion-icon ios="ios-create" md="md-create"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

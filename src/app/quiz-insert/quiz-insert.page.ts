@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService, Resposta, Quiz } from './../services/quiz.service';
 import { ToastController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-quiz-insert',
@@ -17,7 +18,9 @@ export class QuizInsertPage implements OnInit {
     descricao: "",
     acerto: false
   }]
-  constructor(private provider: QuizService, public toastController: ToastController) { }
+  idUser = sessionStorage.getItem('idUser')
+  idSala = this.routeres.snapshot.params["sala-aula"]
+  constructor(private provider: QuizService, public toastController: ToastController, private routeres : ActivatedRoute) { }
 
   ngOnInit() {
   }
@@ -82,9 +85,11 @@ export class QuizInsertPage implements OnInit {
       titulo: this.titulo, 
       tag: this.tag, 
       pergunta: this.pergunta, 
-      respostas: this.respostas
+      respostas: this.respostas,
+      criador: this.idUser,
+      idSala: this.idSala
     }
-
+    
     this.provider.addQuiz(conteudo).then(() => {
       toast.present();
     })

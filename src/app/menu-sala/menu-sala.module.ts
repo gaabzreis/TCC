@@ -9,8 +9,8 @@ import { MenuSalaPage } from './menu-sala.page';
 
 const routes: Routes = [
   {
-    path: 'sala-home/:sala-aula',
-    redirectTo: 'sala-home/:sala-aula',
+    path: 'resumo/:sala-aula',
+    redirectTo: 'resumo/:sala-aula',
     pathMatch: 'full'
   },
    {
@@ -18,8 +18,20 @@ const routes: Routes = [
     component: MenuSalaPage,
     children: [
       {
-        path: 'sala-home/:sala-aula',
-        loadChildren: '../sala-home/sala-home.module#SalaHomePageModule',
+        path: 'resumo',
+        loadChildren: '../resumo/resumo.module#ResumoPageModule',
+      },
+      {
+        path: 'resumo/:sala-aula',
+        loadChildren: '../resumo/resumo.module#ResumoPageModule',
+      },
+      {
+        path: 'quiz',
+        loadChildren: '../quiz/quiz.module#QuizPageModule',
+      },
+      {
+        path: 'quiz/:sala-aula',
+        loadChildren: '../quiz/quiz.module#QuizPageModule',
       },
      
     ]

@@ -147,10 +147,9 @@ export class SalaAulaPage implements OnInit {
     }
     else{
       this.salasT = this.salitas.filter(x => {
-      return x.descricao.indexOf(ev.target.value) >=0 && x.adm != this.idUser && !x.integrantes.find(y => y == this.idUser) 
+        return x.descricao.indexOf(ev.target.value) >=0 && x.adm != this.idUser && !x.integrantes.find(y => y == this.idUser) 
       })
     }
     
-    console.log(ev.target.value)
   }
 }

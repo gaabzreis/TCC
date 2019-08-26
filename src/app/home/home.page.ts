@@ -27,7 +27,7 @@ export class HomePage implements OnInit  {
   }
 
   ngOnInit() {    
-    this.provider.getAll().subscribe(res => {
+   /* this.provider.getAll().subscribe(res => {
       this.todos = res
       this.dia = this.todos.reduce((prev, current) => {
         
@@ -83,6 +83,6 @@ export class HomePage implements OnInit  {
     this.router.navigate(['/home']);
 
     // Maneira 2
-    // this.navCtrl.push('ContactEditPage', { key: contact.key });
-  }
+    // this.navCtrl.push('ContactEditPage', { key: contact.key });*/
+  } 
 }

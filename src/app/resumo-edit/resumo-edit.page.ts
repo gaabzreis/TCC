@@ -1,15 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
-import { ResumoService } from './../services/resumo.service';
+import { ResumoService, Resumo } from './../services/resumo.service';
 
-
-export interface Resumo {
-  data: String;
-  conteudo: String;
-  tag: String;
-  titulo: String
-}
 
 @Component({
   selector: 'app-resumo-edit',
@@ -19,14 +12,10 @@ export interface Resumo {
 
 
 export class ResumoEditPage implements OnInit {
-  todo: Resumo = {
-    data: "",
-    conteudo: "",
-    tag: "",
-    titulo: ""
-  };
+  todo: Resumo 
   fotos: String[] = []
-  todoId: String
+  todoId: string
+  idUser = sessionStorage.getItem('idUser')
   constructor(private route: ActivatedRoute, private loadingController: LoadingController, private provider: ResumoService) { }
 
   ngOnInit() {
@@ -48,8 +37,10 @@ export class ResumoEditPage implements OnInit {
       for(let i = 0; i < randomValue; i++){
         this.fotos = [...this.fotos, ""]
       }
-      console.log(this.fotos)
+      console.log(this.todo)
     });
   }
-
+  setarId(){
+    sessionStorage.setItem('resumo', this.todoId)
+  }
 }

@@ -19,6 +19,8 @@ export class QuizPage implements OnInit {
   qtdQuiz: number[]
   index: String
   somenteTag: Quiz[]
+  idUser = sessionStorage.getItem('idUser')
+  idSala = this.route.snapshot.params["sala-aula"]
   constructor(public toastController: ToastController, private provider : QuizService, private route: ActivatedRoute, private loadingController: LoadingController) { } 
 
   ngOnInit() {
@@ -33,7 +35,7 @@ export class QuizPage implements OnInit {
     
     this.provider.getAll().subscribe(res => {
       
-      this.todo = res;
+      this.todo = res.filter(x => x.criador != this.idUser && x.idSala == this.idSala);
       loading.dismiss();
       this.somenteTag = this.todo.reduce((prev, atual) => {
         if(prev.find(x => x.tag == atual.tag)){

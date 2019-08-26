@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-menu-sala',
@@ -6,23 +7,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu-sala.page.scss'],
 })
 export class MenuSalaPage implements OnInit {
+  idSala = document.URL.split("/")[document.URL.split("/").length - 1]
+  
   pages = [
     {
       title: 'Voltar',
       url: '../menu/sala-aula',
-      icon: 'arrow-left'
+      icon: 'arrow-back'
     },
     {
-      title: 'Salas de aula meczada',
-      url: '/menu-sala/sala-aula',
+      title: 'Resumos',
+      url: '/menu-sala/resumo/' + this.idSala,
+      icon: 'book'
+    },
+    {
+      title: 'Quiz',
+      url: '/menu-sala/quiz/' + this.idSala,
+      icon: 'book'
+    },
+    {
+      title: 'Forum',
+      url: '#',
       icon: 'book'
     },
    
    
   ];
-  constructor() { }
+  constructor(private routeres : ActivatedRoute) { }
 
   ngOnInit() {
+    console.log()
   }
 
 }

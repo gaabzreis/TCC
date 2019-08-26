@@ -26,7 +26,7 @@
     <ion-list *ngFor="let salaP of salasP">
     
       <ion-item-sliding id="item100">
-        <ion-item [routerLink]="['/menu-sala/sala-home', salaP.id]">
+        <ion-item [routerLink]="['/menu-sala/resumo', salaP.id]">
           <ion-label>
             <h2>{{salaP.descricao}}</h2>
             <p>Professor: {{salaP.professor}}</p>

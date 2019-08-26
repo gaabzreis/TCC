@@ -8,7 +8,8 @@ export interface Resumo {
   data: String;
   conteudo: String;
   tag: String;
-  titulo: String
+  titulo: String;
+  idSala: string;
 }
 
 @Injectable({

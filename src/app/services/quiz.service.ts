@@ -7,7 +7,9 @@ export interface Quiz {
   titulo: String;
   pergunta: String;
   tag: String;
-  respostas: Resposta[]
+  respostas: Resposta[];
+  criador: string;
+  idSala: string;
 
 }
 
