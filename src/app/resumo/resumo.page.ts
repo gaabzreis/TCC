@@ -74,6 +74,7 @@ export class ResumoPage implements OnInit {
     
   }
   newContact() {
+    sessionStorage.removeItem('idResumo')
     this.router.navigate(['/resumo-edit']);
   }
 

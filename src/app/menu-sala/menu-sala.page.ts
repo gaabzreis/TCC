@@ -12,7 +12,7 @@ export class MenuSalaPage implements OnInit {
   pages = [
     {
       title: 'Voltar',
-      url: '../menu/sala-aula',
+      url: '/menu/sala-aula',
       icon: 'arrow-back'
     },
     {

@@ -24,7 +24,7 @@ export class CadastrePage implements OnInit {
 
   async cadastrar(){
     let confi = true
-    let regEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i
+    let regEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/igm
     const toast = await this.toastController.create({
       message: '',
       duration: 5000,

@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/menu/home"></ion-back-button>
+      <ion-back-button defaultHref="/menu-sala/resumo/this.todo.idSala" ></ion-back-button>
     </ion-buttons>
-    <ion-title>{{this.todo.tag}}</ion-title>
+    <ion-title *ngIf="this.todo">{{this.todo.tag}}</ion-title>
   </ion-toolbar>
 </ion-header>
  
-<ion-content padding>
+<ion-content padding *ngIf="this.todo">
   <h1 style="text-align: center;">{{this.todo.titulo}}</h1>
 
   <h3>Resumo escrito</h3>
@@ -20,7 +20,7 @@
       <div *ngFor="let item of fotos" class="foto"></div>
   </div>
   
-  <ion-fab *ngIf="idUser == this.todo.criador" vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab *ngIf="this.todo && idUser == this.todo.criador" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button [routerLink]="['/resumo-insert']" (click)="setarId()" routerDirection="forward">
       <ion-icon ios="ios-create" md="md-create"></ion-icon>
     </ion-fab-button>

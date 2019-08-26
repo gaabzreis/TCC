@@ -20,6 +20,16 @@ export class ResumoInsertPage implements OnInit {
   constructor(private routeres: ActivatedRoute, private provider: ResumoService, private camera: Camera,public toastController: ToastController) { }
 
   ngOnInit() {
+    if(this.idResumo != undefined){
+      this.provider.getByFilter(this.idResumo).subscribe(res => {
+        this.tag = res.tag
+        this.titulo = res.titulo
+        this.data = res.data
+        this.idSala = res.idSala
+        this.conteudo = res.conteudo
+
+      })
+    }
   }
   async salvar(){
     const toast = await this.toastController.create({
@@ -35,16 +45,32 @@ export class ResumoInsertPage implements OnInit {
         }
       ]
     });
-    this.data = this.data.split('-')[2].substr(0,2) + "/"+ this.data.split('-')[1] + "/"+ this.data.split('-')[0]
+    if(this.data.indexOf("-") > -1){
+      this.data = this.data.split('-')[2].substr(0,2) + "/"+ this.data.split('-')[1] + "/"+ this.data.split('-')[0]
+    }
     console.log(this.data)
-    let todo = {
-      conteudo: this.conteudo, titulo: this.titulo, data: this.data, tag: this.tag, idSala: this.idSala
-    };
-    console.log(todo)
-    this.provider.addResumo(todo).then(() => {
+    let todo;
+    if(this.idResumo != undefined){
+      todo = {
+        conteudo: this.conteudo, titulo: this.titulo, data: this.data, tag: this.tag, idSala: this.idSala, id: this.idResumo
+      }
+      this.provider.update(todo).then(() => {
      
-      toast.present();
-    })
+        toast.present();
+      })
+    }
+    else{
+      todo = {
+        conteudo: this.conteudo, titulo: this.titulo, data: this.data, tag: this.tag, idSala: this.idSala
+      };
+      this.provider.addResumo(todo).then(() => {
+     
+        toast.present();
+      })
+    }
+    
+    console.log(todo)
+    
   }
 
   acessarCamera(){

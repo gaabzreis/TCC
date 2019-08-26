@@ -4,7 +4,7 @@ import { map } from "rxjs/operators";
 import { Observable } from 'rxjs';
 import { ArrayType } from '@angular/compiler/src/output/output_ast';
 export interface Resumo {
-  id? : String;
+  id? : string;
   data: String;
   conteudo: String;
   tag: String;
@@ -50,5 +50,8 @@ export class ResumoService {
   }
   addResumo(todo: Resumo) {
     return this.todosCollection.add(todo);
+  }
+  update(todo: Resumo){
+    return this.todosCollection.doc(todo.id).update(todo)
   }
 }
