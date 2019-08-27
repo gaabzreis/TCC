@@ -45,11 +45,17 @@
         
      
       </ion-list>
-     
-      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      
+      <ion-fab vertical="bottom" horizontal="start" slot="fixed" (click)="encodedText()">
+        <ion-fab-button  routerDirection="forward">
+          <ion-icon ios="ios-barcode" md="md-barcode"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="addNovo()">
         <ion-fab-button [routerLink]="['/resumo-insert', idSala]" routerDirection="forward">
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>
       </ion-fab>
   
 </ion-content>
+

@@ -152,4 +152,7 @@ export class SalaAulaPage implements OnInit {
     }
     
   }
+  scanCode(){
+    
+  }
 }

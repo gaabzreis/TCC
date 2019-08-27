@@ -20,7 +20,7 @@ export class ResumoInsertPage implements OnInit {
   constructor(private routeres: ActivatedRoute, private provider: ResumoService, private camera: Camera,public toastController: ToastController) { }
 
   ngOnInit() {
-    if(this.idResumo != undefined){
+    if(this.idResumo != null){
       this.provider.getByFilter(this.idResumo).subscribe(res => {
         this.tag = res.tag
         this.titulo = res.titulo
@@ -50,7 +50,7 @@ export class ResumoInsertPage implements OnInit {
     }
     console.log(this.data)
     let todo;
-    if(this.idResumo != undefined){
+    if(this.idResumo != null){
       todo = {
         conteudo: this.conteudo, titulo: this.titulo, data: this.data, tag: this.tag, idSala: this.idSala, id: this.idResumo
       }

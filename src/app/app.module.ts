@@ -20,11 +20,14 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { QRCodeModule } from 'angularx-qrcode';
 
+import { FormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(),QRCodeModule, AppRoutingModule, NovaAtividadePageModule, 
+  imports: [FormsModule, BrowserModule, IonicModule.forRoot(),QRCodeModule, AppRoutingModule, NovaAtividadePageModule, 
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyB2QuPU2P-uacuDhWwbanldt0o4N8jEdMM",
       authDomain: "teste-tcc-3363f.firebaseapp.com",

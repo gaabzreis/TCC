@@ -6,6 +6,8 @@ import { ToastController } from '@ionic/angular';
 import { map } from "rxjs/operators";
 import { ActivatedRoute } from '@angular/router/';
 import {sala, SalaAulaService} from '../services/sala-aula.service';
+import * as qrcode from 'qrcode-generator';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-resumo',
@@ -16,11 +18,15 @@ export class ResumoPage implements OnInit {
   todos: Resumo[];
   dia: any[];
   sala: sala
+  encodeData: string;
+  encodedData: any;
+  scannedData: {};
   idSala = this.routeres.snapshot.params["sala-aula"]
   busca: Resumo[]
   backup: any[]
+  elQrCode : string
   constructor(public router: Router, private provider: ResumoService, private providerSala : SalaAulaService,
-    public toastController: ToastController, public routeres : ActivatedRoute) { }
+    public toastController: ToastController, public routeres : ActivatedRoute, private alertController : AlertController) { }
 
   ngOnInit() { 
     this.providerSala.getByFilter(this.idSala).subscribe(res => {
@@ -73,8 +79,12 @@ export class ResumoPage implements OnInit {
 
     
   }
+
+  addNovo(){
+    sessionStorage.removeItem('resumo')
+  }
   newContact() {
-    sessionStorage.removeItem('idResumo')
+    sessionStorage.removeItem('resumo')
     this.router.navigate(['/resumo-edit']);
   }
 
@@ -100,5 +110,26 @@ export class ResumoPage implements OnInit {
     }
     
   }
+  async encodedText(){
+      let teste = qrcode(0, "H")
+      teste.addData(this.idSala)
+      teste.make()
+      this.elQrCode = teste.createImgTag(10)
 
+      const alert = await this.alertController.create({
+        header: 'Qr Code',
+        message: this.elQrCode,
+        buttons: [
+           {
+            text: 'Fechar',
+            handler: () => {
+              console.log('Confirm Okay');
+            }
+          }
+        ]
+      });
+  
+      await alert.present();
+                   
+  }
 }
