@@ -47,6 +47,7 @@
     "ngx-qrcode2": "0.0.9",
     "ngx-qrcode3": "^0.3.0",
     "phonegap-plugin-barcodescanner": "^8.1.0",
+    "qrcode-generator": "^1.4.3",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.29"
