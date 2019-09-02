@@ -28,6 +28,17 @@ const routes: Routes = [
   { path: 'sala-home', loadChildren: './sala-home/sala-home.module#SalaHomePageModule' },
   { path: 'sala-home/:sala-aula', loadChildren: './sala-home/sala-home.module#SalaHomePageModule' },
   { path: 'menu-sala', loadChildren: './menu-sala/menu-sala.module#MenuSalaPageModule' },
+  { path: 'forum', loadChildren: './forum/forum.module#ForumPageModule' },
+  { path: 'forum/:sala-aula', loadChildren: './forum/forum.module#ForumPageModule' },
+  { path: 'forum-insert', loadChildren: './forum-insert/forum-insert.module#ForumInsertPageModule' },
+  { path: 'forum-insert/:sala-aula', loadChildren: './forum-insert/forum-insert.module#ForumInsertPageModule' },
+  { path: 'forum-list', loadChildren: './forum-list/forum-list.module#ForumListPageModule' },
+  { path: 'forum-list/:sala-aula', loadChildren: './forum-list/forum-list.module#ForumListPageModule' },
+  { path: 'resp-insert', loadChildren: './resp-insert/resp-insert.module#RespInsertPageModule' },
+  { path: 'resp-insert/:idForum', loadChildren: './resp-insert/resp-insert.module#RespInsertPageModule' },
+
+
+
 ];
 
 @NgModule({

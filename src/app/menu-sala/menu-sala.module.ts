@@ -33,6 +33,10 @@ const routes: Routes = [
         path: 'quiz/:sala-aula',
         loadChildren: '../quiz/quiz.module#QuizPageModule',
       },
+      {
+        path: 'forum/:sala-aula',
+        loadChildren: '../forum/forum.module#ForumPageModule',
+      },
      
     ]
   } 

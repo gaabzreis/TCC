@@ -27,7 +27,7 @@ export class MenuSalaPage implements OnInit {
     },
     {
       title: 'Forum',
-      url: '#',
+      url: '/menu-sala/forum/' + this.idSala,
       icon: 'book'
     },
    
