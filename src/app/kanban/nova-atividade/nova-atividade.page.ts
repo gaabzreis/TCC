@@ -15,6 +15,7 @@ export class NovaAtividadePage implements OnInit {
 
   dismiss() {
     this.modalController.dismiss();
+    
   }
 
 }
