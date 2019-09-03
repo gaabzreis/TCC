@@ -1,16 +1,14 @@
 <ion-header>
   <ion-toolbar color="primary">
-      <ion-title>Nova Atividade</ion-title>
-      <ion-buttons>
-        <ion-button (click)="dismiss()">
+      <ion-buttons slot="start">
+        <ion-button (click)="fecharModal()">
           <ion-icon slot="icon-only" name="close"></ion-icon>
         </ion-button>
     </ion-buttons>
       <ion-buttons slot="primary">
-          <ion-button (click)="dismiss()">
-              Salvar
-          </ion-button>
+          <ion-button (click)="salvarAtividade()">Salvar</ion-button>
       </ion-buttons>
+      <ion-title>Nova Atividade</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -18,35 +16,43 @@
 
 <ion-item>
 <ion-label position="stacked">Nome:</ion-label>
-<ion-input></ion-input>
+<ion-input [(ngModel)]="nome"></ion-input>
 </ion-item>
 
 <ion-item>
-<ion-label position="stacked">Disciplina:</ion-label>
-<ion-input></ion-input>
+  <ion-label position="stacked">Disciplina:</ion-label>
+  <ion-select [(ngModel)]="disciplina">
+    <ion-select-option placeholder="Clique para selecionar"
+     *ngFor="let disciplina of listaDisciplinas" [value]="disciplina.id">
+     {{ disciplina.descricao }}</ion-select-option>
+  </ion-select>
 </ion-item>
 
 <ion-item>
   <ion-label position="stacked">Entrega:</ion-label>
-  <ion-datetime min="1990-02" displayFormat="DDDD, DD MMM"></ion-datetime>
+  <ion-datetime [(ngModel)]="dataEntrega" 
+  displayFormat="DDDD, DD MMM"></ion-datetime>
 </ion-item>
 
 <ion-item>
 <ion-label position="stacked">Descrição:</ion-label>
-<ion-textarea rows="6"></ion-textarea>
+<ion-textarea [(ngModel)]="descricao" rows="6" ></ion-textarea>
 </ion-item>
 
 <ion-item>
-  <ion-label position="stacked">Lista:</ion-label>
-  <ion-segment (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="todo" checked>
-      <ion-label>TO DO</ion-label>
+<ion-label position="stacked">Quadro:</ion-label>
+</ion-item>
+
+<ion-item>
+  <ion-segment [(ngModel)]="quadro">
+    <ion-segment-button value="para-fazer" checked>
+      <ion-label>Para fazer</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="in-progress">
-      <ion-label>IN PROGRESS</ion-label>
+    <ion-segment-button value="em-andamento">
+      <ion-label>Em andamento</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="done">
-      <ion-label>DONE</ion-label>
+    <ion-segment-button value="feito">
+      <ion-label>Feito</ion-label>
     </ion-segment-button>
   </ion-segment>
 </ion-item>
