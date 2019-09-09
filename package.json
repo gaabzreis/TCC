@@ -44,6 +44,7 @@
     "core-js": "^2.5.4",
     "firebase": "^6.0.2",
     "mathjs": "^5.10.3",
+    "moment": "^2.24.0",
     "ngx-qrcode2": "0.0.9",
     "ngx-qrcode3": "^0.3.0",
     "phonegap-plugin-barcodescanner": "^8.1.0",

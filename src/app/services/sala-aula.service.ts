@@ -4,23 +4,23 @@ import { map } from "rxjs/operators";
 import { Observable } from 'rxjs';
 
 export interface horariosAulas{
-  diaSemana: String,
-  horarioI: String,
-  horarioF: String
+  diaSemana: string,
+  horarioI: string,
+  horarioF: string
 }
 
 export interface sala{
   id?: string,
-  adm: String,
-  descricao: String,
-  universidade: String,
+  adm: string,
+  descricao: string,
+  universidade: string,
   sala: string,
-  inicioAula: String,
+  inicioAula: string,
   periodo: number,
-  professor: String,
+  professor: string,
   qtdMeses: number,
   horariosAula: horariosAulas[]
-  integrantes: String[]
+  integrantes: string[]
 }
 @Injectable({
   providedIn: 'root'

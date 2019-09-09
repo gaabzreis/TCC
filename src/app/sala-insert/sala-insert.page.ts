@@ -11,11 +11,11 @@ import { ActivatedRoute } from '@angular/router';
 export class SalaInsertPage implements OnInit {
   contador = 1
   adm = sessionStorage.getItem('idUser')
-  descricao: String
-  universidade: String
-  inicioAula: String
+  descricao: string
+  universidade: string
+  inicioAula: string
   periodo: number
-  professor: String
+  professor: string
   qtdMeses: number
   sala: string
   valores : Number[] = [1]
