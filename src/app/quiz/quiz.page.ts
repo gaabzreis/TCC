@@ -6,7 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { map, filter } from "rxjs/operators";
 import { AngularFirestore, AngularFirestoreCollection  } from 'angularfire2/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { NavController, LoadingController } from '@ionic/angular';
+import { NavController, LoadingController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-quiz',
@@ -21,7 +21,9 @@ export class QuizPage implements OnInit {
   somenteTag: Quiz[]
   idUser = sessionStorage.getItem('idUser')
   idSala = this.route.snapshot.params["sala-aula"]
-  constructor(public toastController: ToastController, private provider : QuizService, private route: ActivatedRoute, private loadingController: LoadingController) { } 
+  minhasPerguntas : Quiz[]
+  constructor(public toastController: ToastController, private provider : QuizService, private rotas : Router, 
+    public alertController : AlertController, private route: ActivatedRoute, private loadingController: LoadingController) { } 
 
   ngOnInit() {
     this.loadTodo()
@@ -36,6 +38,7 @@ export class QuizPage implements OnInit {
     this.provider.getAll().subscribe(res => {
       
       this.todo = res.filter(x => x.criador != this.idUser && x.idSala == this.idSala);
+      this.minhasPerguntas = res.filter(x => x.criador == this.idUser && x.idSala == this.idSala)
       loading.dismiss();
       this.somenteTag = this.todo.reduce((prev, atual) => {
         if(prev.find(x => x.tag == atual.tag)){
@@ -86,4 +89,51 @@ export class QuizPage implements OnInit {
 
   }
 
+  async delete(obj){
+    const alert = await this.alertController.create({
+      header: 'Aviso',
+      message: 'Tem certeza que deseja a pergunta ' + obj.pergunta + "?",
+      buttons: [
+        {
+          text: 'Sim',
+          cssClass: 'secondary',
+          handler: (action) => {
+            this.excluirBase(obj.id)
+          }
+        }, {
+          text: 'Cancelar',
+          cssClass: "primary",
+          role: "cancel",
+          handler: () => {
+            console.log('cancel');
+          }
+        }
+      ]
+    })
+    alert.present()
+  }
+
+  async excluirBase(id){
+    const toast = await this.toastController.create({
+      message: 'Pergunta excluido com sucesso!',
+      duration: 5000,
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    this.provider.delete(id).then(res => {
+      toast.present()
+    })
+  }
+
+  edit(obj){
+    sessionStorage.setItem('editQuiz', obj.id)
+    this.rotas.navigate(['/quiz-insert']);
+  }
 }

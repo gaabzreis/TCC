@@ -25,6 +25,7 @@ export class QuizListarPage implements OnInit {
   }]
   marcacaoPont = 0
   verGab = false
+  idSala = this.route.snapshot.params['conteudo'].split("@")[2]
   constructor(private router: Router, public alertController: AlertController, private route: ActivatedRoute, private loadingController: LoadingController, private provider: QuizService) { }
 
   ngOnInit() {

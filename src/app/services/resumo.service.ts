@@ -10,6 +10,7 @@ export interface Resumo {
   tag: String;
   titulo: String;
   idSala: string;
+  tipo: string;
 }
 
 @Injectable({

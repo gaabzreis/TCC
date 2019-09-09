@@ -14,6 +14,7 @@ export interface resp{
   criador: string;
   resposta: string;
   likes: number;
+  pessoasResponderam?: string[];
 }
 
 @Injectable({

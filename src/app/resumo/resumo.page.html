@@ -2,7 +2,7 @@
   <ion-toolbar  color="primary">
     
     <ion-buttons slot="start" >
-        <ion-menu-button></ion-menu-button>
+        <ion-menu-button ></ion-menu-button>
       
     </ion-buttons>
     <ion-title>Summboard</ion-title>
@@ -10,14 +10,25 @@
 </ion-header>
 
 <ion-content padding class="mec" color="light">
+       
   <h1 *ngIf="sala">{{sala.descricao}}</h1>
     <ion-item class="input">
       <ion-label><ion-icon name="search"></ion-icon></ion-label>
       <ion-searchbar animated Placeholder="Procurar" (keyup)="pesquisar($event)"></ion-searchbar>
     </ion-item>
+    <div style="text-align: center;
+    border: 1px solid red;
+    padding: 44px;
+    font-size: 15px;
+    font-weight: 600;
+    color: red;
+    border-radius: 9px;
+    margin-top: 35px;" *ngIf="!dia || dia.length == 0  ">
+        Que Pena! Não há resumos para serem mostrados! Crie um para auxiliar seus colegas
+    </div>
     <ion-list color="light">
  
-        <ng-container *ngIf="!dia || dia.length == 0">
+        <ng-container *ngIf="!dia">
           <div *ngFor="let n of [0,1,2]" padding>
             <ion-skeleton-text></ion-skeleton-text>
             <p>
@@ -28,7 +39,7 @@
         
           <ion-card  *ngFor="let item of dia">
               <ion-card-header>
-                <ion-card-subtitle>Data</ion-card-subtitle>
+                <!-- <ion-card-subtitle>Data</ion-card-subtitle> -->
                 <ion-card-title>{{ item.data }}</ion-card-title>
               </ion-card-header>
             
@@ -52,7 +63,7 @@
         </ion-fab-button>
       </ion-fab>
       <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="addNovo()">
-        <ion-fab-button [routerLink]="['/resumo-insert', idSala]" routerDirection="forward">
+        <ion-fab-button routerDirection="forward">
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>
       </ion-fab>

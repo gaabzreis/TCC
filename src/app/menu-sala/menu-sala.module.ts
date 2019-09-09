@@ -37,6 +37,10 @@ const routes: Routes = [
         path: 'forum/:sala-aula',
         loadChildren: '../forum/forum.module#ForumPageModule',
       },
+      {
+        path: 'listar-usuario/:sala-aula',
+        loadChildren: '../listar-usuario/listar-usuario.module#ListarUsuarioPageModule',
+      },
      
     ]
   } 

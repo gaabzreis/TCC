@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/menu-sala/resumo/this.todo.idSala" ></ion-back-button>
+      <ion-back-button [defaultHref]="['/menu-sala/resumo', todo.idSala]" ></ion-back-button>
     </ion-buttons>
     <ion-title *ngIf="this.todo">{{this.todo.tag}}</ion-title>
   </ion-toolbar>

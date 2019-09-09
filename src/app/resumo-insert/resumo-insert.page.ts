@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ResumoService, Resumo } from './../services/resumo.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ToastController } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router/';
+import { ActivatedRoute, Router } from '@angular/router/';
 
 @Component({
   selector: 'app-resumo-insert',
@@ -15,16 +15,19 @@ export class ResumoInsertPage implements OnInit {
   titulo: String
   conteudo: String
   data: String
+  idUser = sessionStorage.getItem('idUser')
   idSala = this.routeres.snapshot.params["sala-aula"]
   idResumo = sessionStorage.getItem('resumo')
-  constructor(private routeres: ActivatedRoute, private provider: ResumoService, private camera: Camera,public toastController: ToastController) { }
+  tipo : string
+  constructor(private routeres: ActivatedRoute, private provider: ResumoService, private camera: Camera,
+    public toastController: ToastController, private rotas : Router) { }
 
   ngOnInit() {
     if(this.idResumo != null){
       this.provider.getByFilter(this.idResumo).subscribe(res => {
         this.tag = res.tag
         this.titulo = res.titulo
-        this.data = res.data
+        this.data = res.data.split("/")[2] + "-" + res.data.split("/")[1] + "-" + res.data.split('/')[0]
         this.idSala = res.idSala
         this.conteudo = res.conteudo
 
@@ -32,6 +35,7 @@ export class ResumoInsertPage implements OnInit {
     }
   }
   async salvar(){
+    console.log(this.tipo)
     const toast = await this.toastController.create({
       message: 'Resumo salvo com sucesso.',
       duration: 5000,
@@ -45,31 +49,34 @@ export class ResumoInsertPage implements OnInit {
         }
       ]
     });
+    
     if(this.data.indexOf("-") > -1){
       this.data = this.data.split('-')[2].substr(0,2) + "/"+ this.data.split('-')[1] + "/"+ this.data.split('-')[0]
     }
-    console.log(this.data)
+    
     let todo;
     if(this.idResumo != null){
       todo = {
-        conteudo: this.conteudo, titulo: this.titulo, data: this.data, tag: this.tag, idSala: this.idSala, id: this.idResumo
+        conteudo: this.conteudo, titulo: this.titulo, data: this.data, tag: this.tag, idSala: this.idSala, id: this.idResumo, tipo: this.tipo
       }
       this.provider.update(todo).then(() => {
-     
+        this.rotas.navigate(['menu-sala/resumo/', this.idSala])
         toast.present();
       })
     }
     else{
       todo = {
-        conteudo: this.conteudo, titulo: this.titulo, data: this.data, tag: this.tag, idSala: this.idSala
+        conteudo: this.conteudo, titulo: this.titulo, data: this.data, tag: this.tag, idSala: this.idSala, criador: this.idUser, tipo: this.tipo
       };
-      this.provider.addResumo(todo).then(() => {
-     
+     this.provider.addResumo(todo).then(() => {
+        this.conteudo = ""
+        this.titulo = ""
+        this.data = ""
+        this.tag = ""
         toast.present();
       })
     }
     
-    console.log(todo)
     
   }
 

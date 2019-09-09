@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        
+      </ion-buttons>
+      <ion-title>Salas de Aula</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding="">
+  <h1>Usuários inscritos</h1>
+  <div style="text-align: center;
+  border: 1px solid red;
+  padding: 44px;
+  font-size: 15px;
+  font-weight: 600;
+  color: red;
+  border-radius: 9px;
+  margin-top: 35px;" *ngIf="!users || users.length == 0  ">
+      Que Pena! Não há ninguem inscrito na sua sala! Divulgue e começe a se organizar
+  </div> 
+  <ion-item *ngFor="let us of users; " >
+     
+      <ion-label>
+        <h3>Aluno(a)</h3>
+        <p>{{us.nome}}</p>
+      </ion-label>
+      <ion-icon name="close-circle" slot="end" (click)="excluirSala(us)"></ion-icon>
+  </ion-item>
+</ion-content>

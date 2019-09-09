@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar color="primary">
       <ion-buttons slot="start">
-        <ion-back-button defaultHref="/menu-sala/resumo/idSala"></ion-back-button>
+        <ion-back-button [defaultHref]="['/menu-sala/resumo', idSala]"></ion-back-button>
       </ion-buttons>
       <ion-title>Inserir novo resumo</ion-title>
     </ion-toolbar>
@@ -27,6 +27,15 @@
       <ion-label position="floating">Conteúdo</ion-label>
       <ion-textarea rows="5" [(ngModel)]="conteudo"></ion-textarea>
     </ion-item>
+    <ion-segment color="primary" [(ngModel)]="tipo">
+        <ion-segment-button href="#p" value="p" checked>
+          <ion-label>Compartilhado</ion-label>
+        </ion-segment-button>
+        <ion-segment-button href="#i" value="i">
+          <ion-label>Individual</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button (click)="acessarCamera()">
           <ion-icon name="camera"></ion-icon>

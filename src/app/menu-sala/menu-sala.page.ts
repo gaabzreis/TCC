@@ -8,13 +8,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MenuSalaPage implements OnInit {
   idSala = document.URL.split("/")[document.URL.split("/").length - 1]
+  idAdm = sessionStorage.getItem('adm')
   
+
   pages = [
-    {
-      title: 'Voltar',
-      url: '/menu/sala-aula',
-      icon: 'arrow-back'
-    },
     {
       title: 'Resumos',
       url: '/menu-sala/resumo/' + this.idSala,
@@ -33,10 +30,20 @@ export class MenuSalaPage implements OnInit {
    
    
   ];
-  constructor(private routeres : ActivatedRoute) { }
+  
+  constructor(private routeres : ActivatedRoute) { 
+    console.log(this.idAdm)
+    if(this.idAdm == "sim"){
+      this.pages.push({
+        title: "Usuários inscritos",
+        url: '/menu-sala/listar-usuario/' + this.idSala,
+        icon: 'book'
+      })
+    }
+  }
 
   ngOnInit() {
-    console.log()
+    console.log("menu da sala")
   }
 
 }

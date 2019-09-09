@@ -155,4 +155,10 @@ export class SalaAulaPage implements OnInit {
   scanCode(){
     
   }
+  
+  redirectSala(adm, id){
+    sessionStorage.setItem('adm', (this.idUser == adm ? 'sim' : 'nao'))
+    this.router.navigate(["/menu-sala/resumo/", id])
+
+  }
 }

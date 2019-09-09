@@ -36,6 +36,9 @@ const routes: Routes = [
   { path: 'forum-list/:sala-aula', loadChildren: './forum-list/forum-list.module#ForumListPageModule' },
   { path: 'resp-insert', loadChildren: './resp-insert/resp-insert.module#RespInsertPageModule' },
   { path: 'resp-insert/:idForum', loadChildren: './resp-insert/resp-insert.module#RespInsertPageModule' },
+  { path: 'listar-usuario', loadChildren: './listar-usuario/listar-usuario.module#ListarUsuarioPageModule' },
+  { path: 'listar-usuario/:sala-aula', loadChildren: './listar-usuario/listar-usuario.module#ListarUsuarioPageModule' },
+
 
 
 

@@ -1,37 +1,40 @@
 <ion-header>
     <ion-toolbar color="primary">
       <ion-buttons slot="start">
-        <ion-back-button defaultHref="/menu-sala/forum/idSala"></ion-back-button>
+        <ion-back-button [defaultHref]="['/menu-sala/forum/', idForum]"></ion-back-button>
       </ion-buttons>
       <ion-title>Fórum</ion-title>
     </ion-toolbar>
   </ion-header>
 
 <ion-content>
-    <div style="padding: 10px; text-align: center; margin-bottom: 10px;">
-      <h1>{{forum.pergunta}}</h1>
-    </div>
-    <ion-list *ngIf="!forum && forum.respostas.length > 0">
-        <ion-item *ngFor="let item of forum.respostas">
-          <ion-card-header>
-            <ion-card-title>
-                <ion-icon name="arrow-dropup"></ion-icon>
-                <ion-icon name="arrow-dropdown"></ion-icon>
-
-            </ion-card-title>
-          </ion-card-header>
-        
-          <ion-card-content>
-            Keep close to Nature's heart... and break clear away, once in awhile,
-            and climb a mountain or spend a week in the woods. Wash your spirit clean.
-          </ion-card-content>
-        </ion-item>
-       
-      </ion-list>
-      <div *ngIf="forum.respostas == undefined">
-        sem respostas
+    <div *ngIf="forum">
+      <div style="padding: 10px; text-align: center; margin-bottom: 10px;">
+        <h1 style="text-align: left">{{forum.pergunta}}</h1>
       </div>
-      <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="addNovo()">
+      
+      <ion-list *ngIf="forum.respostas">
+          <ion-item *ngFor="let item of forum.respostas; let i = index">
+            <ion-card-header>
+              <ion-card-title>
+                  <ion-icon class="iconeSeta" name="arrow-dropup" (click)="maisLikes(i, 1)"></ion-icon><br>
+                  {{item.likes}}<br>
+                  <ion-icon class="iconeSeta" name="arrow-dropdown" (click)="maisLikes(i, -1)"></ion-icon><br>
+              </ion-card-title>
+            </ion-card-header>
+          
+            <ion-card-content>
+              {{item.resposta}}
+            </ion-card-content>
+          </ion-item>
+        
+        </ion-list>
+      
+        <div *ngIf="!forum.respostas">
+          sem respostas
+        </div>
+      </div>
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
           <ion-fab-button [routerLink]="['/resp-insert', idForum]" routerDirection="forward">
             <ion-icon name="add"></ion-icon>
           </ion-fab-button>

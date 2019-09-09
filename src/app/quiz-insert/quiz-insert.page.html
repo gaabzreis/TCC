@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar color="primary">
       <ion-buttons slot="start">
-        <ion-back-button defaultHref="/menu/quiz"></ion-back-button>
+        <ion-back-button [defaultHref]="['/menu-sala/quiz/', idSala]"></ion-back-button>
       </ion-buttons>
       <ion-title>Inserir nova pergunta</ion-title>
     </ion-toolbar>
@@ -11,9 +11,31 @@
     <div style="padding: 10px; text-align: center; margin-bottom: 10px;">
       <h1>Inserir nova Pergunta</h1>
     </div>
-    <ion-item>
+    
+    <ion-item *ngIf="!temTag">
+        <ion-label>Selecione a tag</ion-label>
+        <ion-select multiple="false" cancelText="Cancelar" okText="Selecionar" [(ngModel)]="tagSelecionada" >
+          <ion-select-option [(value)]="item.tag" *ngFor="let item of todasTags" >{{item.tag}}</ion-select-option>
+        </ion-select>
+       
+    </ion-item>
+    <ion-item *ngIf="temTag">
         <ion-label position="floating">Tag</ion-label>
         <ion-input [(ngModel)]="tag" placeholder="Questão em uma palavra (EX. Limites)"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!temTag">
+        <label>Para criar uma nova tag clique aqui</label>
+          <ion-button slot="end" (click)="addTag(true)">
+            <ion-icon slot="icon-only" name="add"></ion-icon>
+          </ion-button>
+          
+    </ion-item>
+    <ion-item *ngIf="temTag">
+        <label>Para selecionar uma tag clique aqui</label>
+          <ion-button slot="end" (click)="addTag(false)">
+            <ion-icon slot="icon-only" name="checkbox"></ion-icon>
+          </ion-button>
+          
     </ion-item>
     <ion-item>
       <ion-label position="floating">Título</ion-label>

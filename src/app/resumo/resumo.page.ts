@@ -82,6 +82,7 @@ export class ResumoPage implements OnInit {
 
   addNovo(){
     sessionStorage.removeItem('resumo')
+    this.router.navigate(['resumo-insert', this.idSala])
   }
   newContact() {
     sessionStorage.removeItem('resumo')

@@ -18,26 +18,55 @@
   font-weight: 600;
   color: red;
   border-radius: 9px;
-  margin-top: 35px;" *ngIf="todo.length == 0 || !todo ">
+  margin-top: 35px;" *ngIf="!todo || todo.length == 0  ">
       Que Pena! Não há quiz para serem gerados! Crie um para auxiliar seus colegas
   </div>   
-  <div style="text-align: center;" *ngIf="todo.length > 0">
+  <div style="text-align: center;" *ngIf="todo && todo.length > 0">
 
 
-  <ion-item>
+  <ion-item class="espaco">
     <ion-label>Selecione a tag</ion-label>
     <ion-select multiple="true" cancelText="Cancelar" okText="Selecionar" [(ngModel)]="tagSelect" >
       <ion-select-option [(value)]="item.tag" *ngFor="let item of somenteTag" >{{item.tag}}</ion-select-option>
     </ion-select>
   </ion-item>
-  <ion-item>
+  <ion-item class="espaco">
     <ion-label>Selecione a quantidade de perguntas</ion-label>
     <ion-select (click)="teste()" [(ngModel)]="index">
       <ion-select-option [(value)]="item" *ngFor="let item of qtdQuiz">{{item}}</ion-select-option>
     </ion-select>
   </ion-item>
-  <ion-button shape="round" class="gerarQuiz" fill="outline" *ngIf="tagSelect && index" [routerLink]="['/quiz-listar', tagSelect + '@' + index ]">Gerar quiz</ion-button>
+  <ion-button shape="round" class="gerarQuiz" fill="outline" *ngIf="tagSelect && index" [routerLink]="['/quiz-listar', tagSelect + '@' + index + '@' + idSala ]">Gerar quiz</ion-button>
   </div>   
+
+
+  <hr>
+  <br><br><br>
+  <div style="text-align: center;" *ngIf="minhasPerguntas">
+    <h2 *ngIf="minhasPerguntas.length > 0">Minhas perguntas</h2>
+      <ion-list *ngFor="let perg of minhasPerguntas">
+    
+          <ion-item-sliding id="item100">
+            <ion-item >
+              <ion-label>
+                <h2>{{perg.pergunta}}</h2>
+                
+              </ion-label>
+              
+            </ion-item>
+        
+            <ion-item-options side="start">
+              <ion-item-option color="danger" (click)="delete(perg)">
+                <ion-icon slot="icon-only" name="trash"></ion-icon>
+              </ion-item-option>
+              <ion-item-option color="warning" (click)="edit(perg)">
+                <ion-icon slot="icon-only" name="create" md="md-create"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+  </div>   
+      
       <ion-fab vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button [routerLink]="['/quiz-insert', idSala]" routerDirection="forward">
           <ion-icon name="add"></ion-icon>

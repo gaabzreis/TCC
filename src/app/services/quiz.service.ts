@@ -58,4 +58,10 @@ export class QuizService {
   addQuiz(todo: Quiz) {
     return this.todosCollection.add(todo);
   }
+  update(key : string, obj : Quiz){
+    return this.todosCollection.doc(key).update(obj)
+  }
+  delete(key : string){
+    return this.todosCollection.doc(key).delete()
+  }
 }

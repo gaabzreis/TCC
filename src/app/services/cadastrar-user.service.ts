@@ -39,4 +39,21 @@ export class CadastrarUserService {
   addUser(todo: User) {
     return this.todosCollection.add(todo);
   }
+
+  getByFilter(id) {
+    return this.todosCollection.doc<User>(id).valueChanges();
+  }
+
+  getAll() {
+    this.todos = this.todosCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+    return this.todos;
+  }
 }
