@@ -1,0 +1,17 @@
+// .alert-wrapper {
+//     min-width: 100%;//what ever you like
+//  }
+
+//  ion-select{
+//     max-width: 70% !important;// your choice :)
+// }
+
+.alert-tappable.alert-radio {
+    height: auto;
+    contain: content;
+}
+
+.alert-radio-label.sc-ion-alert-md,
+.alert-radio-label.sc-ion-alert-ios {
+    white-space: normal;
+}

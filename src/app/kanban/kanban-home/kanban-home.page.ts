@@ -5,6 +5,11 @@ import { NovaAtividadePage } from '../nova-atividade/nova-atividade.page';
 import { ModalController } from '@ionic/angular';
 import * as moment from "moment"; 
 
+export interface nomeDisciplina {
+  idSala: string
+  nomeDisciplina: string
+}
+
 @Component({
   selector: 'app-kanban-home',
   templateUrl: './kanban-home.page.html',
@@ -16,10 +21,10 @@ export class KanbanHomePage {
   paraFazer: atividade[]
   emAndamento: atividade[]
   feito: atividade[]
-  nomesDisciplinas: [{
-    idSala: string,
-    nomeDisciplina: string
-  }]
+  nomesDisciplinas: nomeDisciplina[]
+
+  public progressClick: number = 0;
+  protected interval: any;
 
   constructor(private modalController: ModalController, private provider: AtividadeKanbanService, 
      private providerSala: SalaAulaService ) {
@@ -30,11 +35,12 @@ export class KanbanHomePage {
       this.paraFazer = []
       this.emAndamento = []
       this.feito = []
-      this.nomesDisciplinas = [{idSala: "", nomeDisciplina: ""}]
+      this.nomesDisciplinas = []
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+  }
 
   ionViewDidEnter() {
     this.provider.getAll().subscribe(res => {
@@ -67,7 +73,7 @@ export class KanbanHomePage {
       })
     })
 
-    console.log("Sala: ", this.nomesDisciplinas)
+    console.log("Dicionario dos nomes das disciplinas: ", this.nomesDisciplinas)
   }
 
   async presentModal() {
@@ -82,6 +88,43 @@ export class KanbanHomePage {
 
     return await modal.present();
   }
+
+  getNome (id: string) {
+    return this.nomesDisciplinas.filter ( x => {
+      if (x.idSala == id) {
+        // console.log("LOG do IF: " + x.nomeDisciplina)
+        return x.nomeDisciplina
+      }
+    })
+  }
+  
+  onPress($event) {
+    console.log("onPress", $event);
+    console.log("click");
+    if (this.progressClick == 5) {
+      console.log("LOG 5");
+    }
+    //this.pressState = 'pressing';
+    this.startInterval();
+}
+
+onPressUp($event) {
+    console.log("onPressUp", $event);
+    //this.pressState = 'released';
+    this.stopInterval();
+    this.progressClick = 0;
+}
+
+startInterval() {
+    const self = this;
+    this.interval = setInterval(function () {
+        self.progressClick = self.progressClick + 1;
+    }, 50);
+}
+
+stopInterval() {
+    clearInterval(this.interval);
+}
 
   dadosMock () {
     this.paraFazer = [{
