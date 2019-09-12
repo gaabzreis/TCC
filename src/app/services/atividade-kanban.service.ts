@@ -7,6 +7,7 @@ export interface atividade {
   id?: string
   nome: string
   idDisciplina: string
+  idUser: string
   dataEntrega: string
   descricao: string
   quadro: string

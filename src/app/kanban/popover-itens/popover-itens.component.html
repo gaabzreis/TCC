@@ -1,0 +1,29 @@
+<ion-content>
+  <ion-title>Mover para:</ion-title>
+  <ion-list>
+    <ion-item *ngIf="boardSelected=='para-fazer'" disabled>
+      Para fazer  
+      <ion-icon ios="ios-list" md="md-list" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item *ngIf="boardSelected!='para-fazer'" (click)="moverParaFazer()">
+      Para fazer
+      <ion-icon ios="ios-list" md="md-list" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item *ngIf="boardSelected=='em-andamento'" disabled>
+      Em andamento
+      <ion-icon ios="ios-time" md="md-time" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item *ngIf="boardSelected!='em-andamento'" (click)="moverEmAndamento()">
+      Em andamento
+      <ion-icon ios="ios-time" md="md-time" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item *ngIf="boardSelected=='feito'" disabled>
+      Feito
+      <ion-icon name="checkmark"  md="md-checkmark" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item *ngIf="boardSelected!='feito'" (click)="moverFeito()">
+      Feito
+      <ion-icon name="checkmark"  md="md-checkmark" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

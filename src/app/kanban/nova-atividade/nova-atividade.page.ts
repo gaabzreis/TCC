@@ -38,9 +38,9 @@ export class NovaAtividadePage implements OnInit {
 
   salvarAtividade() {
     this.atividade = {
-      id: this.idUser,
       nome: this.nome,
       idDisciplina: this.disciplina,
+      idUser: this.idUser,
       dataEntrega: moment(this.dataEntrega).format("DD/MM/YY"),
       descricao: this.descricao,
       quadro: this.quadro

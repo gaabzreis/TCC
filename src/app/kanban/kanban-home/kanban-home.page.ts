@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import {atividade, AtividadeKanbanService} from '../../services/atividade-kanban.service'
 import { sala, SalaAulaService } from 'src/app/services/sala-aula.service';
 import { NovaAtividadePage } from '../nova-atividade/nova-atividade.page';
-import { ModalController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import * as moment from "moment"; 
+import { PopoverItensComponent } from '../popover-itens/popover-itens.component';
 
 export interface nomeDisciplina {
   idSala: string
@@ -26,16 +27,20 @@ export class KanbanHomePage {
   public progressClick: number = 0;
   protected interval: any;
 
-  constructor(private modalController: ModalController, private provider: AtividadeKanbanService, 
-     private providerSala: SalaAulaService ) {
-    this.idUser = sessionStorage.getItem('idUser')
-    if (this.idUser == "mock") {
-      this.dadosMock()
-    } else {
-      this.paraFazer = []
-      this.emAndamento = []
-      this.feito = []
-      this.nomesDisciplinas = []
+  constructor(
+    private modalController: ModalController, 
+    private provider: AtividadeKanbanService, 
+    private providerSala: SalaAulaService,
+    public popoverController: PopoverController) 
+     {
+        this.idUser = sessionStorage.getItem('idUser')
+        if (this.idUser == "mock") {
+          this.dadosMock()
+        } else {
+          this.paraFazer = []
+          this.emAndamento = []
+          this.feito = []
+          this.nomesDisciplinas = []
     }
   }
 
@@ -45,7 +50,7 @@ export class KanbanHomePage {
   ionViewDidEnter() {
     this.provider.getAll().subscribe(res => {
       res.filter (atv => {
-        if (atv.id == this.idUser){
+        if (atv.idUser == this.idUser){
           switch (atv.quadro) {
             case "para-fazer": {
               this.paraFazer.push(atv)
@@ -97,45 +102,32 @@ export class KanbanHomePage {
       }
     })
   }
-  
-  onPress($event) {
-    console.log("onPress", $event);
-    console.log("click");
-    if (this.progressClick == 5) {
-      console.log("LOG 5");
+
+async onPress(ev, atv, board) {
+  console.log("LOG -> ", atv, " -> ", board);
+  const popover = await this.popoverController.create({
+    component: PopoverItensComponent,
+    event: ev,
+    componentProps: { 
+      idAtividade: atv,
+      boardSelected: board
     }
-    //this.pressState = 'pressing';
-    this.startInterval();
-}
-
-onPressUp($event) {
-    console.log("onPressUp", $event);
-    //this.pressState = 'released';
-    this.stopInterval();
-    this.progressClick = 0;
-}
-
-startInterval() {
-    const self = this;
-    this.interval = setInterval(function () {
-        self.progressClick = self.progressClick + 1;
-    }, 50);
-}
-
-stopInterval() {
-    clearInterval(this.interval);
+  });
+  return await popover.present();
 }
 
   dadosMock () {
     this.paraFazer = [{
       nome: "Modelo lógico do IFIP",
       idDisciplina: "Banco de Dados",
+      idUser: "mock",
       dataEntrega: moment().format("DD/MM/YY"),
       descricao: "Cnstruir o modelo lógico do IFIP",
       quadro: "para-fazer"
     }, {
       nome: "Lista de exercícios 02",
       idDisciplina: "Lógica Matemática",
+      idUser: "mock",
       dataEntrega: moment().format("DD/MM/YY"),
       descricao: "Fazer atividades da lista",
       quadro: "para-fazer"
@@ -143,6 +135,7 @@ stopInterval() {
     this.emAndamento = [{
       nome: "Mapa mental dos modelos",
       idDisciplina: "Banco de Dados",
+      idUser: "mock",
       dataEntrega: moment().format("DD/MM/YY"),
       descricao: "Realizar o mapa mental",
       quadro: "em-andamento"
@@ -150,12 +143,14 @@ stopInterval() {
     this.feito = [{
       nome: "Atividade esteganografia",
       idDisciplina: "Segurança",
+      idUser: "mock",
       dataEntrega: moment().format("DD/MM/YY"),
       descricao: "Realizar leitura do material",
       quadro: "feito"
     }, {
       nome: "Diagrama de sequência",
       idDisciplina: "APS I",
+      idUser: "mock",
       dataEntrega: moment().format("DD/MM/YY"),
       descricao: "Fazer o diagrama do projeto",
       quadro: "feito"
