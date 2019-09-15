@@ -13,11 +13,12 @@
 </ion-header>
 
 <ion-content>
-
+<ng-container>
 <ion-item>
 <ion-label position="stacked">Nome:</ion-label>
 <ion-input [(ngModel)]="nome"></ion-input>
 </ion-item>
+</ng-container>
 
 <ion-item>
   <ion-label position="stacked">Disciplina:</ion-label>
@@ -31,7 +32,7 @@
 <ion-item>
   <ion-label position="stacked">Entrega:</ion-label>
   <ion-datetime [(ngModel)]="dataEntrega" 
-  displayFormat="DDDD, DD MMM"></ion-datetime>
+  displayFormat="DDDD, DD MMM" ></ion-datetime>
 </ion-item>
 
 <ion-item>
