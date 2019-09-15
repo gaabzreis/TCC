@@ -38,10 +38,7 @@ const routes: Routes = [
   { path: 'resp-insert/:idForum', loadChildren: './resp-insert/resp-insert.module#RespInsertPageModule' },
   { path: 'listar-usuario', loadChildren: './listar-usuario/listar-usuario.module#ListarUsuarioPageModule' },
   { path: 'listar-usuario/:sala-aula', loadChildren: './listar-usuario/listar-usuario.module#ListarUsuarioPageModule' },
-
-
-
-
+  { path: 'detalhes-atividade', loadChildren: './kanban/detalhes-atividade/detalhes-atividade.module#DetalhesAtividadePageModule' },
 ];
 
 @NgModule({

@@ -10,5 +10,8 @@
         <ion-input type="password" [(ngModel)]="senha" ></ion-input>
     </ion-item>
     <ion-button expand="block" color="dark" style="margin: 10px;" (click)="logar()" >Logar</ion-button>
-    <a (click)="cadastre()" >Cadastre-se</a>
+    <div style="text-align: center">
+        <span>Ainda não possui uma conta?</span>
+        <a style="color: white; cursor: pointer;" (click)="cadastre()" > Cadastre-se</a>
+    </div>
 </ion-content>

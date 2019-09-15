@@ -2,8 +2,15 @@ import { Component } from '@angular/core';
 import {atividade, AtividadeKanbanService} from '../../services/atividade-kanban.service'
 import { sala, SalaAulaService } from 'src/app/services/sala-aula.service';
 import { NovaAtividadePage } from '../nova-atividade/nova-atividade.page';
-import { ModalController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import * as moment from "moment"; 
+import { PopoverItensComponent } from '../popover-itens/popover-itens.component';
+import { Router } from '@angular/router';
+
+export interface nomeDisciplina {
+  idSala: string
+  nomeDisciplina: string
+}
 
 @Component({
   selector: 'app-kanban-home',
@@ -16,30 +23,37 @@ export class KanbanHomePage {
   paraFazer: atividade[]
   emAndamento: atividade[]
   feito: atividade[]
-  nomesDisciplinas: [{
-    idSala: string,
-    nomeDisciplina: string
-  }]
+  nomesDisciplinas: nomeDisciplina[]
 
-  constructor(private modalController: ModalController, private provider: AtividadeKanbanService, 
-     private providerSala: SalaAulaService ) {
-    this.idUser = sessionStorage.getItem('idUser')
-    if (this.idUser == "mock") {
-      this.dadosMock()
-    } else {
-      this.paraFazer = []
-      this.emAndamento = []
-      this.feito = []
-      this.nomesDisciplinas = [{idSala: "", nomeDisciplina: ""}]
+  public progressClick: number = 0;
+  protected interval: any;
+
+  constructor(
+    private modalController: ModalController, 
+    private provider: AtividadeKanbanService, 
+    private providerSala: SalaAulaService,
+    private popoverController: PopoverController,
+    private router: Router
+    ) 
+     {
+        this.idUser = sessionStorage.getItem('idUser')
+        if (this.idUser == "mock") {
+          this.dadosMock()
+        } else {
+          this.paraFazer = []
+          this.emAndamento = []
+          this.feito = []
+          this.nomesDisciplinas = []
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+  }
 
   ionViewDidEnter() {
     this.provider.getAll().subscribe(res => {
       res.filter (atv => {
-        if (atv.id == this.idUser){
+        if (atv.idUser == this.idUser){
           switch (atv.quadro) {
             case "para-fazer": {
               this.paraFazer.push(atv)
@@ -67,7 +81,7 @@ export class KanbanHomePage {
       })
     })
 
-    console.log("Sala: ", this.nomesDisciplinas)
+    console.log("Dicionario dos nomes das disciplinas: ", this.nomesDisciplinas)
   }
 
   async presentModal() {
@@ -83,16 +97,45 @@ export class KanbanHomePage {
     return await modal.present();
   }
 
+  getNome (id: string) {
+    return this.nomesDisciplinas.filter ( x => {
+      if (x.idSala == id) {
+        return x.nomeDisciplina
+      }
+    })
+  }
+
+async onPress(ev, atv, board) {
+  console.log("LOG -> ", atv, " -> ", board);
+  const popover = await this.popoverController.create({
+    component: PopoverItensComponent,
+    event: ev,
+    componentProps: { 
+      idAtividade: atv,
+      boardSelected: board
+    }
+  });
+  return await popover.present();
+}
+
+openDetails(atv: atividade) {
+  this.router.navigate(['detalhes-atividade'], {
+    queryParams: { ...atv }
+  });
+}
+
   dadosMock () {
     this.paraFazer = [{
       nome: "Modelo lógico do IFIP",
       idDisciplina: "Banco de Dados",
+      idUser: "mock",
       dataEntrega: moment().format("DD/MM/YY"),
       descricao: "Cnstruir o modelo lógico do IFIP",
       quadro: "para-fazer"
     }, {
       nome: "Lista de exercícios 02",
       idDisciplina: "Lógica Matemática",
+      idUser: "mock",
       dataEntrega: moment().format("DD/MM/YY"),
       descricao: "Fazer atividades da lista",
       quadro: "para-fazer"
@@ -100,6 +143,7 @@ export class KanbanHomePage {
     this.emAndamento = [{
       nome: "Mapa mental dos modelos",
       idDisciplina: "Banco de Dados",
+      idUser: "mock",
       dataEntrega: moment().format("DD/MM/YY"),
       descricao: "Realizar o mapa mental",
       quadro: "em-andamento"
@@ -107,12 +151,14 @@ export class KanbanHomePage {
     this.feito = [{
       nome: "Atividade esteganografia",
       idDisciplina: "Segurança",
+      idUser: "mock",
       dataEntrega: moment().format("DD/MM/YY"),
       descricao: "Realizar leitura do material",
       quadro: "feito"
     }, {
       nome: "Diagrama de sequência",
       idDisciplina: "APS I",
+      idUser: "mock",
       dataEntrega: moment().format("DD/MM/YY"),
       descricao: "Fazer o diagrama do projeto",
       quadro: "feito"

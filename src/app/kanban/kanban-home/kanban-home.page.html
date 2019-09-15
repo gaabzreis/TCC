@@ -29,13 +29,13 @@
             </ion-card-header>
           
             
-            <ion-card-content>
+            <ion-card-content *ngIf="nomesDisciplinas">
                 <ion-list *ngFor="let atividade of paraFazer">
-                  <ion-item no-padding>
+                  <ion-item no-padding (click)="openDetails(atividade)" (press)="onPress($event, atividade.id, atividade.quadro)">
                     <ion-grid>
                         <ion-row>
                             <ion-col size="8" style="padding-left: 0px">
-                                <h3>{{atividade.idDisciplina}}</h3>
+                                <h3>{{getNome(atividade.idDisciplina)[0].nomeDisciplina}}</h3>
                             </ion-col>  
                               <ion-col size="4" style="padding-right: 0px; text-align: right">
                                   <h3>{{atividade.dataEntrega}}</h3>
@@ -65,11 +65,11 @@
             
               <ion-card-content>
                 <ion-list *ngFor="let atividade of emAndamento">
-                  <ion-item no-padding>
+                  <ion-item no-padding (click)="openDetails(atividade)" (press)="onPress($event, atividade.id, atividade.quadro)">
                     <ion-grid>
                         <ion-row>
                             <ion-col size="8" style="padding-left: 0px">
-                                <h3>{{atividade.idDisciplina}}</h3>
+                              <h3>{{getNome(atividade.idDisciplina)[0].nomeDisciplina}}</h3>
                             </ion-col>  
                               <ion-col size="4" style="padding-right: 0px; text-align: right">
                                   <h3>{{atividade.dataEntrega}}</h3>
@@ -96,14 +96,14 @@
                 <ion-card-subtitle *ngIf="feito.length > 1">{{feito.length + " atividades"}}</ion-card-subtitle>
                   <ion-card-title>FEITO</ion-card-title>
                 </ion-card-header>
-              
+               
                 <ion-card-content>
                   <ion-list *ngFor="let atividade of feito">
-                    <ion-item no-padding>
+                    <ion-item no-padding (click)="openDetails(atividade)" (press)="onPress($event, atividade.id, atividade.quadro)">
                       <ion-grid>
                           <ion-row>
                               <ion-col size="8" style="padding-left: 0px">
-                                  <h3>{{atividade.idDisciplina}}</h3>
+                                <h3>{{getNome(atividade.idDisciplina)[0].nomeDisciplina}}</h3>
                               </ion-col>  
                                 <ion-col size="4" style="padding-right: 0px; text-align: right">
                                     <h3>{{atividade.dataEntrega}}</h3>

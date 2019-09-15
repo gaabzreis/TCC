@@ -5,13 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { KanbanHomePage } from './kanban-home.page';
-import { PopoverItensComponent } from '../popover-itens/popover-itens.component';
+import { DetalhesAtividadePage } from './detalhes-atividade.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: KanbanHomePage
+    component: DetalhesAtividadePage
   }
 ];
 
@@ -22,7 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  entryComponents: [PopoverItensComponent],
-  declarations: [KanbanHomePage, PopoverItensComponent]
+  declarations: [DetalhesAtividadePage]
 })
-export class KanbanHomePageModule {}
+export class DetalhesAtividadePageModule {}
