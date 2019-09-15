@@ -9,6 +9,7 @@ import {sala, SalaAulaService} from '../services/sala-aula.service';
 import * as qrcode from 'qrcode-generator';
 import { AlertController } from '@ionic/angular';
 import { LoginServiceService, User } from '../services/login-service.service';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-resumo',
@@ -31,7 +32,8 @@ export class ResumoPage implements OnInit {
   contadorLiberar = 0
   constructor(public router: Router, private provider: ResumoService, private providerSala : SalaAulaService,
     public toastController: ToastController, public routeres : ActivatedRoute, 
-    private alertController : AlertController, private providerUser : LoginServiceService) { }
+    private alertController : AlertController, private providerUser : LoginServiceService,
+    private actionSheetController : ActionSheetController) { }
 
   ngOnInit() { 
     
@@ -314,5 +316,45 @@ export class ResumoPage implements OnInit {
     else{
       this.contadorLiberar++
     }
+  }
+
+  async clickpermissao(){
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Mais opções',
+      buttons: []
+    });
+    if(this.adm == 'sim'){
+      actionSheet.buttons = [{
+          text: 'Confirmar permissões',
+          handler: () => {
+            this.pedirAumentarPermissao();
+          }
+        },
+        {
+          text: 'Fechar',
+          role: "cancel",
+          handler: () => {
+            
+          }
+        }]
+      await actionSheet.present();
+    }
+    else{
+      actionSheet.buttons= [{
+        text: 'Solicitar permissão de monitor',
+        handler: () => {
+          this.pedirAumentarPermissao();
+        }
+      },
+      {
+        text: 'Fechar',
+        role: "cancel",
+        handler: () => {
+          
+        }
+      }]
+      await actionSheet.present();
+    }
+    
   }
 }

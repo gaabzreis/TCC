@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
-import { AtividadeKanbanService, atividade } from 'src/app/services/atividade-kanban.service';
+import { AtividadeKanbanService, atividade } from '../../services/atividade-kanban.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class PopoverItensComponent implements OnInit {
   @Input("idAtividade") idAtividade;
   @Input("boardSelected") boardSelected;
+  @Input("arrayBoard") arrayBoard;
 
   constructor(
     private popoverController: PopoverController,
@@ -22,9 +23,11 @@ export class PopoverItensComponent implements OnInit {
   }
 
   moverAtividade(quadro: string) {
+    this.arrayBoard = this.arrayBoard.filter(x => {
+      return x.id != this.idAtividade
+    })
     this.providerKanban.moverAtividade(this.idAtividade, quadro);
     this.popoverController.dismiss();
-    
   }
   
 }

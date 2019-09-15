@@ -20,12 +20,12 @@ export class MenuSalaPage implements OnInit {
     {
       title: 'Quiz',
       url: '/menu-sala/quiz/' + this.idSala,
-      icon: 'book'
+      icon: 'help'
     },
     {
       title: 'Forum',
       url: '/menu-sala/forum/' + this.idSala,
-      icon: 'book'
+      icon: 'chatboxes'
     },
    
    
@@ -37,7 +37,7 @@ export class MenuSalaPage implements OnInit {
       this.pages.push({
         title: "Usuários inscritos",
         url: '/menu-sala/listar-usuario/' + this.idSala,
-        icon: 'book'
+        icon: 'person'
       })
     }
   }

@@ -10,10 +10,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./resp-insert.page.scss'],
 })
 export class RespInsertPage implements OnInit {
-  resp : resp
+  resp : resp 
   forum : forum
   idForum = this.rout.snapshot.params['idForum']
-  resposta: string
+  resposta: string = ""
   idUser = sessionStorage.getItem('idUser')
   constructor(private router : Router, private rout: ActivatedRoute, private provider : ForumServiceService, public toastController: ToastController) { }
 
@@ -30,11 +30,16 @@ export class RespInsertPage implements OnInit {
         {
           text: 'Ok',
           handler: () => {
-            this.router.navigate(["forum-list", this.idForum])
+            
           }
         }
       ]
     });
+    if(this.resposta == ""){
+      toast.message = "Preencha todos os campos"
+      toast.present()
+      return 
+    }
     this.resp = {resposta: this.resposta, likes: 0, criador: this.idUser}
     if(this.forum.respostas == undefined){
       this.forum.respostas = [this.resp]
@@ -44,7 +49,9 @@ export class RespInsertPage implements OnInit {
     }
 
     this.provider.updateForum(this.idForum, this.forum).then(res => {
+
       toast.present()
+      this.router.navigate(["forum-list", this.idForum])
     })
   }
 

@@ -14,7 +14,7 @@ export class ForumInsertPage implements OnInit {
   idSala = this.router.snapshot.params["sala-aula"]
   idUser = sessionStorage.getItem('idUser')
   forum : forum
-  pergunta: string
+  pergunta: string = ""
   constructor(private provider : ForumServiceService, private router : ActivatedRoute, 
     private toastController : ToastController, private rout : Router) { }
 
@@ -27,17 +27,21 @@ export class ForumInsertPage implements OnInit {
       buttons: [
         {
           text: 'Ok',
-          handler: () => {
-            this.rout.navigate(["forum", this.idSala])
-          }
+          role: "cancel"
         }
       ]
     });
+    if(this.pergunta == ""){
+      toast.message = "Por favor, preencha o campo pergunta"
+      toast.present()
+      return
+    }
     
     this.forum = {pergunta: this.pergunta, idSala : this.idSala, criador : this.idUser}
     
     this.provider.addForum(this.forum).then(res => {
       toast.present()
+      this.rout.navigate(["menu-sala/forum", this.idSala])
     })
     
   }

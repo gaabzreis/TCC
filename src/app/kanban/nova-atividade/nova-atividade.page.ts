@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import {sala, SalaAulaService} from '../../services/sala-aula.service'
-import { AtividadeKanbanService, atividade } from 'src/app/services/atividade-kanban.service';
+import { AtividadeKanbanService, atividade } from '../../services/atividade-kanban.service'
 import * as moment from "moment"; 
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -59,6 +59,16 @@ export class NovaAtividadePage implements OnInit {
         this.dataEntrega = moment(params.dataEntrega, "DD/MM/YY").format("YYYY-MM-DDTHH:mmZ");
         this.descricao = params.descricao;
         this.quadro = params.quadro;
+        this.disciplina = params.idDisciplina
+        this.atividade = {
+          id: params.id,
+          nome: this.nome,
+          idDisciplina: this.disciplina,
+          idUser: this.idUser,
+          dataEntrega: moment(this.dataEntrega).format("DD/MM/YY"),
+          descricao: this.descricao,
+          quadro: this.quadro
+        }
       }
     });
   }
@@ -66,11 +76,16 @@ export class NovaAtividadePage implements OnInit {
   async salvarAtividade() {
     //TODO: Verificar se é edição.
     //OBS: O IF ABAIXO NÃO ESTÁ FUNCIONANDO.
-    if (this.atividade.id != null) {
+    if (this.atividade) {
       console.log("2.this.atividade.id -> ", this.atividade.id)
-      this.providerKanban.updateAtividade(this.atividade);
+      this.atividade.nome = this.nome,
+      this.atividade.idDisciplina = this.disciplina,
+      this.atividade.dataEntrega = moment(this.dataEntrega).format("DD/MM/YY"),
+      this.atividade.descricao = this.descricao,
+      this.atividade.quadro = this.quadro
+      
+      this.providerKanban.updateAtividade(this.atividade.id, this.atividade);
     } else {
-      console.log("3.this.atividade.id -> ", this.atividade.id)
       this.atividade = {
         nome: this.nome,
         idDisciplina: this.disciplina,

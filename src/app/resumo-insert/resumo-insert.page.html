@@ -4,6 +4,11 @@
         <ion-back-button [defaultHref]="['/menu-sala/resumo', idSala]"></ion-back-button>
       </ion-buttons>
       <ion-title>Inserir novo resumo</ion-title>
+      <ion-buttons slot="primary" >
+        <ion-button (click)="help()" >
+            <ion-icon ios="ios-help" md="md-help" ></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 

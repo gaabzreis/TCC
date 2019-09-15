@@ -23,6 +23,16 @@
   <hr>
  <div *ngIf="salasP">
     <h2>Salas de aulas - inscrito</h2>
+    <div style="text-align: center;
+      border: 1px solid red;
+      padding: 44px;
+      font-size: 15px;
+      font-weight: 600;
+      color: red;
+      border-radius: 9px;
+      margin-top: 35px;" *ngIf="!salasP || salasP.length == 0  ">
+          Que Pena! Não há salas de aula em que você esteja inscrito! Arraste as salas para o lado e se inscreva!
+      </div>   
     <ion-list *ngFor="let salaP of salasP">
     
       <ion-item-sliding id="item100" >

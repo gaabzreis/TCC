@@ -3,7 +3,6 @@ import { ResumoService, Resumo } from './../services/resumo.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ToastController, ActionSheetController, AlertController  } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router/';
-import {MyData, UpImageService} from '../services/up-image.service'
 
 import { File } from '@ionic-native/file/ngx';
 import { stringify } from '@angular/core/src/util';
@@ -16,17 +15,17 @@ import { database } from 'firebase';
 })
 
 export class ResumoInsertPage implements OnInit {
-  tag: String
-  titulo: String
-  conteudo: String
-  data: String
+  tag: String = ""
+  titulo: String = ""
+  conteudo: String = ""
+  data: String = ""
   idUser = sessionStorage.getItem('idUser')
   idSala = this.routeres.snapshot.params["sala-aula"]
   idResumo = sessionStorage.getItem('resumo')
   tipo : string = "p"
   criador: string = this.idUser
   constructor(private routeres: ActivatedRoute, private provider: ResumoService, private camera: Camera,
-    public toastController: ToastController, private rotas : Router) { }
+    public toastController: ToastController, private rotas : Router, private alert : AlertController) { }
 
   ngOnInit() {
     if(this.idResumo != null){
@@ -89,10 +88,30 @@ export class ResumoInsertPage implements OnInit {
         this.data = ""
         this.tag = ""
         toast.present();
+        this.rotas.navigate(['menu-sala/resumo/', this.idSala])
       })
     }
     
     
+  }
+
+  async help(){
+    const alert = await this.alert.create({
+      header: 'Ajuda',
+      message: "Tags são as palavras chave do seu resumo! O título é demonstrado como título do resumo quando demonstrado seus resumos são abertos",
+      buttons: [
+        {
+          text: 'Fechar',
+          cssClass: "primary",
+          role: "cancel",
+          handler: () => {
+            console.log('cancel');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 

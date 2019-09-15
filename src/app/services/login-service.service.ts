@@ -10,6 +10,7 @@ export interface User{
   nome: string;
   senha: String;
   universidade: String;
+  instituicao?: string;
 }
 
 @Injectable({

@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar color="primary">
       <ion-buttons slot="start">
-        <ion-back-button [defaultHref]="['/menu-sala/forum/', idForum]"></ion-back-button>
+        <ion-back-button [defaultHref]="['/menu-sala/forum/', forum.idSala]"></ion-back-button>
       </ion-buttons>
       <ion-title>Fórum</ion-title>
     </ion-toolbar>
@@ -18,7 +18,7 @@
             <ion-card-header>
               <ion-card-title>
                   <ion-icon class="iconeSeta" name="arrow-dropup" (click)="maisLikes(i, 1)"></ion-icon><br>
-                  {{item.likes}}<br>
+                  <span style="margin-left:16px">{{item.likes}}</span><br>
                   <ion-icon class="iconeSeta" name="arrow-dropdown" (click)="maisLikes(i, -1)"></ion-icon><br>
               </ion-card-title>
             </ion-card-header>
@@ -30,9 +30,16 @@
         
         </ion-list>
       
-        <div *ngIf="!forum.respostas">
-          sem respostas
-        </div>
+        <div style="text-align: center;
+  border: 1px solid red;
+  padding: 44px;
+  font-size: 15px;
+  font-weight: 600;
+  color: red;
+  border-radius: 9px;
+  margin-top: 35px;" *ngIf="!forum.respostas || forum.respostas.length == 0  ">
+      Que Pena! Não há respostas para a pergunta!
+  </div>   
       </div>
       <ion-fab vertical="bottom" horizontal="end" slot="fixed">
           <ion-fab-button [routerLink]="['/resp-insert', idForum]" routerDirection="forward">

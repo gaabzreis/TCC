@@ -23,6 +23,8 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { FormsModule } from '@angular/forms';
 import {IonicGestureConfig} from "./gestures/ionic-gesture-config";
 
+/* import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/'; */
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -49,7 +51,7 @@ import {IonicGestureConfig} from "./gestures/ionic-gesture-config";
     Toast,
     Camera,
     BarcodeScanner,
-    File
+
   ],
   bootstrap: [AppComponent],
  

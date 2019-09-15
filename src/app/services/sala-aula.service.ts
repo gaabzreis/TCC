@@ -21,6 +21,8 @@ export interface sala{
   qtdMeses: number,
   horariosAula: horariosAulas[]
   integrantes: string[]
+  monitores?: string[]
+  solicitacao?: string[]
 }
 @Injectable({
   providedIn: 'root'

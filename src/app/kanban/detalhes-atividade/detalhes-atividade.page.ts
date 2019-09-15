@@ -12,6 +12,7 @@ import { NovaAtividadePage } from '../nova-atividade/nova-atividade.page';
 export class DetalhesAtividadePage implements OnInit {
 
   atividade: atividade;
+  nomeDisciplina : string = ""
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -32,6 +33,7 @@ export class DetalhesAtividadePage implements OnInit {
           idUser: params.idUser,
           quadro: params.quadro
         }
+        this.nomeDisciplina = params.nomeDisciplina
       });
   }
 
