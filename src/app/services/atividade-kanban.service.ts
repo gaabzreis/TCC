@@ -41,5 +41,14 @@ export class AtividadeKanbanService {
   addAtividadeKanban(atividade: atividade) {
     return this.todosCollection.add(atividade);
   }
+  moverAtividade(idAtividade: string, quadroDestino: string){
+    return this.todosCollection.doc(idAtividade).update({quadro: quadroDestino});
+  }
+  updateAtividade(atv: atividade){
+    return this.todosCollection.doc(atv.id).update(atv);
+  }
+  deleteAtividade(idAtividade: string){
+    return this.todosCollection.doc(idAtividade).delete()
+  }
 
 }

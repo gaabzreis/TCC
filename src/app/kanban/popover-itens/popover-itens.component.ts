@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PopoverController, Events } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
+import { AtividadeKanbanService, atividade } from 'src/app/services/atividade-kanban.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-popover-itens',
@@ -11,26 +13,18 @@ export class PopoverItensComponent implements OnInit {
   @Input("boardSelected") boardSelected;
 
   constructor(
-    private events: Events,
-    private popoverController: PopoverController
+    private popoverController: PopoverController,
+    private providerKanban: AtividadeKanbanService,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    console.log("idAtividade = ", this.idAtividade);
-    console.log("boardSelected = ", this.boardSelected);
   }
 
-  moverParaFazer() {
-    console.log("Para Fazer");
-  }
-
-  moverEmAndamento() {
-    console.log("moverEmAndamento");
-  }
-
-  moverFeito() {
-    this.events.publish('fromPopoverEvent');
+  moverAtividade(quadro: string) {
+    this.providerKanban.moverAtividade(this.idAtividade, quadro);
     this.popoverController.dismiss();
+    
   }
-
+  
 }

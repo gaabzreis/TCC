@@ -31,7 +31,7 @@
             
             <ion-card-content *ngIf="nomesDisciplinas">
                 <ion-list *ngFor="let atividade of paraFazer">
-                  <ion-item no-padding (press)="onPress($event, atividade.id, atividade.quadro)">
+                  <ion-item no-padding (click)="openDetails(atividade)" (press)="onPress($event, atividade.id, atividade.quadro)">
                     <ion-grid>
                         <ion-row>
                             <ion-col size="8" style="padding-left: 0px">
@@ -65,7 +65,7 @@
             
               <ion-card-content>
                 <ion-list *ngFor="let atividade of emAndamento">
-                  <ion-item no-padding (press)="onPress($event, atividade.id, atividade.quadro)">
+                  <ion-item no-padding (click)="openDetails(atividade)" (press)="onPress($event, atividade.id, atividade.quadro)">
                     <ion-grid>
                         <ion-row>
                             <ion-col size="8" style="padding-left: 0px">
@@ -99,7 +99,7 @@
                
                 <ion-card-content>
                   <ion-list *ngFor="let atividade of feito">
-                    <ion-item no-padding (press)="onPress($event, atividade.id, atividade.quadro)">
+                    <ion-item no-padding (click)="openDetails(atividade)" (press)="onPress($event, atividade.id, atividade.quadro)">
                       <ion-grid>
                           <ion-row>
                               <ion-col size="8" style="padding-left: 0px">

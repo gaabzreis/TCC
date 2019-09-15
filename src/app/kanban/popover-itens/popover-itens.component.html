@@ -1,27 +1,26 @@
 <ion-content>
-  <ion-title>Mover para:</ion-title>
-  <ion-list>
-    <ion-item *ngIf="boardSelected=='para-fazer'" disabled>
+  <ion-list class="lista">
+    <ion-item lines="none" *ngIf="boardSelected=='para-fazer'" disabled>
       Para fazer  
-      <ion-icon ios="ios-list" md="md-list" slot="end"></ion-icon>
+      <ion-icon lines="none" ios="ios-list" md="md-list" slot="end"></ion-icon>
     </ion-item>
-    <ion-item *ngIf="boardSelected!='para-fazer'" (click)="moverParaFazer()">
+    <ion-item lines="none" *ngIf="boardSelected!='para-fazer'" (click)="moverAtividade('para-fazer')">
       Para fazer
       <ion-icon ios="ios-list" md="md-list" slot="end"></ion-icon>
     </ion-item>
-    <ion-item *ngIf="boardSelected=='em-andamento'" disabled>
+    <ion-item lines="none" *ngIf="boardSelected=='em-andamento'" disabled>
       Em andamento
       <ion-icon ios="ios-time" md="md-time" slot="end"></ion-icon>
     </ion-item>
-    <ion-item *ngIf="boardSelected!='em-andamento'" (click)="moverEmAndamento()">
+    <ion-item lines="none" *ngIf="boardSelected!='em-andamento'" (click)="moverAtividade('em-andamento')">
       Em andamento
       <ion-icon ios="ios-time" md="md-time" slot="end"></ion-icon>
     </ion-item>
-    <ion-item *ngIf="boardSelected=='feito'" disabled>
+    <ion-item lines="none" *ngIf="boardSelected=='feito'" disabled>
       Feito
       <ion-icon name="checkmark"  md="md-checkmark" slot="end"></ion-icon>
     </ion-item>
-    <ion-item *ngIf="boardSelected!='feito'" (click)="moverFeito()">
+    <ion-item lines="none" *ngIf="boardSelected!='feito'" (click)="moverAtividade('feito')">
       Feito
       <ion-icon name="checkmark"  md="md-checkmark" slot="end"></ion-icon>
     </ion-item>

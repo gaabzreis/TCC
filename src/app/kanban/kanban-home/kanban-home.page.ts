@@ -5,6 +5,7 @@ import { NovaAtividadePage } from '../nova-atividade/nova-atividade.page';
 import { ModalController, PopoverController } from '@ionic/angular';
 import * as moment from "moment"; 
 import { PopoverItensComponent } from '../popover-itens/popover-itens.component';
+import { Router } from '@angular/router';
 
 export interface nomeDisciplina {
   idSala: string
@@ -31,7 +32,9 @@ export class KanbanHomePage {
     private modalController: ModalController, 
     private provider: AtividadeKanbanService, 
     private providerSala: SalaAulaService,
-    public popoverController: PopoverController) 
+    private popoverController: PopoverController,
+    private router: Router
+    ) 
      {
         this.idUser = sessionStorage.getItem('idUser')
         if (this.idUser == "mock") {
@@ -97,7 +100,6 @@ export class KanbanHomePage {
   getNome (id: string) {
     return this.nomesDisciplinas.filter ( x => {
       if (x.idSala == id) {
-        // console.log("LOG do IF: " + x.nomeDisciplina)
         return x.nomeDisciplina
       }
     })
@@ -114,6 +116,12 @@ async onPress(ev, atv, board) {
     }
   });
   return await popover.present();
+}
+
+openDetails(atv: atividade) {
+  this.router.navigate(['detalhes-atividade'], {
+    queryParams: { ...atv }
+  });
 }
 
   dadosMock () {

@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    
+    <ion-buttons slot="primary">
+      <ion-button (click)="maisOpcoes()">
+          <ion-icon slot="icon-only" ios="ios-more" md="md-more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Detalhes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="container">
+
+    <ion-card text-wrap>
+      <ion-card-header>
+        <ion-card-subtitle>{{ atividade.nome }}</ion-card-subtitle>
+        <h1 style="margin-top: 0px; margin-bottom: 0px">Nome disciplina</h1>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card text-wrap>
+      <ion-card-content style="padding-top: 0px; color: black">
+          <ion-textarea rows="10" [(ngModel)]="atividade.descricao" disabled></ion-textarea>
+      </ion-card-content>    
+    </ion-card>
+
+    <ion-card text-wrap>
+      <ion-card-header>
+          <h4 style="margin-top: 0px; margin-bottom: 0px">ENTREGA: {{ atividade.dataEntrega }}</h4>
+      </ion-card-header>
+    </ion-card>
+
+    <!-- <ion-item no-lines>
+      <ion-input [(ngModel)]="atividade.nome" disabled></ion-input>
+    </ion-item>
+
+    <ion-item no-lines>
+      <ion-textarea rows="10" [(ngModel)]="atividade.descricao"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Entrega: </ion-label>
+        <ion-datetime [(ngModel)]="dataEntrega" 
+        displayFormat="DDDD, DD MMM"></ion-datetime>
+      </ion-item> -->
+
+</ion-content>
