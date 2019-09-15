@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ResumoService, Resumo } from './../services/resumo.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { ToastController } from '@ionic/angular';
+import { ToastController, Platform } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router/';
+import { File } from '@ionic-native/file/ngx';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-resumo-insert',
@@ -18,12 +22,19 @@ export class ResumoInsertPage implements OnInit {
   idUser = sessionStorage.getItem('idUser')
   idSala = this.routeres.snapshot.params["sala-aula"]
   idResumo = sessionStorage.getItem('resumo')
-  tipo : string
+  tipo: string
+
+  public uploadPercent: Observable<number>;
+  public downloadURL: Observable<string>;
+
   constructor(private routeres: ActivatedRoute, private provider: ResumoService, private camera: Camera,
-    public toastController: ToastController, private rotas : Router) { }
+    public toastController: ToastController, private rotas: Router,
+    private platform: Platform,
+    private file: File,
+    private afStorage: AngularFireStorage) { }
 
   ngOnInit() {
-    if(this.idResumo != null){
+    if (this.idResumo != null) {
       this.provider.getByFilter(this.idResumo).subscribe(res => {
         this.tag = res.tag
         this.titulo = res.titulo
@@ -34,7 +45,7 @@ export class ResumoInsertPage implements OnInit {
       })
     }
   }
-  async salvar(){
+  async salvar() {
     console.log(this.tipo)
     const toast = await this.toastController.create({
       message: 'Resumo salvo com sucesso.',
@@ -49,13 +60,13 @@ export class ResumoInsertPage implements OnInit {
         }
       ]
     });
-    
-    if(this.data.indexOf("-") > -1){
-      this.data = this.data.split('-')[2].substr(0,2) + "/"+ this.data.split('-')[1] + "/"+ this.data.split('-')[0]
+
+    if (this.data.indexOf("-") > -1) {
+      this.data = this.data.split('-')[2].substr(0, 2) + "/" + this.data.split('-')[1] + "/" + this.data.split('-')[0]
     }
-    
+
     let todo;
-    if(this.idResumo != null){
+    if (this.idResumo != null) {
       todo = {
         conteudo: this.conteudo, titulo: this.titulo, data: this.data, tag: this.tag, idSala: this.idSala, id: this.idResumo, tipo: this.tipo
       }
@@ -64,11 +75,11 @@ export class ResumoInsertPage implements OnInit {
         toast.present();
       })
     }
-    else{
+    else {
       todo = {
         conteudo: this.conteudo, titulo: this.titulo, data: this.data, tag: this.tag, idSala: this.idSala, criador: this.idUser, tipo: this.tipo
       };
-     this.provider.addResumo(todo).then(() => {
+      this.provider.addResumo(todo).then(() => {
         this.conteudo = ""
         this.titulo = ""
         this.data = ""
@@ -76,26 +87,70 @@ export class ResumoInsertPage implements OnInit {
         toast.present();
       })
     }
-    
-    
+
+
   }
 
-  acessarCamera(){
+  acessarCamera() {
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
-    
+
     this.camera.getPicture(options).then((imageData) => {
-     // imageData is either a base64 encoded string or a file URI
-     // If it's base64 (DATA_URL):
-     let base64Image = 'data:image/jpeg;base64,' + imageData;
-     console.log(base64Image)
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      console.log(base64Image)
     }, (err) => {
-     // Handle error
+      // Handle error
     });
   }
+
+  // alteracoes-paulo
+  async openGallery() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true
+    };
+
+    try {
+      const fileURI: string = await this.camera.getPicture(options);
+      let file: string
+
+      if (this.platform.is('ios')) {
+        file = fileURI.split('/').pop();
+      } else {
+        file = fileURI.substring(fileURI.lastIndexOf('/') + 1, fileURI.indexOf('?'));
+      }
+
+      const path: string = fileURI.substring(0, fileURI.lastIndexOf('/'));
+
+      const buffer: ArrayBuffer = await this.file.readAsArrayBuffer(path, file);
+      const blob: Blob = new Blob([buffer], { type: 'image/jpeg' });
+
+      this.uploadFoto(blob);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  uploadFoto(blob: Blob) {
+    const ref = this.afStorage.ref('paulo/foto_1.jpg');
+    const task = ref.put(blob);
+
+    this.uploadPercent = task.percentageChanges();
+
+    task.snapshotChanges().pipe(finalize(() =>
+      this.downloadURL = ref.getDownloadURL())
+    ).subscribe()
+  }
+  // fim-alteracoes-paulo
 
 }
