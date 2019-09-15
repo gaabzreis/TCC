@@ -44,7 +44,7 @@ export class QuizInsertPage implements OnInit {
     }
     else{
       this.provider.getAll().subscribe(res => {
-        this.todasTags = res.filter(x => x.idSala = this.idSala).reduce((prev,atual) => {
+        this.todasTags = res.filter(x => x.idSala == this.idSala).reduce((prev,atual) => {
           if(prev.find(x => x.tag == atual.tag)){
             return [...prev]
           }

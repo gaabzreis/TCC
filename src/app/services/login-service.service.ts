@@ -7,7 +7,7 @@ export interface User{
   id?: string;
   curso: String;
   email: String;
-  nome: String;
+  nome: string;
   senha: String;
   universidade: String;
 }

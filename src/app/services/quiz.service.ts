@@ -10,7 +10,8 @@ export interface Quiz {
   respostas: Resposta[];
   criador: string;
   idSala: string;
-
+  likes?: number;
+  liker?: string[];
 }
 
 export interface Resposta{

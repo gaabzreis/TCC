@@ -23,7 +23,6 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { FormsModule } from '@angular/forms';
 
 
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -36,7 +35,7 @@ import { FormsModule } from '@angular/forms';
       storageBucket: "teste-tcc-3363f.appspot.com",
       messagingSenderId: "1059435639373"
     }),
-    AngularFirestoreModule
+    AngularFirestoreModule 
     
   ],
   providers: [
@@ -45,7 +44,8 @@ import { FormsModule } from '@angular/forms';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Toast,
     Camera,
-    BarcodeScanner
+    BarcodeScanner,
+    File
   ],
   bootstrap: [AppComponent],
  

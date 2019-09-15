@@ -25,8 +25,10 @@
     <h2>Salas de aulas - inscrito</h2>
     <ion-list *ngFor="let salaP of salasP">
     
-      <ion-item-sliding id="item100">
-        <ion-item (click)="redirectSala(salaP.adm, salaP.id)" [routerLink]="['/menu-sala/resumo', salaP.id]">
+      <ion-item-sliding id="item100" >
+        
+        <ion-item (click)="redirectSala(salaP.adm, salaP.id, salaP.monitores)" [routerLink]="['/menu-sala/resumo', salaP.id]">
+          <div class="adm" *ngIf="salaP.adm == idUser" ></div>
           <ion-label>
             <h2>{{salaP.descricao}}</h2>
             <p>Professor: {{salaP.professor}}</p>
