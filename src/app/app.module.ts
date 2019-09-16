@@ -8,6 +8,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +23,7 @@ import { QRCodeModule } from 'angularx-qrcode';
 
 import { FormsModule } from '@angular/forms';
 import {IonicGestureConfig} from "./gestures/ionic-gesture-config";
+import { File } from '@ionic-native/file/ngx'
 
 /* import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/'; */
 
@@ -37,8 +39,8 @@ import {IonicGestureConfig} from "./gestures/ionic-gesture-config";
       storageBucket: "teste-tcc-3363f.appspot.com",
       messagingSenderId: "1059435639373"
     }),
-    AngularFirestoreModule 
-    
+    AngularFirestoreModule,
+    AngularFireStorageModule
   ],
   providers: [
     StatusBar,
@@ -51,7 +53,7 @@ import {IonicGestureConfig} from "./gestures/ionic-gesture-config";
     Toast,
     Camera,
     BarcodeScanner,
-
+    File
   ],
   bootstrap: [AppComponent],
  

@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ResumoService, Resumo } from './../services/resumo.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { ToastController, ActionSheetController, AlertController  } from '@ionic/angular';
+import { ToastController, ActionSheetController, AlertController, Platform  } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router/';
-
 import { File } from '@ionic-native/file/ngx';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import * as moment from "moment"; 
+
 import { stringify } from '@angular/core/src/util';
 import { database } from 'firebase';
 
@@ -24,11 +28,21 @@ export class ResumoInsertPage implements OnInit {
   idResumo = sessionStorage.getItem('resumo')
   tipo : string = "p"
   criador: string = this.idUser
-  constructor(private routeres: ActivatedRoute, private provider: ResumoService, private camera: Camera,
-    public toastController: ToastController, private rotas : Router, private alert : AlertController) { }
+  blob: Blob
+
+  constructor(
+    private routeres: ActivatedRoute, 
+    private provider: ResumoService, 
+    private camera: Camera,
+    public toastController: ToastController, 
+    private rotas : Router, 
+    private alert : AlertController,
+    private afStorage: AngularFireStorage,
+    private platform: Platform,
+    private file: File) { }
 
   ngOnInit() {
-    if(this.idResumo != null){
+    if (this.idResumo != null) {
       this.provider.getByFilter(this.idResumo).subscribe(res => {
         this.tag = res.tag
         this.titulo = res.titulo
@@ -63,9 +77,9 @@ export class ResumoInsertPage implements OnInit {
     if(this.data.indexOf("-") > -1){
       this.data = this.data.split('-')[2].substr(0,2) + "/"+ this.data.split('-')[1] + "/"+ this.data.split('-')[0]
     }
-    
+
     let todo;
-    if(this.idResumo != null){
+    if (this.idResumo != null) {
       todo = {
         conteudo: this.conteudo, titulo: this.titulo, data: this.data, 
         tag: this.tag, idSala: this.idSala, id: this.idResumo, tipo: this.tipo, criador: this.criador
@@ -75,7 +89,7 @@ export class ResumoInsertPage implements OnInit {
         toast.present();
       })
     }
-    else{
+    else {
       todo = {
         conteudo: this.conteudo, titulo: this.titulo, data: this.data, tag: this.tag, 
         idSala: this.idSala, criador: this.criador, tipo: this.tipo
@@ -91,8 +105,8 @@ export class ResumoInsertPage implements OnInit {
         this.rotas.navigate(['menu-sala/resumo/', this.idSala])
       })
     }
-    
-    
+
+
   }
 
   async help(){
@@ -114,6 +128,56 @@ export class ResumoInsertPage implements OnInit {
     await alert.present();
   }
 
+  // alteracoes-paulo
+  async acessarCamera() {
+    const optionsGallery: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true
+    };
 
+    const optionsCamera: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      correctOrientation: true
+    };
+
+    try {
+      const fileURI: string = await this.camera.getPicture(optionsCamera);
+      let file: string
+
+      if (this.platform.is('ios')) {
+        file = fileURI.split('/').pop();
+      } else {
+        file = fileURI.substring(fileURI.lastIndexOf('/') + 1, fileURI.indexOf('?'));
+      }
+
+      const path: string = fileURI.substring(0, fileURI.lastIndexOf('/'));
+
+      const buffer: ArrayBuffer = await this.file.readAsArrayBuffer(path, file);
+      this.blob = new Blob([buffer], { type: 'image/jpeg' });
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  uploadFoto(blob: Blob) {
+    const ref = this.afStorage.ref(
+      this.tag + '.jpg');
+      //this.idSala + '/' + this.tag + '/' + moment().format('YYYY-MM-DD-HH:mm') + '.jpg');
+    ref.put(blob);
+      //const task = ref.put(blob);
+
+    //this.uploadPercent = task.percentageChanges();
+
+    // task.snapshotChanges().pipe(finalize(() =>
+    //   this.downloadURL = ref.getDownloadURL())
+    // ).subscribe()
+  }
+  // fim-alteracoes-paulo
 
 }

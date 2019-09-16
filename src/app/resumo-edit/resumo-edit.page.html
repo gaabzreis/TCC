@@ -14,10 +14,14 @@
   <hr>
   <p>{{this.todo.conteudo}}</p>
   <br><br>
-  <h3>Fotos do resumo</h3>
+  <h3>Foto do resumo</h3>
   <hr>
   <div >
-      <div *ngFor="let item of fotos" class="foto"></div>
+    <!-- TODO: Exibir foto. -->
+    
+      <!-- <div *ngFor="let item of fotos" class="foto"></div> -->
+    <img src="{{fotoURL | async}}" *ngIf="fotoURL | async">
+      <!-- <img [src]="fotoURL | async" *ngIf="fotoURL | async"> -->
   </div>
   
   <ion-fab *ngIf="this.todo && idUser == this.todo.criador" vertical="bottom" horizontal="end" slot="fixed">

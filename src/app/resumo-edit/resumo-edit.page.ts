@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 import { ResumoService, Resumo } from './../services/resumo.service';
-
+import { Observable } from 'rxjs';
+import { FirebaseApp } from 'angularfire2';
 
 @Component({
   selector: 'app-resumo-edit',
@@ -10,13 +11,17 @@ import { ResumoService, Resumo } from './../services/resumo.service';
   styleUrls: ['./resumo-edit.page.scss'],
 })
 
-
 export class ResumoEditPage implements OnInit {
   todo: Resumo 
-  fotos: String[] = []
   todoId: string
   idUser = sessionStorage.getItem('idUser')
-  constructor(private route: ActivatedRoute, private loadingController: LoadingController, private provider: ResumoService) { }
+  fotoURL;
+
+  constructor(
+    private route: ActivatedRoute, 
+    private loadingController: LoadingController, 
+    private provider: ResumoService,
+    private firebase: FirebaseApp) { }
 
   ngOnInit() {
     this.todoId = this.route.snapshot.params['id'];
@@ -33,14 +38,22 @@ export class ResumoEditPage implements OnInit {
     this.provider.getByFilter(this.todoId).subscribe(res => {
       loading.dismiss();
       this.todo = res;
-      let randomValue = Math.floor(Math.random() * (10 - 1))
-      for(let i = 0; i < randomValue; i++){
-        this.fotos = [...this.fotos, ""]
-      }
+      this.carregarImagem();
       console.log(this.todo)
     });
   }
   setarId(){
     sessionStorage.setItem('resumo', this.todoId)
   }
+
+  carregarImagem () {
+    //TODO: Exibir foto.
+    this.firebase.storage().ref().child(this.todo.tag + '.jpg').getDownloadURL().then( 
+      (url) => {
+        this.fotoURL = url;
+        console.log("URL da foto --> ", this.fotoURL)
+      })
+
+  }
+
 }
