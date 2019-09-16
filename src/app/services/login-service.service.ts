@@ -11,6 +11,7 @@ export interface User{
   senha: String;
   universidade: String;
   instituicao?: string;
+  login: string
 }
 
 @Injectable({
