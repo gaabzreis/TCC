@@ -41,7 +41,7 @@ export class LoginPage implements OnInit {
         this.router.navigate(["menu/home"])
       }
       else if(users.find(x => x.email == this.login && x.senha == this.senha)){
-        sessionStorage.setItem('idUser',users.find(x => x.email == this.login && x.senha == this.senha).id)
+        sessionStorage.setItem('idUser',users.find(x => x.login == this.login && x.senha == this.senha).id)
         this.router.navigate(["menu/home"])
       }
       else{
