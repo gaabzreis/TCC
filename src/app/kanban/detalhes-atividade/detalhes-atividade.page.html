@@ -8,7 +8,7 @@
     </ion-buttons>
 
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button [defaultHref]="['/menu/kanban/']"></ion-back-button>
     </ion-buttons>
 
     <ion-title>Detalhes</ion-title>
@@ -20,7 +20,7 @@
     <ion-card text-wrap>
       <ion-card-header>
         <ion-card-subtitle>{{ atividade.nome }}</ion-card-subtitle>
-        <h1 style="margin-top: 0px; margin-bottom: 0px">Nome disciplina</h1>
+        <h1 style="margin-top: 0px; margin-bottom: 0px">{{nomeDisciplina}}</h1>
       </ion-card-header>
     </ion-card>
 

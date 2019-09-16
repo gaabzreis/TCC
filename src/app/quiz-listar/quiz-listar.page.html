@@ -14,7 +14,9 @@
   <div *ngIf="!verGab">
     <div  *ngFor="let item of res; index as b" [attr.data-index]="b" >
       <hr>
+      
       <div class="tituloQuestionario">
+        
         {{item.titulo}}
       </div>
       <div class="tagQuestionario">
@@ -33,8 +35,14 @@
               </ion-item>
           </ion-radio-group>
         </ion-list>
+        
+      </div>
+      <div (click)="like(item.id, item)" style="border: 2px solid #30b286; color: white; width: 84px; border-radius: 5px 0px 0px 5px; background:#30b286; float: right; ">
+        <ion-icon name="thumbs-up" style="font-size: 20px;"></ion-icon>
+        Gostei
       </div>
     </div>
+    
   </div>
   <div *ngIf="verGab">
       <div  *ngFor="let item of res; index as b" [attr.data-index]="b" >

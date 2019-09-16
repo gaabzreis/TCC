@@ -11,6 +11,8 @@ export interface Resumo {
   titulo: String;
   idSala: string;
   tipo: string;
+  criador: string;
+  fotos?: string[];
 }
 
 @Injectable({

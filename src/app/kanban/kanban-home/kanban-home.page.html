@@ -20,7 +20,7 @@
 
   <ion-slides pager="true">
       <ion-slide>
-        <ion-card class="kanban">
+        <ion-card class="kanban" *ngIf="nomesDisciplinas">
             <ion-card-header>
               <ion-card-subtitle *ngIf="paraFazer.length == 0">Sem atividades</ion-card-subtitle>
                 <ion-card-subtitle *ngIf="paraFazer.length == 1">{{paraFazer.length + " atividade"}}</ion-card-subtitle>

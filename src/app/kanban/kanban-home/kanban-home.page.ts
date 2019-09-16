@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {atividade, AtividadeKanbanService} from '../../services/atividade-kanban.service'
-import { sala, SalaAulaService } from 'src/app/services/sala-aula.service';
+import { sala, SalaAulaService } from '../../services/sala-aula.service';
 import { NovaAtividadePage } from '../nova-atividade/nova-atividade.page';
 import { ModalController, PopoverController } from '@ionic/angular';
 import * as moment from "moment"; 
@@ -51,26 +51,8 @@ export class KanbanHomePage {
   }
 
   ionViewDidEnter() {
-    this.provider.getAll().subscribe(res => {
-      res.filter (atv => {
-        if (atv.idUser == this.idUser){
-          switch (atv.quadro) {
-            case "para-fazer": {
-              this.paraFazer.push(atv)
-              break
-            }
-            case "em-andamento": {
-              this.emAndamento.push(atv)
-              break
-            }
-            case "feito": {
-              this.feito.push(atv)
-              break
-            }
-          }
-        }
-      })
-    })
+    
+    this.atualizaCard()
 
     this.providerSala.getAll().subscribe( res => {
       res.filter (sla => {
@@ -107,20 +89,64 @@ export class KanbanHomePage {
 
 async onPress(ev, atv, board) {
   console.log("LOG -> ", atv, " -> ", board);
+  let quadroes = []
+  if(board == "para-fazer"){
+    quadroes = this.paraFazer
+  }
+  else if(board == "em-andamento"){
+    quadroes = this.emAndamento
+
+  }
+  else{
+    quadroes = this.feito
+  }
+  
   const popover = await this.popoverController.create({
     component: PopoverItensComponent,
     event: ev,
-    componentProps: { 
+    componentProps: {
       idAtividade: atv,
-      boardSelected: board
+      boardSelected: board,
+      arrayBoard: quadroes
     }
   });
-  return await popover.present();
+  
+ 
+  await popover.present();
+
+  this.atualizaCard()
+}
+
+atualizaCard(){
+  this.provider.getAll().subscribe(res => {
+    res.filter (atv => {
+      if (atv.idUser == this.idUser){
+        this.paraFazer = []
+        this.emAndamento = []
+        this.feito = []
+        switch (atv.quadro) {
+          case "para-fazer": {
+            this.paraFazer.push(atv)
+            break
+          }
+          case "em-andamento": {
+            this.emAndamento.push(atv)
+            break
+          }
+          case "feito": {
+            this.feito.push(atv)
+            break
+          }
+        }
+      }
+    })
+  })
 }
 
 openDetails(atv: atividade) {
+  let nomeDisciplina = this.getNome(atv.idDisciplina)
   this.router.navigate(['detalhes-atividade'], {
-    queryParams: { ...atv }
+    queryParams: { ...atv, nomeDisciplina: nomeDisciplina[0].nomeDisciplina}
   });
 }
 
@@ -164,5 +190,6 @@ openDetails(atv: atividade) {
       quadro: "feito"
     }]
   }
+
 
 }

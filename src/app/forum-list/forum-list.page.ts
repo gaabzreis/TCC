@@ -12,6 +12,7 @@ export class ForumListPage implements OnInit {
   idForum = this.router.snapshot.params['sala-aula']
   forum : forum
   idUser = sessionStorage.getItem('idUser')
+  idSala
   constructor(private provider : ForumServiceService, private router : ActivatedRoute, private toastController : ToastController) { }
 
   ngOnInit() {

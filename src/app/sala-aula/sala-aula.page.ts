@@ -3,6 +3,10 @@ import {sala, horariosAulas,SalaAulaService} from '../services/sala-aula.service
 import { ToastController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router/';
 import { ActivatedRoute } from '@angular/router/src/router_state';
+import {
+  BarcodeScannerOptions,
+  BarcodeScanner
+} from "@ionic-native/barcode-scanner/ngx";
 
 
 @Component({
@@ -17,7 +21,7 @@ export class SalaAulaPage implements OnInit {
   idUser = sessionStorage.getItem('idUser')
   semNada = false
   constructor(private provider: SalaAulaService, public router :Router,
-     public toastController: ToastController, public alertController: AlertController) { }
+     public toastController: ToastController, public alertController: AlertController, private barcodeScanner: BarcodeScanner) { }
 
   ngOnInit() {
     
@@ -86,11 +90,21 @@ export class SalaAulaPage implements OnInit {
       }
       else{
         obj.adm = obj.integrantes[0]
-        obj.integrantes.shift(0)
+        obj.integrantes.splice(0,1)
       }
     }
     else if(obj.integrantes.length > 0){
       obj.integrantes = obj.integrantes.filter(x => x != this.idUser)
+      if(obj.monitores){
+        if(obj.monitores.find(x => x == this.idUser)){
+          obj.monitores = obj.monitores.filter(x => x != this.idUser)
+        }
+      }
+      if(obj.solicitacao){
+        if(obj.solicitacao.find(x => x == this.idUser)){
+          obj.solicitacao = obj.solicitacao.filter(x => x != this.idUser)
+        }
+      }
     }
 
     
@@ -152,12 +166,34 @@ export class SalaAulaPage implements OnInit {
     }
     
   }
-  scanCode(){
-    
+  async scanCode(){
+    const toast = await this.toastController.create({
+      duration: 5000,
+      message: "Sala de aula inscrito com sucesso",
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    this.barcodeScanner
+      .scan()
+      .then(barcodeData => {
+        let obj = this.salasT.filter(x => x.id == barcodeData.text)
+        this.seInscrever(obj[0])
+        toast.present()
+      })
+      .catch(err => {
+        console.log("Error", err);
+      });   
   }
   
-  redirectSala(adm, id){
-    sessionStorage.setItem('adm', (this.idUser == adm ? 'sim' : 'nao'))
+  redirectSala(adm, id, integrantes){
+    sessionStorage.setItem('adm', (this.idUser == adm || (integrantes != undefined && integrantes.find(x => x == this.idUser)) ? 'sim' : 'nao'))
     this.router.navigate(["/menu-sala/resumo/", id])
 
   }

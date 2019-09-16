@@ -26,7 +26,9 @@ export class QuizListarPage implements OnInit {
   marcacaoPont = 0
   verGab = false
   idSala = this.route.snapshot.params['conteudo'].split("@")[2]
-  constructor(private router: Router, public alertController: AlertController, private route: ActivatedRoute, private loadingController: LoadingController, private provider: QuizService) { }
+  idUser = sessionStorage.getItem('idUser')
+  constructor(private router: Router, public alertController: AlertController, private route: ActivatedRoute, 
+    private loadingController: LoadingController, private provider: QuizService, private toast : ToastController) { }
 
   ngOnInit() {
     
@@ -44,7 +46,12 @@ export class QuizListarPage implements OnInit {
 
     await this.provider.getAll().subscribe(res => {
       
-      this.todo = res;
+      this.todo = res.sort((atual, prev) => {
+        if(atual.likes == prev.likes){
+          return 0
+        }
+        return (atual.likes > prev.likes ? -1 : 1)
+      });
       let cont = 0
       this.res = this.todo.reduce((prev, atual) => {
         
@@ -130,6 +137,45 @@ export class QuizListarPage implements OnInit {
       }]
     });
     await alert.present();
+  }
+
+  async like(id, obj){
+    const toast = await this.toast.create({
+      message: 'Pergunta dado like com sucesso.',
+      duration: 5000,
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    if(obj.liker == undefined){
+      obj.liker = [this.idUser]
+    }
+    else{
+      if(obj.liker.find(x => x == this.idUser)){
+        toast.message = "Você já votou nessa pergunta"
+        toast.present()
+        return false
+      }
+      else{
+        obj.liker.push(this.idUser)
+      }
+    }
+    if(obj.likes == undefined){
+      obj.likes = 1
+    }
+    else{
+      obj.likes++
+    }
+    this.provider.update(id, obj).then(res => {
+      toast.present()
+    })
+    
   }
 
 }

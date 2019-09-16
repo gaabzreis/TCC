@@ -11,6 +11,7 @@ export interface User {
   curso: String;
   senha: String;
   login: String;
+  nome: string
 
 }
 

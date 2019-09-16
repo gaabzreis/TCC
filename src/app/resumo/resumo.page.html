@@ -5,7 +5,17 @@
         <ion-menu-button ></ion-menu-button>
       
     </ion-buttons>
-    <ion-title>Summboard</ion-title>
+    <ion-title>Summboard  </ion-title>
+    <ion-buttons slot="primary" *ngIf="adm && sala">
+      <div *ngIf="sala.solicitacao">
+        <div *ngIf="adm != 'sim' || sala.solicitacao.length > 0">
+          <ion-badge color="danger" *ngIf="adm == 'sim' &&  (sala.solicitacao.length > 0)">{{sala.solicitacao.length}}</ion-badge>
+          <ion-button color="secondary" (click)="clickpermissao()" >
+            <ion-icon slot="icon-only" name="more" ></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

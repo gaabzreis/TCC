@@ -4,6 +4,11 @@
         <ion-back-button [defaultHref]="['/menu-sala/resumo', idSala]"></ion-back-button>
       </ion-buttons>
       <ion-title>Inserir novo resumo</ion-title>
+      <ion-buttons slot="primary" >
+        <ion-button (click)="help()" >
+            <ion-icon ios="ios-help" md="md-help" ></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
@@ -28,17 +33,18 @@
       <ion-textarea rows="5" [(ngModel)]="conteudo"></ion-textarea>
     </ion-item>
     <ion-segment color="primary" [(ngModel)]="tipo">
-        <ion-segment-button href="#p" value="p" checked>
+        <ion-segment-button href="#p" value="p">
           <ion-label>Compartilhado</ion-label>
         </ion-segment-button>
         <ion-segment-button href="#i" value="i">
           <ion-label>Individual</ion-label>
         </ion-segment-button>
       </ion-segment>
-      
+     
+   
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="acessarCamera()">
-          <ion-icon name="camera"></ion-icon>
+        <ion-fab-button >
+          
         </ion-fab-button>
       </ion-fab>
 

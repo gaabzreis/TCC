@@ -25,6 +25,7 @@ import { FormsModule } from '@angular/forms';
 import {IonicGestureConfig} from "./gestures/ionic-gesture-config";
 import { File } from '@ionic-native/file/ngx'
 
+/* import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/'; */
 
 @NgModule({
   declarations: [AppComponent],

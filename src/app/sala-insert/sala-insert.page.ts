@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {sala, horariosAulas,SalaAulaService} from '../services/sala-aula.service'
 import { ToastController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router/';
 
 @Component({
   selector: 'app-sala-insert',
@@ -25,7 +26,8 @@ export class SalaInsertPage implements OnInit {
     horarioF: ""
   }]
   salaEdicao: sala
-  constructor(private provider: SalaAulaService, public toastController: ToastController, public router :ActivatedRoute) { }
+  constructor(private provider: SalaAulaService, public toastController: ToastController, 
+    public router :ActivatedRoute, public rout : Router) { }
 
   ngOnInit() {
     let id = this.router.snapshot.params["sala-aula"]
@@ -41,6 +43,7 @@ export class SalaInsertPage implements OnInit {
         this.qtdMeses = this.salaEdicao.qtdMeses
         this.sala = this.salaEdicao.sala
         this.horarios = this.salaEdicao.horariosAula
+        this.salaEdicao.id = id
         this.valores = []
         this.horarios.forEach((x, index) => {
           console.log(index)
@@ -124,6 +127,11 @@ export class SalaInsertPage implements OnInit {
       toast.present()
       valid = 0
     }
+    else if(this.qtdMeses <= 0 ){
+      toast.message = "A quantidade de meses deve ser maior que 1"
+      toast.present()
+      valid = 0
+    }
     if(this.horarios.length == 0){
       toast.message = "Por favor, insira ao menos um dia de aula"
       toast.present()
@@ -135,9 +143,24 @@ export class SalaInsertPage implements OnInit {
       toast.present()
       valid = 0
     }
+    else if(this.horarios.find(x => x.horarioI >= x.horarioF)){
+      toast.message = "O horário fim deve ser maior que o horário inicio da aula"
+      toast.present()
+      valid = 0
+    }
     
     if(valid == 1){
       if(this.salaEdicao != undefined){
+        this.horarios = this.horarios.map(x => {
+          if(x.horarioI.split("T").length == 1){
+            return {diaSemana: x.diaSemana, horarioF: x.horarioF, horarioI: x.horarioI}
+          }
+          let horarioI = x.horarioI.split("T")[1].split(":")
+          let horarioF = x.horarioF.split("T")[1].split(":")
+          return {diaSemana: x.diaSemana, horarioI: horarioI[0] + ":" + horarioI[1],
+           horarioF: horarioF[0] + ":" + horarioF[1]}
+        })
+        console.log(this.horarios)
         this.salaEdicao.adm = this.adm
         this.salaEdicao.descricao = this.descricao
         this.salaEdicao.sala = this.sala
@@ -150,6 +173,7 @@ export class SalaInsertPage implements OnInit {
         this.provider.update(this.salaEdicao.id, this.salaEdicao).then(res => {
             toast.message = 'Sala de aula editado com sucesso.'
             toast.present();
+            this.rout.navigate(["menu/sala-aula"])
         })
       }
       else{
@@ -170,13 +194,16 @@ export class SalaInsertPage implements OnInit {
           professor: this.professor,
           qtdMeses: this.qtdMeses,
           horariosAula: this.horarios,
-          integrantes: []
+          integrantes: [],
+          monitores: [],
+          solicitacao: []
         }
         
         
         this.provider.addSala(conteudo).then(() => {
           toast.message = 'Sala de aula criado com sucesso.'
           toast.present();
+          this.rout.navigate(["menu/sala-aula"])
         })
       }
       

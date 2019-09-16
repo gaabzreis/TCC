@@ -23,6 +23,15 @@ export class AtividadeKanbanService {
 
   constructor(private db: AngularFirestore) { 
     this.todosCollection = db.collection<atividade>('atividade-kanban');
+    this.todasAtividades = this.todosCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
   }
 
   getAll() {
@@ -44,8 +53,8 @@ export class AtividadeKanbanService {
   moverAtividade(idAtividade: string, quadroDestino: string){
     return this.todosCollection.doc(idAtividade).update({quadro: quadroDestino});
   }
-  updateAtividade(atv: atividade){
-    return this.todosCollection.doc(atv.id).update(atv);
+  updateAtividade(key : string, atv: atividade){
+    return this.todosCollection.doc(key).update(atv);
   }
   deleteAtividade(idAtividade: string){
     return this.todosCollection.doc(idAtividade).delete()
