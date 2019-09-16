@@ -7,6 +7,7 @@ import { File } from '@ionic-native/file/ngx';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import * as moment from "moment"; 
 
 @Component({
   selector: 'app-resumo-insert',
@@ -23,6 +24,7 @@ export class ResumoInsertPage implements OnInit {
   idSala = this.routeres.snapshot.params["sala-aula"]
   idResumo = sessionStorage.getItem('resumo')
   tipo: string
+  blob: Blob
 
   public uploadPercent: Observable<number>;
   public downloadURL: Observable<string>;
@@ -69,7 +71,7 @@ export class ResumoInsertPage implements OnInit {
     if (this.idResumo != null) {
       todo = {
         conteudo: this.conteudo, titulo: this.titulo, data: this.data, tag: this.tag, idSala: this.idSala, id: this.idResumo, tipo: this.tipo
-      }
+      } 
       this.provider.update(todo).then(() => {
         this.rotas.navigate(['menu-sala/resumo/', this.idSala])
         toast.present();
@@ -79,6 +81,7 @@ export class ResumoInsertPage implements OnInit {
       todo = {
         conteudo: this.conteudo, titulo: this.titulo, data: this.data, tag: this.tag, idSala: this.idSala, criador: this.idUser, tipo: this.tipo
       };
+      this.uploadFoto(this.blob);
       this.provider.addResumo(todo).then(() => {
         this.conteudo = ""
         this.titulo = ""
@@ -91,7 +94,7 @@ export class ResumoInsertPage implements OnInit {
 
   }
 
-  acessarCamera() {
+  acessarCamera_OLD() {
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.FILE_URI,
@@ -110,8 +113,8 @@ export class ResumoInsertPage implements OnInit {
   }
 
   // alteracoes-paulo
-  async openGallery() {
-    const options: CameraOptions = {
+  async acessarCamera() {
+    const optionsGallery: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.FILE_URI,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
@@ -119,8 +122,15 @@ export class ResumoInsertPage implements OnInit {
       correctOrientation: true
     };
 
+    const optionsCamera: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      correctOrientation: true
+    };
+
     try {
-      const fileURI: string = await this.camera.getPicture(options);
+      const fileURI: string = await this.camera.getPicture(optionsCamera);
       let file: string
 
       if (this.platform.is('ios')) {
@@ -132,9 +142,7 @@ export class ResumoInsertPage implements OnInit {
       const path: string = fileURI.substring(0, fileURI.lastIndexOf('/'));
 
       const buffer: ArrayBuffer = await this.file.readAsArrayBuffer(path, file);
-      const blob: Blob = new Blob([buffer], { type: 'image/jpeg' });
-
-      this.uploadFoto(blob);
+      this.blob = new Blob([buffer], { type: 'image/jpeg' });
 
     } catch (error) {
       console.log(error);
@@ -142,14 +150,17 @@ export class ResumoInsertPage implements OnInit {
   }
 
   uploadFoto(blob: Blob) {
-    const ref = this.afStorage.ref('paulo/foto_1.jpg');
-    const task = ref.put(blob);
+    const ref = this.afStorage.ref(
+      this.tag + '.jpg');
+      //this.idSala + '/' + this.tag + '/' + moment().format('YYYY-MM-DD-HH:mm') + '.jpg');
+    ref.put(blob);
+      //const task = ref.put(blob);
 
-    this.uploadPercent = task.percentageChanges();
+    //this.uploadPercent = task.percentageChanges();
 
-    task.snapshotChanges().pipe(finalize(() =>
-      this.downloadURL = ref.getDownloadURL())
-    ).subscribe()
+    // task.snapshotChanges().pipe(finalize(() =>
+    //   this.downloadURL = ref.getDownloadURL())
+    // ).subscribe()
   }
   // fim-alteracoes-paulo
 
