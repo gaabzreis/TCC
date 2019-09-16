@@ -90,19 +90,17 @@ export class ResumoInsertPage implements OnInit {
       })
     }
     else {
+      this.uploadFoto(this.blob);
       todo = {
         conteudo: this.conteudo, titulo: this.titulo, data: this.data, tag: this.tag, 
         idSala: this.idSala, criador: this.criador, tipo: this.tipo
       };
-      
-      
-     this.provider.addResumo(todo).then(() => {
+      this.provider.addResumo(todo).then(() => {
         this.conteudo = ""
         this.titulo = ""
         this.data = ""
         this.tag = ""
         toast.present();
-        this.uploadFoto(this.blob);
         this.rotas.navigate(['menu-sala/resumo/', this.idSala])
       })
     }

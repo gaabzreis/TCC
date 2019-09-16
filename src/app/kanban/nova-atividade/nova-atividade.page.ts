@@ -46,11 +46,10 @@ export class NovaAtividadePage implements OnInit {
     this.activatedRoute.queryParams
     .subscribe(params => {
       if (params.id != null) {
-        console.log("1.params -> ", params)
         this.nome = params.nome;
         //TODO: Auto completar disciplina.
 
-        //this.disciplina = params.idDisciplina;
+        this.disciplina = params.idDisciplina;
         // this.disciplina = this.listaDisciplinas.filter (result => {
         //   if (params.idDisciplina == result.id) {
         //     return result.descricao;
@@ -74,8 +73,6 @@ export class NovaAtividadePage implements OnInit {
   }
 
   async salvarAtividade() {
-    //TODO: Verificar se é edição.
-    //OBS: O IF ABAIXO NÃO ESTÁ FUNCIONANDO.
     if (this.atividade) {
       console.log("2.this.atividade.id -> ", this.atividade.id)
       this.atividade.nome = this.nome,
