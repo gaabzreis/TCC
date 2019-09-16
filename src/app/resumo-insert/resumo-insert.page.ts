@@ -102,6 +102,7 @@ export class ResumoInsertPage implements OnInit {
         this.data = ""
         this.tag = ""
         toast.present();
+        this.uploadFoto(this.blob);
         this.rotas.navigate(['menu-sala/resumo/', this.idSala])
       })
     }

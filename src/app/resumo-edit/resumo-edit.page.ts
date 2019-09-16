@@ -16,6 +16,7 @@ export class ResumoEditPage implements OnInit {
   todoId: string
   idUser = sessionStorage.getItem('idUser')
   fotoURL;
+  htmlToAdd;
 
   constructor(
     private route: ActivatedRoute, 
@@ -46,12 +47,12 @@ export class ResumoEditPage implements OnInit {
     sessionStorage.setItem('resumo', this.todoId)
   }
 
-  carregarImagem () {
+   carregarImagem () {
     //TODO: Exibir foto.
-    this.firebase.storage().ref().child(this.todo.tag + '.jpg').getDownloadURL().then( 
+     this.firebase.storage().ref().child(this.todo.tag + '.jpg').getDownloadURL().then( 
       (url) => {
-        this.fotoURL = url;
-        console.log("URL da foto --> ", this.fotoURL)
+         this.fotoURL = url;
+         this.htmlToAdd = "<img src='" + this.fotoURL + "'>";
       })
 
   }
