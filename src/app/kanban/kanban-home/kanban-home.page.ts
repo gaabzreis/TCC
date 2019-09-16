@@ -116,6 +116,9 @@ async onPress(ev, atv, board) {
 atualizaCard(){
   this.provider.getAll().subscribe(res => {
     res.filter (atv => {
+      this.paraFazer=[]
+      this.emAndamento=[]
+      this.feito=[]
       if (atv.idUser == this.idUser){
         switch (atv.quadro) {
           case "para-fazer": {

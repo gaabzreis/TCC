@@ -22,7 +22,7 @@
   </ng-container>
   <hr>
  <div *ngIf="salasP">
-    <h2 style="text-align: left;">Salas inscritas</h2> <br/>
+    <h2 style="text-align: left;">Salas inscritas</h2>
     <div style="text-align: center;
       border: 1px solid red;
       padding: 44px;
@@ -42,14 +42,14 @@
           <ion-label>
             <h2 style="text-align: center; font-size: 25px;">{{salaP.descricao}}</h2>
             <p style="text-align: center;">{{salaP.professor}}</p>
-            <hr style="border-top: 0.5px solid black; margin-bottom: -20px;">
+            <hr style="border-top: 1px solid black; margin-bottom: -20px;">
             <!-- <p>{{salaP.periodo}}º Período - Sala: {{salaP.sala}}</p> -->
             <br/>
             <table style="width:100%">
               <tr *ngFor="let horario of salaP.horariosAula">
                 <td style="text-align: center">{{horario.diaSemana}}</td>
-                <td style="text-align: center">{{horario.horarioI}}</td>
-                <td style="text-align: center">{{horario.horarioF}}</td>
+                <td style="text-align: center">{{horario.horarioI}}-{{horario.horarioF}}</td>
+                <td style="text-align: center">{{salaP.sala}}</td>
               </tr>
             </table>
           </ion-label>
@@ -95,7 +95,7 @@
       </div>
     </ng-container>
   <div *ngIf="salasT">
-      <h2>Salas de aulas</h2>
+      <h2 style="text-align: left;">Salas de Aula</h2>
       <ion-list *ngFor="let salaT of salasT; let i = index">
       
         <ion-item-sliding id="item100">
