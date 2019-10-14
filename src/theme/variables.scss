@@ -1,6 +1,13 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+/** Paleta de cores do SummBoard. **/
+$summBoard: (
+  redPrimary:          #F0525D,
+  grenPrimary:         #76CCD0,
+  background:          red //#FBFBFB
+);
+
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
