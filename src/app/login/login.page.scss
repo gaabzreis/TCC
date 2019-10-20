@@ -1,6 +1,30 @@
-.item input {
-    background-color: transparent;
+// .item input {
+//     background-color: transparent;
+//     height: 56pt;
+// }
+// .item .item-native{
+//     border-radius: 17.5pt;
+// }
+
+.input {
+    --border-radius: 15px;
+    margin-left: 16.5pt;
+    margin-right: 13.5pt;
+    font-size: 13px;
 }
-.item .item-native{
-    border-radius: 5px;
+
+#rounded {
+    border: 1px solid #707070;  
+    border-radius: 15px;
+}
+
+.imagemLogo {
+    margin-top: 90%;
+    margin-bottom: 23.5pt;
+    width: 80%;
+}
+
+.text {
+    color: #707070; 
+    font-size: 13px;
 }

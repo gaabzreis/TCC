@@ -3,6 +3,7 @@ import { LoginServiceService, User } from './../services/login-service.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-login',
@@ -12,11 +13,16 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 export class LoginPage implements OnInit {
   login: String
   senha: String
-  constructor(public toastController: ToastController,private router: Router, 
-    private provider: LoginServiceService, private splashScreen: SplashScreen) { }
+  constructor(
+    public toastController: ToastController,
+    private router: Router, 
+    private provider: LoginServiceService, 
+    private splashScreen: SplashScreen, 
+    private statusBar: StatusBar) { }
 
   ngOnInit() {
     this.splashScreen.show();
+    this.statusBar.backgroundColorByHexString('#707070');
   }
 
   async logar(){
