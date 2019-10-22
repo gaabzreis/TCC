@@ -113,29 +113,39 @@ async onPress(ev, atv, board) {
   
  
   await popover.present();
-
+ 
   this.atualizaCard()
 }
 
 atualizaCard(){
+  
+  
   this.provider.getAll().subscribe(res => {
+    this.paraFazer = []
+  this.emAndamento = []
+  this.feito = []
     res.filter (atv => {
+      console.log(atv)
       if (atv.idUser == this.idUser){
-        this.paraFazer = []
-        this.emAndamento = []
-        this.feito = []
         switch (atv.quadro) {
           case "para-fazer": {
-            this.paraFazer.push(atv)
-            break
+            if(!this.paraFazer.find(x => x.id == atv.id)){
+              this.paraFazer.push(atv)
+              break
+            }
+            
           }
           case "em-andamento": {
-            this.emAndamento.push(atv)
-            break
+            if(!this.emAndamento.find(x => x.id == atv.id)){
+              this.emAndamento.push(atv)
+              break
+            }
           }
           case "feito": {
-            this.feito.push(atv)
-            break
+            if(!this.feito.find(x => x.id == atv.id)){
+              this.feito.push(atv)
+              break
+            }
           }
         }
       }

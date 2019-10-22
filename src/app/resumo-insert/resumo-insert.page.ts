@@ -12,6 +12,8 @@ import * as moment from "moment";
 import { stringify } from '@angular/core/src/util';
 import { database } from 'firebase';
 
+import { LoginServiceService, User} from '../services/login-service.service'
+
 @Component({
   selector: 'app-resumo-insert',
   templateUrl: './resumo-insert.page.html',
@@ -29,6 +31,7 @@ export class ResumoInsertPage implements OnInit {
   tipo : string = "p"
   criador: string = this.idUser
   blob: Blob
+  usuario: User
 
   constructor(
     private routeres: ActivatedRoute, 
@@ -39,7 +42,8 @@ export class ResumoInsertPage implements OnInit {
     private alert : AlertController,
     private afStorage: AngularFireStorage,
     private platform: Platform,
-    private file: File) { }
+    private file: File,
+    private userPorvider: LoginServiceService) { }
 
   ngOnInit() {
     if (this.idResumo != null) {
@@ -95,12 +99,28 @@ export class ResumoInsertPage implements OnInit {
         idSala: this.idSala, criador: this.criador, tipo: this.tipo
       };
       
+
+      this.userPorvider.getByFilter(this.idUser).subscribe(res => {
+        let pr : LoginServiceService
+        let banco = this.userPorvider.db
+        pr = new LoginServiceService(banco)
+        if(res.pontos == undefined){
+          res.pontos = 5
+        }
+        else{
+          res.pontos += 5
+        }
+        this.usuario = res
+        pr.update(this.idUser, res)
+      })
       
      this.provider.addResumo(todo).then(() => {
         this.conteudo = ""
         this.titulo = ""
         this.data = ""
         this.tag = ""
+        
+
         toast.present();
         this.rotas.navigate(['menu-sala/resumo/', this.idSala])
       })

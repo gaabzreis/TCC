@@ -12,6 +12,7 @@ export interface User{
   universidade: String;
   instituicao?: string;
   login: string
+  pontos?: number;
 }
 
 @Injectable({
@@ -20,7 +21,7 @@ export interface User{
 export class LoginServiceService {
   private todosCollection: AngularFirestoreCollection<User>;
   private todos: Observable<User[]>;
-  constructor(private db: AngularFirestore) { 
+  constructor(public db: AngularFirestore) { 
     this.todosCollection = db.collection<User>('users');
     this.todos = this.todosCollection.snapshotChanges().pipe(
       map(actions => {
