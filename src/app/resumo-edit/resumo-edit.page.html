@@ -16,11 +16,8 @@
   <br><br>
   <h3>Foto do resumo</h3>
   <hr>
-  <div >
-    <!-- TODO: Exibir foto. -->
-    
+  <div class="one" [innerHtml]="htmlToAdd">
       <!-- <div *ngFor="let item of fotos" class="foto"></div> -->
-    <img src="{{fotoURL | async}}" *ngIf="fotoURL | async">
       <!-- <img [src]="fotoURL | async" *ngIf="fotoURL | async"> -->
   </div>
   

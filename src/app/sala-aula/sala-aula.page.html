@@ -22,7 +22,7 @@
   </ng-container>
   <hr>
  <div *ngIf="salasP">
-    <h2>Salas de aulas - inscrito</h2>
+    <h2 style="text-align: left;">Salas inscritas</h2>
     <div style="text-align: center;
       border: 1px solid red;
       padding: 44px;
@@ -38,18 +38,30 @@
       <ion-item-sliding id="item100" >
         
         <ion-item (click)="redirectSala(salaP.adm, salaP.id, salaP.monitores)" [routerLink]="['/menu-sala/resumo', salaP.id]">
-          <div class="adm" *ngIf="salaP.adm == idUser" ></div>
+          <!-- <div class="adm" *ngIf="salaP.adm == idUser" ></div> -->
           <ion-label>
-            <h2>{{salaP.descricao}}</h2>
-            <p>Professor: {{salaP.professor}}</p>
-            <p>{{salaP.periodo}}º Período - Sala: {{salaP.sala}}</p>
+            <h2 style="text-align: center; font-size: 25px;">{{salaP.descricao}}</h2>
+            <p style="text-align: center;">{{salaP.professor}}</p>
+            <hr style="border-top: 1px solid black; margin-bottom: -20px;">
+            <!-- <p>{{salaP.periodo}}º Período - Sala: {{salaP.sala}}</p> -->
+            <br/>
+            <table style="width:100%">
+              <tr *ngFor="let horario of salaP.horariosAula">
+                <td style="text-align: center">{{horario.diaSemana}}</td>
+                <td style="text-align: center">{{horario.horarioI}}-{{horario.horarioF}}</td>
+                <td style="text-align: center">{{salaP.sala}}</td>
+              </tr>
+            </table>
           </ion-label>
-          <ion-note slot="end" >
+          
+            
+  
+          
+          <!-- <ion-note slot="end" >
             <span *ngFor="let horario of salaP.horariosAula">
               {{horario.diaSemana}} - {{horario.horarioI}} ~ {{horario.horarioF}} <br>
             </span>
-             
-          </ion-note>
+          </ion-note> -->
         </ion-item>
     
         <ion-item-options side="start" *ngIf=" idUser == salaP.adm">
@@ -83,7 +95,7 @@
       </div>
     </ng-container>
   <div *ngIf="salasT">
-      <h2>Salas de aulas</h2>
+      <h2 style="text-align: left;">Salas de Aula</h2>
       <ion-list *ngFor="let salaT of salasT; let i = index">
       
         <ion-item-sliding id="item100">

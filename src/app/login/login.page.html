@@ -1,17 +1,35 @@
 
-<ion-content padding color="medium">
-    <h1 style="text-align: center; font-weight: 600; margin-top: 30%; margin-bottom: 30%;">Summboard</h1>
-    <ion-item color="light" style="margin: 5px; border-radius:5px; " >
-        <ion-label position="floating">Login</ion-label>
-        <ion-input [(ngModel)]="login"></ion-input>
-    </ion-item>
-    <ion-item class="item"  style="margin: 5px; ">
-        <ion-label position="floating">Senha</ion-label>
-        <ion-input type="password" [(ngModel)]="senha" ></ion-input>
-    </ion-item>
-    <ion-button expand="block" color="dark" style="margin: 10px;" (click)="logar()" >Logar</ion-button>
-    <div style="text-align: center">
-        <span>Ainda não possui uma conta?</span>
-        <a style="color: white; cursor: pointer;" (click)="cadastre()" > Cadastre-se</a>
+<ion-content force-overscroll="false" padding color="medium">
+    
+    <div class="ion-text-center">
+        <img class="imagemLogo" src="../../assets/logo_login.png">
     </div>
+
+    <div class="ion-text-center">
+        <ion-label class="text">Preencha suas informações de login</ion-label>
+    </div>
+
+    <ion-item lines="none" id="rounded" class="input" style="margin-bottom: 23.5pt; margin-top: 5px;"> 
+        <ion-input placeholder="Usuário" [(ngModel)]="login"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none" id="rounded" class="input">
+        <ion-input placeholder="Senha" type="password" [(ngModel)]="senha" ></ion-input>
+    </ion-item>
+
+    <ion-button class="input" expand="block" color="secondary" style="margin-top: 23.5pt; color: white;" (click)="logar()" >Acessar a conta</ion-button>
+    
+    <div class="ion-text-center">
+        <span class="text">Ainda não possui uma conta?</span>
+        <a class="text" style="cursor: pointer;" (click)="cadastre()" > Cadastre-se</a>
+    </div>
+    
+    <div style="margin-top: 25px; margin-bottom: 15px;" class="ion-text-center">
+        <span class="text">ou</span>
+    </div>
+
+    <div class="ion-text-center">
+        <img width="15%" src="../../assets//faceId.png">
+    </div>
+    
 </ion-content>

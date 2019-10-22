@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 import { ResumoService, Resumo } from './../services/resumo.service';
-import { Observable } from 'rxjs';
 import { FirebaseApp } from 'angularfire2';
 
 @Component({
@@ -15,7 +14,7 @@ export class ResumoEditPage implements OnInit {
   todo: Resumo 
   todoId: string
   idUser = sessionStorage.getItem('idUser')
-  fotoURL;
+  htmlToAdd;
 
   constructor(
     private route: ActivatedRoute, 
@@ -47,13 +46,11 @@ export class ResumoEditPage implements OnInit {
   }
 
   carregarImagem () {
-    //TODO: Exibir foto.
     this.firebase.storage().ref().child(this.todo.tag + '.jpg').getDownloadURL().then( 
       (url) => {
-        this.fotoURL = url;
-        console.log("URL da foto --> ", this.fotoURL)
-      })
-
-  }
+        this.htmlToAdd = "<img src='" + url + "'>";
+      }
+    )
+  } 
 
 }
