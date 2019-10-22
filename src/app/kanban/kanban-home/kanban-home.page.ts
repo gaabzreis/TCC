@@ -47,13 +47,11 @@ export class KanbanHomePage {
     }
   }
 
-  ngOnInit() { 
-  }
+  ngOnInit() { }
 
   ionViewDidEnter() {
     
-    this.atualizaCard()
-
+    this.atualizaCard();
     this.providerSala.getAll().subscribe( res => {
       res.filter (sla => {
         this.nomesDisciplinas.push({
@@ -111,7 +109,6 @@ async onPress(ev, atv, board) {
     }
   });
   
- 
   await popover.present();
  
   this.atualizaCard()
@@ -126,6 +123,9 @@ atualizaCard(){
   this.feito = []
     res.filter (atv => {
       console.log(atv)
+      this.paraFazer=[]
+      this.emAndamento=[]
+      this.feito=[]
       if (atv.idUser == this.idUser){
         switch (atv.quadro) {
           case "para-fazer": {

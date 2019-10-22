@@ -114,7 +114,9 @@ export class ResumoInsertPage implements OnInit {
         pr.update(this.idUser, res)
       })
       
-     this.provider.addResumo(todo).then(() => {
+      this.provider.addResumo(todo).then(() => {
+        this.uploadFoto(this.blob);
+        console.log("TAG ->", this.tag)
         this.conteudo = ""
         this.titulo = ""
         this.data = ""
