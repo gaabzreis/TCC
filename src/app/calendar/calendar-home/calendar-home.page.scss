@@ -1,0 +1,27 @@
+.monthview-primary-with-event {
+	background-color: transparent !important;
+	color: #000000 !important;
+	border-bottom: 2px solid black !important;
+  }
+  
+  .monthview-current {
+	background-color: lightgray !important;
+	color: #000000 !important;
+  }
+  
+  .monthview-selected {
+	background-color: red !important;
+	color: #ffffff !important;
+  }
+
+  .table-bordered>tfoot>tr>td {
+	border: 0 !important;
+  }
+  
+  .table-bordered {
+	border: 0 !important;
+  }
+
+  .monthview-eventdetail-timecolumn {
+	  width: 0px;
+  }

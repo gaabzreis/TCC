@@ -85,4 +85,9 @@ export class HomePage implements OnInit  {
     // Maneira 2
     // this.navCtrl.push('ContactEditPage', { key: contact.key });*/
   } 
+
+  calendar(){
+    this.router.navigate(["calendar-home"]);
+  }
+
 }

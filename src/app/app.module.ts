@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -23,9 +23,12 @@ import { QRCodeModule } from 'angularx-qrcode';
 
 import { FormsModule } from '@angular/forms';
 import {IonicGestureConfig} from "./gestures/ionic-gesture-config";
-import { File } from '@ionic-native/file/ngx'
+import { File } from '@ionic-native/file/ngx';
+import { NgCalendarModule  } from 'ionic2-calendar';
 
-/* import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/'; */
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [AppComponent],
@@ -40,7 +43,8 @@ import { File } from '@ionic-native/file/ngx'
       messagingSenderId: "1059435639373"
     }),
     AngularFirestoreModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    NgCalendarModule
   ],
   providers: [
     StatusBar,
@@ -49,7 +53,8 @@ import { File } from '@ionic-native/file/ngx'
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: IonicGestureConfig
-  },
+    },
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
     Toast,
     Camera,
     BarcodeScanner,
