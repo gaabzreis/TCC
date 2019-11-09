@@ -22,6 +22,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.splashScreen.show();
+    this.statusBar.overlaysWebView(true);
     this.statusBar.backgroundColorByHexString('#707070');
   }
 
@@ -42,13 +43,14 @@ export class LoginPage implements OnInit {
     let users: User[]
     this.provider.getAll().subscribe(res => {
       users = res;
+      let pageInitial =  "calendar-home";
       if (this.login == "mock" && this.senha == "mock") {
         sessionStorage.setItem('idUser', "mock")
-        this.router.navigate(["menu/home"])
+        this.router.navigate([pageInitial])
       }
       else if(users.find(x => x.login == this.login && x.senha == this.senha)){
         sessionStorage.setItem('idUser',users.find(x => x.login == this.login && x.senha == this.senha).id)
-        this.router.navigate(["menu/home"])
+        this.router.navigate([pageInitial])
       }
       else{
         toast.present()

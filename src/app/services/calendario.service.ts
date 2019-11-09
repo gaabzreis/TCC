@@ -7,9 +7,8 @@ export interface atividade {
   id?: string,
   idUser?: string,
   title: string,
-  startTime: Date,
-  endTime: Date,
-  allDay: Boolean
+  dateTime: Date,
+  disciplina: string
 }
 
 @Injectable({
@@ -36,6 +35,23 @@ export class CalendarioService {
   addAtividadeCalendario(atividade: atividade) {
     atividade.idUser = sessionStorage.getItem('idUser');
     return this.todosCollection.add(atividade);
+  }
+
+  getAll() {
+    this.todasAtividades = this.todosCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+    return this.todasAtividades;
+  }
+
+  getByDay(date: Date) {
+    return this.todosCollection.doc<atividade>(date.toISOString()).valueChanges();
   }
 
 }

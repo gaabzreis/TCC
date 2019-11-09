@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="danger">
     
     <ion-buttons slot="primary">
       <ion-button (click)="addNewEvent()">
@@ -8,19 +8,30 @@
     </ion-buttons>
 
     <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
-    <ion-title>Calendário</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content force-overscroll="false" no-bounce>
 
-  <div class="ion-text-center">
-    <h2 style="font-size: 35px; margin-bottom: 0px;">{{ mesSelecionado }}</h2>
-    <h3 style="margin-top: 0px;">{{ anoSelecionado }}</h3>
+  <div style="background-color: #F0525D; border-radius: 0px 0px 25px 25px;" class="ion-text-center">
+    <h2 style="font-size: 35px; margin-bottom: 0px; margin-top: 0px; background-color: #F0525D; color: white;">{{ mesSelecionado }}</h2>
+    <h3 style="margin-top: 0px; background-color: #F0525D; color: white;border-radius: 0px 0px 25px 25px;">{{ anoSelecionado }}</h3>
   </div>
+
+  <ng-template #template let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
+    <ion-list lines="none" class="event-detail-container" has-bouncing="false" *ngIf="showEventDetail" overflow-scroll="false">
+      <ion-item *ngFor="let event of eventSource" (click)="onEventSelected(event)">
+        <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
+          <p class="tituloAtividade">{{ event.title }}</p>
+          <p class="nomeDiciplina">{{ event.disciplina}}</p>
+          <div class="linha"></div>
+        </ion-label>
+      </ion-item>
+      </ion-list>
+  </ng-template>
 
   <calendar 
     [eventSource]="eventSource"
@@ -28,8 +39,9 @@
     [currentDate]="calendar.currentDate"
     [noEventsLabel]="calendar.noEventsLabel"
     [allDayLabel]="calendar.allDayLabel"
+    [monthviewEventDetailTemplate]="template"
     (onCurrentDateChanged)="onCurrentDateChanged($event)"
-    (onRangeChanged)="reloadSource(startTime, endTime)"
+    (onRangeChanged)="onRangeChanged($event)"
     (onEventSelected)="onEventSelected($event)"
     (onTitleChanged)="onViewTitleChanged($event)"
     (onTimeSelected)="onTimeSelected($event)"

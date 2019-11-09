@@ -40,6 +40,7 @@ const routes: Routes = [
   { path: 'listar-usuario/:sala-aula', loadChildren: './listar-usuario/listar-usuario.module#ListarUsuarioPageModule' },
   { path: 'detalhes-atividade', loadChildren: './kanban/detalhes-atividade/detalhes-atividade.module#DetalhesAtividadePageModule' },
   { path: 'calendar-home', loadChildren: './calendar/calendar-home/calendar-home.module#CalendarHomePageModule' },
+  { path: 'calendar-new', loadChildren: './calendar/calendar-new/calendar-new.module#CalendarNewPageModule' },
 ];
 
 @NgModule({

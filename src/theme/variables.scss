@@ -51,7 +51,7 @@ $colors: (
   --ion-color-warning-tint: #ffd31a;
 
   /** danger **/
-  --ion-color-danger: #f04141;
+  --ion-color-danger: #F0525D;
   --ion-color-danger-rgb: 245, 61, 61;
   --ion-color-danger-contrast: #ffffff;
   --ion-color-danger-contrast-rgb: 255, 255, 255;
@@ -106,7 +106,7 @@ $colors: (
   }
   
   .monthview-selected {
-	background-color: red !important;
+	background-color: #F0525D !important;
 	color: #ffffff !important;
   }
 
@@ -132,3 +132,9 @@ $colors: (
   .monthview-container {
     border-radius: 25px 25px 0px 0px;
   }
+
+  .header-ios ion-toolbar:last-child {
+    --border-width: 0;
+}
+
+.weekview-allday-table, .dayview-allday-table { display: none; } init-position-scroll { &.weekview-normal-event-container { margin-top: 37px; } &.dayview-normal-event-container { margin-top: 0px; } }

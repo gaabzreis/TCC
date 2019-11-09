@@ -14,6 +14,11 @@ export class MenuPage implements OnInit {
       icon: 'home'
     },
     {
+      title: 'Calendário',
+      url: '/menu/calendar-home',
+      icon: 'book'
+    },
+    {
       title: 'Salas de aula',
       url: '/menu/sala-aula',
       icon: 'book'
@@ -32,8 +37,7 @@ export class MenuPage implements OnInit {
       title: 'Sair',
       url: '../login',
       icon: 'log-out'
-    },
-   
+    }
   ];
  
   constructor() { }

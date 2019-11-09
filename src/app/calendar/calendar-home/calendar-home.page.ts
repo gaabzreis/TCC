@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { CalendarioService, atividade } from '../../services/calendario.service';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-calendar-home',
@@ -23,33 +24,22 @@ export class CalendarHomePage implements OnInit {
 
   constructor (
     private db: AngularFireStorage,
-    private providerCalendar: CalendarioService) { }
+    private providerCalendar: CalendarioService,
+    private statusBar: StatusBar) { }
 
   ngOnInit() {
-    this.eventSource.push({
-      title: 'Atividade_01',
-      startTime: new Date(),
-      endTime: new Date(),
-      allDay: true
-    },
-    {
-      title: 'Atividade_02',
-      startTime: new Date(),
-      endTime: new Date(),
-      allDay: true
-    });
+    this.statusBar.overlaysWebView(true);
+    this.statusBar.backgroundColorByHexString('#ffffff');
+
   }
 
-  addNewEvent () {
-    this.atividade = {
-      title: 'TESTE - Paulo',
-      startTime: new Date(),
-      endTime: new Date(),
-      allDay: false
-    };
-
-    this.providerCalendar.addAtividadeCalendario(this.atividade);
-
+  addNewEvent (atv: atividade) {
+    // this.atividade = {
+    //   title: 'TESTE - Paulo',
+    //   dateTime: new Date(),
+    //   disciplina: 'Banco de Dados'
+    // };
+    this.providerCalendar.addAtividadeCalendario(atv);
   }
 
   onViewTitleChanged = (title: string) => {
@@ -63,15 +53,17 @@ export class CalendarHomePage implements OnInit {
   }
 
   onTimeSelected(ev) {
-
+    console.log(ev);
   }
 
   onCurrentDateChanged(event: Date) {
-
+    this.providerCalendar.getByDay(event).subscribe( ev => {
+      //this.eventSource = ev;
+    })
   }
 
-  onRangeChanged(ev) {
-
-  }
+  onRangeChanged = (ev: { startTime: Date, endTime: Date }) => {
+    
+};
 
 }
