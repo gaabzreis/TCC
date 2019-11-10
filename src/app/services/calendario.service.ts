@@ -7,8 +7,9 @@ export interface atividade {
   id?: string,
   idUser?: string,
   title: string,
-  dateTime: Date,
-  disciplina: string
+  dateTime: string,
+  disciplina: string,
+  descricao: string
 }
 
 @Injectable({

@@ -33,10 +33,12 @@ registerLocaleData(localePt);
 
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx'
 
+import { CalendarNewPageModule } from './calendar/calendar-new/calendar-new.module'
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [FormsModule, BrowserModule, IonicModule.forRoot(),QRCodeModule, AppRoutingModule, NovaAtividadePageModule, ConfigurarNotificacaoPageModule, 
+  imports: [FormsModule, BrowserModule, IonicModule.forRoot(),QRCodeModule, AppRoutingModule, NovaAtividadePageModule, ConfigurarNotificacaoPageModule,CalendarNewPageModule, 
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyB2QuPU2P-uacuDhWwbanldt0o4N8jEdMM",
       authDomain: "teste-tcc-3363f.firebaseapp.com",

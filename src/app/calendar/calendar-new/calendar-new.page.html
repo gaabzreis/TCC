@@ -1,9 +1,39 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>calendar-new</ion-title>
+  <ion-toolbar color="danger">
+      <ion-buttons slot="start">
+        <ion-button (click)="fecharModal()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+      
+      <ion-title>Atividade</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-
+  <div style="padding: 10px; text-align: center; margin-bottom: 10px;">
+    <h1 *ngIf="!salaEdicao">Inserir nova atividade</h1>
+    <h1 *ngIf="salaEdicao">Editar atividade</h1>
+  </div>
+  <ion-item>
+    <ion-label position="floating">Titulo atividade</ion-label>
+    <ion-input [(ngModel)]="titulo"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Descrição da atividade</ion-label>
+    <ion-textarea [(ngModel)]="descricao"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">sala</ion-label>
+    <ion-select multiple="false" cancelText="Cancelar" okText="Selecionar" [(ngModel)]="salaSelecionada" >
+      <ion-select-option [(value)]="item.id" *ngFor="let item of todasSalas" >{{item.descricao}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Data entrega</ion-label>
+    <ion-datetime [(ngModel)]="dataEntrega" display-format="DD/MM/YYYY"></ion-datetime>
+  </ion-item>
+  
 </ion-content>
+<ion-footer>
+  <ion-button expand="block" color="success" style="margin: 10px;" (click)="salvar()" >Salvar</ion-button>
+</ion-footer>
