@@ -14,7 +14,7 @@ hr{
     width: 50px;
     border-radius: 6.5px;
     border: solid 1px #76ccd0;
-    font-family: SFProText;
+    font-family: SFProText Regular;
     font-size: 12px;
     color: #76ccd0;
     text-align: center;
@@ -24,10 +24,9 @@ hr{
 }
 
 .lbSala{
-    height: 25px;
-    font-family: SFProText;
+    height: 26px;
+    font-family: SFProText Heavy;
     font-size: 22px;
-    font-weight: 900;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
@@ -38,9 +37,8 @@ hr{
 
 .lbProfessor{
     height: 18px;
-    font-family: SFProText;
+    font-family: SFProText Regular;
     font-size: 15px;
-    font-weight: normal;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
@@ -52,9 +50,8 @@ hr{
 
 .lbCursoPeriodo{
     height: 15px;
-    font-family: SFProText;
+    font-family: SFProText Regular;
     font-size: 13px;
-    font-weight: normal;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
@@ -66,9 +63,8 @@ hr{
 
 .lbLocal{
     height: 15px;
-    font-family: SFProText;
+    font-family: SFProText Regular;
     font-size: 13px;
-    font-weight: normal;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
@@ -89,7 +85,8 @@ hr{
     background-color: #f0525d;
     padding: 5px;
     color: white;
-    font-size: 20px;
+    font-family: SFProText Regular;
+    font-size: 17px;
     margin-top: -5px;
-    border-radius: 0px 0px 15px 15px;
+    margin-bottom: 5px;
 }
