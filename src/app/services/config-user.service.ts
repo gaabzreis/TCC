@@ -1,43 +1,25 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection  } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { map } from "rxjs/operators";
 import { Observable } from 'rxjs';
 
-export interface horariosAulas{
-  diaSemana: string,
-  horarioI: string,
-  horarioF: string
+export interface Config {
+  id?: string;
+  permite: string;
+  qtdDias: number;
+  idUser: string;
 }
 
-export interface sala{
-  id?: string,
-  adm: string,
-  descricao: string,
-  universidade: string,
-  sala: string,
-  inicioAula: string,
-  periodo: number,
-  professor: string,
-  qtdMeses: number,
-  horariosAula: horariosAulas[],
-  integrantes: [{
-    idIntegrante: string,
-    pontos: number
-  }],
-  monitores?: string[]
-  solicitacao?: string[]
-}
+
 @Injectable({
   providedIn: 'root'
 })
-export class SalaAulaService {
+export class ConfigUserService {
 
-  private todosCollection: AngularFirestoreCollection<sala>;
- 
-  private todos: Observable<sala[]>;
+  private todosCollection: AngularFirestoreCollection<Config>;
+  private todos: Observable<Config[]>;
   constructor(private db: AngularFirestore) {
-    this.todosCollection = db.collection<sala>('sala');
- 
+    this.todosCollection = db.collection<Config>('config');
     this.todos = this.todosCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -47,7 +29,8 @@ export class SalaAulaService {
         });
       })
     );
-   }
+  }
+
   getAll() {
     this.todos = this.todosCollection.snapshotChanges().pipe(
       map(actions => {
@@ -59,24 +42,20 @@ export class SalaAulaService {
       })
     );
     return this.todos;
-
   }
   getByFilter(id) {
-    return this.todosCollection.doc<sala>(id).valueChanges();
+    return this.todosCollection.doc<Config>(id).valueChanges();
   }
-  addSala(todo: sala) {
+  addUser(todo: Config) {
     return this.todosCollection.add(todo);
   }
-  update(key: string, data){
+  update(key, data) {
     return this.todosCollection.doc(key).update(data)
-  }
-  delete(key:string){
-    return this.todosCollection.doc(key).delete()
   }
   getById(id) {
     let subscription;
     return new Promise((resolve, reject) => {
-      subscription = this.todosCollection.doc<sala>(id)
+      subscription = this.todosCollection.doc<Config>(id)
         .valueChanges()
         .subscribe(observer => {
           resolve(observer)

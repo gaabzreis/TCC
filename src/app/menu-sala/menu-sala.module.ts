@@ -41,6 +41,10 @@ const routes: Routes = [
         path: 'listar-usuario/:sala-aula',
         loadChildren: '../listar-usuario/listar-usuario.module#ListarUsuarioPageModule',
       },
+      {
+        path: 'ranking-sala/:sala-aula',
+        loadChildren: '../ranking-sala/ranking-sala.module#RankingSalaPageModule',
+      },
      
     ]
   } 

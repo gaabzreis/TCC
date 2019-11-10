@@ -24,7 +24,7 @@ export class ListarUsuarioPage implements OnInit {
         this.users = []
         for(let i = 0; i < usersRet.length; i++){
           for(let j = 0; j < ids.length; j++){
-            if(ids[j] == usersRet[i].id){
+            if(ids[j].idIntegrante == usersRet[i].id){
               this.users.push(usersRet[i])
             }
           }
@@ -71,9 +71,11 @@ export class ListarUsuarioPage implements OnInit {
         }
       ]
     });
-    this.sala.integrantes = this.sala.integrantes.filter(x => x != id)
-    this.provider.update(this.sala.id, this.sala).then(res => {
+    let teste = this.sala.integrantes.filter(x => x.idIntegrante != id)
+    console.log(teste)
+    //this.sala.integrantes = teste
+    /* this.provider.update(this.sala.id, this.sala).then(res => {
       toast.present()
-    })
+    }) */
   }
 }

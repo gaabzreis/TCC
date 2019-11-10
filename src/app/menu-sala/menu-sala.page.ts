@@ -27,6 +27,11 @@ export class MenuSalaPage implements OnInit {
       url: '/menu-sala/forum/' + this.idSala,
       icon: 'chatboxes'
     },
+    {
+      title: 'Ranking',
+      url: '/menu-sala/ranking-sala/' + this.idSala,
+      icon: 'podium'
+    },
    
    
   ];

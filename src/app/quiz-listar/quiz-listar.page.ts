@@ -8,6 +8,8 @@ import { AngularFirestore, AngularFirestoreCollection  } from 'angularfire2/fire
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 /* import {Math } from 'mathjs' */
+import { LoginServiceService, User} from '../services/login-service.service'
+import { sala, SalaAulaService} from '../services/sala-aula.service'
 
 @Component({
   selector: 'app-quiz-listar',
@@ -27,11 +29,25 @@ export class QuizListarPage implements OnInit {
   verGab = false
   idSala = this.route.snapshot.params['conteudo'].split("@")[2]
   idUser = sessionStorage.getItem('idUser')
-  constructor(private router: Router, public alertController: AlertController, private route: ActivatedRoute, 
-    private loadingController: LoadingController, private provider: QuizService, private toast : ToastController) { }
+  usuario: User
+  sala: sala
+  usuarioVoto: User
+  constructor(private router: Router, 
+              public alertController: AlertController, 
+              private route: ActivatedRoute, 
+              private loadingController: LoadingController, 
+              private provider: QuizService, 
+              private toast : ToastController,
+              private userPorvider: LoginServiceService,
+              private salaProvider: SalaAulaService) { }
 
   ngOnInit() {
-    
+    this.userPorvider.getByFilter(this.idUser).subscribe(res => {
+      this.usuario = res
+    })
+    this.salaProvider.getByFilter(this.idSala).subscribe(res => {
+      this.sala = res
+    })
     this.loadTodo()
   }
 
@@ -118,10 +134,19 @@ export class QuizListarPage implements OnInit {
     somatorio = somatorio.filter(valor => {
       return valor > 0
     }, 0)
+    if(this.usuario.pontos == undefined){
+      this.usuario.pontos = 0
+    }
+    this.usuario.pontos += somatorio.length
+    let usuarioSala = this.sala.integrantes.find(x => x.idIntegrante == this.idUser)
+
+    this.userPorvider.update(this.idUser, this.usuario)
+    this.salaProvider.update(this.idSala, this.sala)
+
     const alert = await this.alertController.create({
       header: 'Parabéns!',
       subHeader: 'resultado',
-      message: 'Você acertou ' + somatorio.length + " questões e acumulou mais " + somatorio.length * 2 + " pontos no ranking",
+      message: 'Você acertou ' + somatorio.length + " questões e acumulou mais " + somatorio.length  + " pontos no ranking",
       buttons: [{
         text: 'Responder novamente',
         cssClass: 'primary',
@@ -140,6 +165,7 @@ export class QuizListarPage implements OnInit {
   }
 
   async like(id, obj){
+    
     const toast = await this.toast.create({
       message: 'Pergunta dado like com sucesso.',
       duration: 5000,
@@ -172,10 +198,36 @@ export class QuizListarPage implements OnInit {
     else{
       obj.likes++
     }
+    let usuarioVotado : any
+    let salaVotada : any
+    usuarioVotado = await this.userPorvider.getById(obj.criador)
+    salaVotada = await this.salaProvider.getById(obj.idSala)
+    if(usuarioVotado.pontos == undefined){
+      usuarioVotado.pontos = 0
+    }
+    usuarioVotado.pontos += 15
+    console.log(salaVotada)
+    const salaUsuarios = salaVotada.integrantes.filter(x => x.idIntegrante == obj.criador)
+    
+    salaUsuarios[0].pontos += 15
+    
+    
+    this.userPorvider.update(obj.criador, usuarioVotado).then(a => {
+      console.log("user provider")
+
+    }) 
+    this.salaProvider.update(obj.idSala, salaVotada).then(a => {
+      console.log("sala provider")
+
+    }) 
+    
+    //usuarioVoto.unsubscribe()
+   
     this.provider.update(id, obj).then(res => {
       toast.present()
     })
     
-  }
+  // }
 
+}
 }

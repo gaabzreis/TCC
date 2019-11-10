@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    
+    <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      
+    </ion-buttons>
+    <ion-title>Ranking da sala de aula</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding="">
+<h1>Ranking geral de alunos</h1>
+
+
+<div class="primeiro">
+  <label>{{usuarios[0].nome}}</label>
+</div>
+<div class="segundo">
+  <label>{{usuarios[1].nome}}</label>
+</div>
+<div class="terceiro">
+  <label>{{usuarios[2].nome}}</label>
+</div>
+<img src="../../assets/podium.png" width="400px" style="margin-top: 100px;">
+<div>
+  <label>A diferença entre você e o último ganhador é de: </label>
+  <div>{{diferenca}}</div>
+</div>
+</ion-content>

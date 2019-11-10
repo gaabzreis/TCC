@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection  } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { map } from "rxjs/operators";
 import { Observable } from 'rxjs';
 
-export interface User{
+export interface User {
   id?: string;
   curso: String;
   email: String;
@@ -12,6 +12,7 @@ export interface User{
   universidade: String;
   instituicao?: string;
   login: string
+  pontos?: number;
 }
 
 @Injectable({
@@ -20,7 +21,7 @@ export interface User{
 export class LoginServiceService {
   private todosCollection: AngularFirestoreCollection<User>;
   private todos: Observable<User[]>;
-  constructor(private db: AngularFirestore) { 
+  constructor(private db: AngularFirestore) {
     this.todosCollection = db.collection<User>('users');
     this.todos = this.todosCollection.snapshotChanges().pipe(
       map(actions => {
@@ -44,7 +45,6 @@ export class LoginServiceService {
       })
     );
     return this.todos;
-
   }
   getByFilter(id) {
     return this.todosCollection.doc<User>(id).valueChanges();
@@ -52,7 +52,17 @@ export class LoginServiceService {
   addUser(todo: User) {
     return this.todosCollection.add(todo);
   }
-  update(key, data){
+  update(key, data) {
     return this.todosCollection.doc(key).update(data)
+  }
+  getById(id) {
+    let subscription;
+    return new Promise((resolve, reject) => {
+      subscription = this.todosCollection.doc<User>(id)
+        .valueChanges()
+        .subscribe(observer => {
+          resolve(observer)
+        })
+    })
   }
 }

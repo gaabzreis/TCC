@@ -57,4 +57,7 @@ export class ResumoService {
   update(todo: Resumo){
     return this.todosCollection.doc(todo.id).update(todo)
   }
+  delete(key: string){
+    return this.todosCollection.doc(key).delete()
+  }
 }

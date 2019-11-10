@@ -29,6 +29,11 @@ export class MenuPage implements OnInit {
       icon: 'list-box'
     },
     {
+      title: 'Ranking geral',
+      url: '/menu/ranking-total',
+      icon: 'podium'
+    },
+    {
       title: 'Perfil',
       url: '/menu/user-perfil',
       icon: 'person'

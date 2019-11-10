@@ -37,7 +37,11 @@ const routes: Routes = [
       {
         path: 'sala-aula',
         loadChildren: '../sala-home/sala-home.module#SalaHomePageModule',
-      }
+      },
+      {
+        path: 'ranking-total',
+        loadChildren: '../ranking-total/ranking-total.module#RankingTotalPageModule',
+      },
     ]
   } 
 ];

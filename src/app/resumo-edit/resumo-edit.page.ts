@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 import { ResumoService, Resumo } from './../services/resumo.service';
 import { FirebaseApp } from 'angularfire2';
+import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-resumo-edit',
@@ -20,7 +22,9 @@ export class ResumoEditPage implements OnInit {
     private route: ActivatedRoute, 
     private loadingController: LoadingController, 
     private provider: ResumoService,
-    private firebase: FirebaseApp) { }
+    private firebase: FirebaseApp,
+    private alertController: AlertController,
+    private rotas : Router) { }
 
   ngOnInit() {
     this.todoId = this.route.snapshot.params['id'];
@@ -52,5 +56,31 @@ export class ResumoEditPage implements OnInit {
       }
     )
   } 
+  async deletar(){
 
+    const alert = await this.alertController.create({
+      header: 'Aviso',
+      message: 'Tem certeza que deseja excluir o resumo com a tag ' + this.todo.tag + "?",
+      buttons: [
+        {
+          text: 'Sim',
+          cssClass: 'secondary',
+          handler: (action) => {
+            console.log(this.todoId)
+            this.provider.delete(this.todoId)
+            this.rotas.navigate(['menu-sala/resumo/',this.todo.idSala])
+          }
+        }, {
+          text: 'Cancelar',
+          cssClass: "primary",
+          role: "cancel",
+          handler: () => {
+            console.log('cancel');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 }
