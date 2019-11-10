@@ -55,4 +55,8 @@ export class CalendarioService {
     return this.todosCollection.doc<atividade>(date.toISOString()).valueChanges();
   }
 
+  update(key : string, data : atividade){
+    return this.todosCollection.doc(key).update(data)
+  }
+
 }
