@@ -41,6 +41,10 @@ const routes: Routes = [
   { path: 'detalhes-atividade', loadChildren: './kanban/detalhes-atividade/detalhes-atividade.module#DetalhesAtividadePageModule' },
   { path: 'calendar-home', loadChildren: './calendar/calendar-home/calendar-home.module#CalendarHomePageModule' },
   { path: 'calendar-new', loadChildren: './calendar/calendar-new/calendar-new.module#CalendarNewPageModule' },
+  { path: 'ranking-sala', loadChildren: './ranking-sala/ranking-sala.module#RankingSalaPageModule' },
+  { path: 'ranking-sala/:sala-aula', loadChildren: './ranking-sala/ranking-sala.module#RankingSalaPageModule' },
+  { path: 'ranking-total', loadChildren: './ranking-total/ranking-total.module#RankingTotalPageModule' },
+  { path: 'configurar-notificacao', loadChildren: './configurar-notificacao/configurar-notificacao.module#ConfigurarNotificacaoPageModule' },
 ];
 
 @NgModule({
