@@ -12,7 +12,7 @@ import { CalendarNewPage } from '../calendar-new/calendar-new.page'
   styleUrls: ['./calendar-home.page.scss'],
 })
 export class CalendarHomePage implements OnInit {
-
+  dataClicada : Date = new Date()
   eventSource = [];
   atvSource = [];
   atividade: atividade;
@@ -52,7 +52,7 @@ export class CalendarHomePage implements OnInit {
 
     modal.onDidDismiss()
       .then((data) => {
-        const user = data['data']; 
+        this.onCurrentDateChanged(this.dataClicada)
     });
 
     return await modal.present();
@@ -64,8 +64,26 @@ export class CalendarHomePage implements OnInit {
     this.anoSelecionado = newTitle[1];
   };
 
-  onEventSelected(event) {
-    console.log('evento selecionado:' + event.startTime + ' - ' + event.title);
+  async onEventSelected(event) {
+    console.log(event)
+    const modal = await this.modalController.create({
+      component: CalendarNewPage,
+      componentProps: {
+        descricao: event.descricao,
+        titulo: event.title,
+        id: event.id,
+        dataEntrega: event.dateTime
+      }
+    });
+
+    modal.onDidDismiss()
+      .then((data) => {
+        this.onCurrentDateChanged(this.dataClicada)
+    });
+    if(event.tipo == "atv"){
+      return await modal.present();
+
+    }
   }
 
   onTimeSelected(ev) {
@@ -73,12 +91,13 @@ export class CalendarHomePage implements OnInit {
   }
 
   onCurrentDateChanged(event: Date) {
+    this.dataClicada = event
     this.eventSource = []
     this.atvSource = []
     this.salaProvider.getAll().subscribe(res => {
       let salas = res.filter(x => (x.integrantes.find(y => y.idIntegrante == this.idUser)) || x.adm == this.idUser)
       
-      let dataClicada = event.getFullYear() + "-" + ("00" + (event.getMonth() + 1)).slice(-2) + "-" + ("00" + event.getDate()).slice(-2)
+      
       let dataLimite = salas.map(x => {
         let a = new Date(x.inicioAula)
         a.setMonth(a.getMonth() + parseInt(x.qtdMeses.toString()))
@@ -116,7 +135,8 @@ export class CalendarHomePage implements OnInit {
       salasData.forEach((x) => {
         this.eventSource.push({
           title: x.descricao,
-          disciplina: x.professor
+          disciplina: x.professor,
+          tipo: "sala"
         })
       })
       
@@ -130,7 +150,10 @@ export class CalendarHomePage implements OnInit {
       diaAtv.forEach((x) => {
         this.atvSource.push({
           title: x.title,
-          descricao: x.descricao
+          descricao: x.descricao,
+          id: x.id,
+          tipo: "atv",
+          dateTime: x.dateTime
         })
       })
     })
