@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="danger">
     
     <ion-buttons slot="primary">
       <ion-button (click)="presentModal()">
@@ -18,7 +18,77 @@
 
 <ion-content>
 
-  <ion-slides pager="true">
+    <ion-grid padding class="ionGrid">
+        <ion-row style="text-align: center;">
+          <ion-col (click)="setKanbanSelecionado('paraFazer')" class="numero">
+            {{paraFazer.length}}
+          </ion-col>
+          <ion-col (click)="setKanbanSelecionado('emAndamento')" class="numero">
+            {{emAndamento.length}}
+          </ion-col>
+          <ion-col (click)="setKanbanSelecionado('feito')" class="numero">
+            {{feito.length}}
+          </ion-col>
+        </ion-row>
+        <ion-row style="text-align: center;">
+            <ion-col class="paraFazer">
+              Para fazer
+            </ion-col>
+            <ion-col class="paraFazer">
+              Em andamento
+            </ion-col>
+            <ion-col class="paraFazer">
+              Feito
+            </ion-col>
+          </ion-row>
+      </ion-grid>
+
+      <ion-slides>
+          <ion-slide>
+              <ion-card class="kanban">
+              <ion-list class="padding" *ngFor="let atividade of paraFazer">
+                      <ion-item no-padding class="ltDisciplinas" detail="false" (click)="openDetails(atividade)" (press)="onPress($event, atividade.id, atividade.quadro)">
+                        <ion-label>
+                            <p class="lbAtividade" style="color: #f47f54;">{{atividade.nome}}</p>
+                            <p class="lbSala">{{getNome(atividade.idDisciplina)[0].nomeDisciplina}}</p>
+                            <p class="lbData">{{atividade.dataEntrega}}</p>
+                        </ion-label>
+                      </ion-item>
+                </ion-list>
+              </ion-card>
+          </ion-slide>
+
+          <ion-slide>
+              <ion-card class="kanban">
+              <ion-list class="padding" *ngFor="let atividade of emAndamento">
+                      <ion-item no-padding class="ltDisciplinas" detail="false" (click)="openDetails(atividade)" (press)="onPress($event, atividade.id, atividade.quadro)">
+                        <ion-label>
+                            <p class="lbAtividade" style="color: #febf50;">{{atividade.nome}}</p>
+                            <p class="lbSala">{{getNome(atividade.idDisciplina)[0].nomeDisciplina}}</p>
+                            <p class="lbData">{{atividade.dataEntrega}}</p>
+                        </ion-label>
+                      </ion-item>
+                </ion-list>
+              </ion-card>
+          </ion-slide>
+
+          <ion-slide>
+              <ion-card class="kanban">
+              <ion-list class="padding" *ngFor="let atividade of feito">
+                      <ion-item no-padding class="ltDisciplinas" detail="false" (click)="openDetails(atividade)" (press)="onPress($event, atividade.id, atividade.quadro)">
+                        <ion-label>
+                            <p class="lbAtividade" style="color: #76ccd0;">{{atividade.nome}}</p>
+                            <p class="lbSala">{{getNome(atividade.idDisciplina)[0].nomeDisciplina}}</p>
+                            <p class="lbData">{{atividade.dataEntrega}}</p>
+                        </ion-label>
+                      </ion-item>
+                </ion-list>
+              </ion-card>
+          </ion-slide>
+      </ion-slides>
+        
+            
+  <!-- <ion-slides pager="true">
       <ion-slide>
         <ion-card class="kanban" *ngIf="nomesDisciplinas">
             <ion-card-header>
@@ -122,6 +192,6 @@
               </ion-card>
           </ion-slide>
 
-  </ion-slides>
+  </ion-slides> -->
   
 </ion-content>

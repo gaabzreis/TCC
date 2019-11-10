@@ -1,15 +1,98 @@
+.list-ios {
+    margin-bottom: -5px !important;
+}
+
 .kanban {
-    display: flex;
-    flex-direction: column;
-    height: 90%;
+    height: 100%;
     width: 100%;
-    margin-top: 0%;
+    margin-left: 0px;
+    margin-right: 0px;
+    box-shadow: none;
+    margin-top: 210px;
 }
 
 ion-slides {
     height: 95%;
 }
 
-ion-card-header {
-    text-align: left;
+ion-grid{
+    position: fixed;
+    overflow: scroll;
+    z-index: 999;
+    width: 100%;
+}
+
+.lbAtividade{
+    height: 25px;
+    font-family: SFProText;
+    font-size: 22px;
+    font-weight: 900;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    margin-bottom: 5px;
+}
+
+.lbSala{
+    height: 18px;
+    font-family: SFProText;
+    font-size: 15px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #6b6b6b;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.lbData{
+    height: 15px;
+    font-family: SFProText;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #6b6b6b;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.paraFazer {
+    width: 58px;
+    height: 14px;
+    font-family: SFProText;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: white;
+  }
+
+.numero{
+    width: 25px;
+    height: 41px;
+    font-family: SFProText;
+    font-size: 35px;
+    font-weight: 900;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: white;
+}
+
+.ionGrid{
+    background-color: #F0525D;
+    border-radius: 0px 0px 25px 25px;
+}
+
+.padding{
+    padding: 0px 15px 10px 15px; ;
 }

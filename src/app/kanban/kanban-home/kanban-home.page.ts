@@ -24,6 +24,7 @@ export class KanbanHomePage {
   emAndamento: atividade[]
   feito: atividade[]
   nomesDisciplinas: nomeDisciplina[]
+  kanbanSelecionado: string = "paraFazer"
 
   public progressClick: number = 0;
   protected interval: any;
@@ -155,6 +156,15 @@ openDetails(atv: atividade) {
   this.router.navigate(['detalhes-atividade'], {
     queryParams: { ...atv, nomeDisciplina: nomeDisciplina[0].nomeDisciplina}
   });
+}
+
+setKanbanSelecionado(kanban) {
+  this.kanbanSelecionado = kanban;
+  console.log("Selecionado -> " + kanban);
+}
+
+getKanbanSelecionado() {
+  return this.kanbanSelecionado;
 }
 
   dadosMock () {
