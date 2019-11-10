@@ -43,7 +43,7 @@ export class LoginPage implements OnInit {
     let users: User[]
     this.provider.getAll().subscribe(res => {
       users = res;
-      let pageInitial =  "calendar-home";
+      let pageInitial =  "menu/calendar-home";
       if (this.login == "mock" && this.senha == "mock") {
         sessionStorage.setItem('idUser', "mock")
         this.router.navigate([pageInitial])

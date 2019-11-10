@@ -10,13 +10,8 @@ export class MenuPage implements OnInit {
   pages = [
     {
       title: 'Home',
-      url: '/menu/home',
-      icon: 'home'
-    },
-    {
-      title: 'Calendário',
       url: '/menu/calendar-home',
-      icon: 'book'
+      icon: 'home'
     },
     {
       title: 'Salas de aula',

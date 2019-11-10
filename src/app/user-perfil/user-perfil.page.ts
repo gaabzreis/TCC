@@ -79,16 +79,7 @@ export class UserPerfilPage implements OnInit {
   
       return await modal.present();
     
-    /* this.localnotification.schedule({
-      id: 42,
-      title: "Bom dia",
-      text: "OGGG",
-      trigger: {
-        every: {
-          hour: 20, minute: 32
-        }
-      }
-    }) */
+    /*  */
   }
 
 }

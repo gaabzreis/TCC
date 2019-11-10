@@ -22,6 +22,7 @@
   </div>
 
   <ng-template #template let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
+    <p class="lbNaoIncrito" *ngIf="eventSource.length > 0">Aulas</p>
     <ion-list lines="none" class="event-detail-container" has-bouncing="false" *ngIf="showEventDetail" overflow-scroll="false">
       <ion-item *ngFor="let event of eventSource" (click)="onEventSelected(event)">
         <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
@@ -31,6 +32,16 @@
         </ion-label>
       </ion-item>
       </ion-list>
+      <p class="lbNaoIncrito" *ngIf="atvSource.length > 0">Atividades</p>
+      <ion-list lines="none" class="event-detail-container" has-bouncing="false" *ngIf="showEventDetail" overflow-scroll="false">
+        <ion-item *ngFor="let event of atvSource" (click)="onEventSelected(event)">
+          <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
+            <p class="tituloAtividade">{{ event.title }}</p>
+            <p class="nomeDiciplina">{{ event.disciplina}}</p>
+            <div class="linha"></div>
+          </ion-label>
+        </ion-item>
+        </ion-list>
   </ng-template>
 
   <calendar 

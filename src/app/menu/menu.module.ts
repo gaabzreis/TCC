@@ -32,7 +32,6 @@ const routes: Routes = [
       {
         path: 'kanban',
         loadChildren: '../kanban/kanban-home/kanban-home.module#KanbanHomePageModule',
-        
       },
       {
         path: 'sala-aula',
@@ -41,6 +40,10 @@ const routes: Routes = [
       {
         path: 'ranking-total',
         loadChildren: '../ranking-total/ranking-total.module#RankingTotalPageModule',
+      },
+      {
+        path: 'calendar-home',
+        loadChildren: '../calendar/calendar-home/calendar-home.module#CalendarHomePageModule',
       },
     ]
   } 
