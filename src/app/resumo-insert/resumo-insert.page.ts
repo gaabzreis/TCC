@@ -10,9 +10,9 @@ import { finalize } from 'rxjs/operators';
 import * as moment from "moment"; 
 
 import { stringify } from '@angular/core/src/util';
-import { database } from 'firebase';
 
 import { LoginServiceService, User} from '../services/login-service.service'
+import { sala, SalaAulaService} from '../services/sala-aula.service'
 
 @Component({
   selector: 'app-resumo-insert',
@@ -32,6 +32,8 @@ export class ResumoInsertPage implements OnInit {
   criador: string = this.idUser
   blob: Blob
   usuario: User
+  sala: sala
+  
 
   constructor(
     private routeres: ActivatedRoute, 
@@ -43,10 +45,19 @@ export class ResumoInsertPage implements OnInit {
     private afStorage: AngularFireStorage,
     private platform: Platform,
     private file: File,
-    private userPorvider: LoginServiceService) { }
+    private userPorvider: LoginServiceService,
+    private salaProvider: SalaAulaService) { }
 
   ngOnInit() {
+    this.userPorvider.getByFilter(this.idUser).subscribe(res => {
+      this.usuario = res
+    })
+    this.salaProvider.getByFilter(this.idSala).subscribe(res => {
+      this.sala = res
+    })
     if (this.idResumo != null) {
+      
+
       this.provider.getByFilter(this.idResumo).subscribe(res => {
         this.tag = res.tag
         this.titulo = res.titulo
@@ -100,28 +111,37 @@ export class ResumoInsertPage implements OnInit {
       };
       
 
-      this.userPorvider.getByFilter(this.idUser).subscribe(res => {
-        let pr : LoginServiceService
-        let banco = this.userPorvider.db
-        pr = new LoginServiceService(banco)
-        if(res.pontos == undefined){
-          res.pontos = 5
-        }
-        else{
-          res.pontos += 5
-        }
-        this.usuario = res
-        pr.update(this.idUser, res)
-      })
+      
       
       this.provider.addResumo(todo).then(() => {
-        this.uploadFoto(this.blob);
+        let usuarioSala = this.sala.integrantes.find(x => x.idIntegrante == this.idUser)
+        
+        if(this.usuario.pontos == undefined){
+          this.usuario.pontos = 0
+        }
+        if(this.blob != undefined){
+          if(this.tipo == "p"){
+            usuarioSala.pontos += 10
+            this.usuario.pontos += 10
+          }
+          
+          this.uploadFoto(this.blob);
+        }
+        else{
+          if(this.tipo == "p"){
+            usuarioSala.pontos += 5
+            this.usuario.pontos += 5
+          }
+        }
         console.log("TAG ->", this.tag)
         this.conteudo = ""
         this.titulo = ""
         this.data = ""
         this.tag = ""
-        
+        if(this.tipo == "p"){
+          this.userPorvider.update(this.idUser, this.usuario)
+          this.salaProvider.update(this.idSala, this.sala)
+        }
 
         toast.present();
         this.rotas.navigate(['menu-sala/resumo/', this.idSala])
@@ -201,5 +221,8 @@ export class ResumoInsertPage implements OnInit {
     // ).subscribe()
   }
   // fim-alteracoes-paulo
+
+
+
 
 }

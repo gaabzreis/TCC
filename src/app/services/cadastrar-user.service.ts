@@ -12,7 +12,7 @@ export interface User {
   senha: String;
   login: String;
   nome: string
-
+  pontos?: number;
 }
 
 @Injectable({

@@ -36,7 +36,7 @@ export class NovaAtividadePage implements OnInit {
     this.providerSala.getAll().subscribe(result => {
       this.listaDisciplinas = result.filter ( user => {
         return user.integrantes.find ( 
-          x => x == this.idUser ) || user.adm == this.idUser
+          x => x.idIntegrante == this.idUser ) || user.adm == this.idUser
       })
       this.editar();
     })

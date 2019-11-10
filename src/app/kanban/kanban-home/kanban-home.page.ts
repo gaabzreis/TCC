@@ -119,13 +119,10 @@ atualizaCard(){
   
   this.provider.getAll().subscribe(res => {
     this.paraFazer = []
-  this.emAndamento = []
-  this.feito = []
+    this.emAndamento = []
+    this.feito = []
     res.filter (atv => {
       console.log(atv)
-      this.paraFazer=[]
-      this.emAndamento=[]
-      this.feito=[]
       if (atv.idUser == this.idUser){
         switch (atv.quadro) {
           case "para-fazer": {

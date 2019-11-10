@@ -39,6 +39,11 @@ const routes: Routes = [
   { path: 'listar-usuario', loadChildren: './listar-usuario/listar-usuario.module#ListarUsuarioPageModule' },
   { path: 'listar-usuario/:sala-aula', loadChildren: './listar-usuario/listar-usuario.module#ListarUsuarioPageModule' },
   { path: 'detalhes-atividade', loadChildren: './kanban/detalhes-atividade/detalhes-atividade.module#DetalhesAtividadePageModule' },
+  { path: 'ranking-sala', loadChildren: './ranking-sala/ranking-sala.module#RankingSalaPageModule' },
+  { path: 'ranking-sala/:sala-aula', loadChildren: './ranking-sala/ranking-sala.module#RankingSalaPageModule' },  { path: 'ranking-total', loadChildren: './ranking-total/ranking-total.module#RankingTotalPageModule' },
+  { path: 'configurar-notificacao', loadChildren: './configurar-notificacao/configurar-notificacao.module#ConfigurarNotificacaoPageModule' },
+
+
 ];
 
 @NgModule({

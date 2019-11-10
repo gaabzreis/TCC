@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { QuizService, Resposta, Quiz } from './../services/quiz.service';
 import { ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoginServiceService, User} from '../services/login-service.service'
+import { sala, SalaAulaService} from '../services/sala-aula.service'
 
 @Component({
   selector: 'app-quiz-insert',
@@ -23,8 +25,14 @@ export class QuizInsertPage implements OnInit {
   idSala = this.routeres.snapshot.params["sala-aula"]
   temTag = false
   todasTags : string[] = []
-  constructor(private provider: QuizService, public toastController: ToastController, 
-    private rotas : Router, private routeres : ActivatedRoute) { }
+  sala: sala
+  usuario: User
+  constructor(private provider: QuizService, 
+              public toastController: ToastController, 
+              private rotas : Router, 
+              private routeres : ActivatedRoute,
+              private userPorvider: LoginServiceService,
+              private salaProvider: SalaAulaService) { }
 
   ngOnInit() {
     if(this.idSala == undefined){
@@ -43,6 +51,12 @@ export class QuizInsertPage implements OnInit {
       })
     }
     else{
+      this.salaProvider.getByFilter(this.idSala).subscribe(res => {
+        this.sala = res
+      })
+      this.userPorvider.getByFilter(this.idUser).subscribe(res => {
+        this.usuario = res
+      })
       this.provider.getAll().subscribe(res => {
         this.todasTags = res.filter(x => x.idSala == this.idSala).reduce((prev,atual) => {
           if(prev.find(x => x.tag == atual.tag)){
@@ -146,6 +160,16 @@ export class QuizInsertPage implements OnInit {
         this.tag = ""
         this.titulo = ""
         toast.present();
+        if(this.usuario.pontos == undefined){
+          this.usuario.pontos = 0
+        }
+        this.usuario.pontos += 5
+        let usuarioSala = this.sala.integrantes.find(x => x.idIntegrante == this.idUser)
+        usuarioSala.pontos += 5
+
+        this.salaProvider.update(this.idSala, this.sala)
+        this.userPorvider.update(this.idUser, this.usuario)
+
       })
     }
     

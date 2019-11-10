@@ -17,6 +17,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 
 import { NovaAtividadePageModule } from './kanban/nova-atividade/nova-atividade.module';
+import { ConfigurarNotificacaoPageModule } from './configurar-notificacao/configurar-notificacao.module';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { QRCodeModule } from 'angularx-qrcode';
@@ -27,10 +28,12 @@ import { File } from '@ionic-native/file/ngx'
 
 /* import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/'; */
 
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx'
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [FormsModule, BrowserModule, IonicModule.forRoot(),QRCodeModule, AppRoutingModule, NovaAtividadePageModule, 
+  imports: [FormsModule, BrowserModule, IonicModule.forRoot(),QRCodeModule, AppRoutingModule, NovaAtividadePageModule, ConfigurarNotificacaoPageModule, 
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyB2QuPU2P-uacuDhWwbanldt0o4N8jEdMM",
       authDomain: "teste-tcc-3363f.firebaseapp.com",
@@ -53,7 +56,9 @@ import { File } from '@ionic-native/file/ngx'
     Toast,
     Camera,
     BarcodeScanner,
-    File
+    File,
+    LocalNotifications
+    
   ],
   bootstrap: [AppComponent],
  

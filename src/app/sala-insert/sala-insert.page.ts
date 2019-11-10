@@ -25,6 +25,10 @@ export class SalaInsertPage implements OnInit {
     horarioI: "",
     horarioF: ""
   }]
+  integrantes: [{
+    idIntegrante: string,
+    pontos: number
+  }]
   salaEdicao: sala
   constructor(private provider: SalaAulaService, public toastController: ToastController, 
     public router :ActivatedRoute, public rout : Router) { }
@@ -45,6 +49,7 @@ export class SalaInsertPage implements OnInit {
         this.horarios = this.salaEdicao.horariosAula
         this.salaEdicao.id = id
         this.valores = []
+        this.integrantes = this.salaEdicao.integrantes
         this.horarios.forEach((x, index) => {
           console.log(index)
           
@@ -194,11 +199,14 @@ export class SalaInsertPage implements OnInit {
           professor: this.professor,
           qtdMeses: this.qtdMeses,
           horariosAula: this.horarios,
-          integrantes: [],
+          integrantes: [{
+            idIntegrante: this.adm,
+            pontos: 0
+          }],
           monitores: [],
           solicitacao: []
         }
-        
+        console.log(conteudo)
         
         this.provider.addSala(conteudo).then(() => {
           toast.message = 'Sala de aula criado com sucesso.'

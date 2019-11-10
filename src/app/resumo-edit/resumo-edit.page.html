@@ -21,6 +21,11 @@
       <!-- <img [src]="fotoURL | async" *ngIf="fotoURL | async"> -->
   </div>
   
+  <ion-fab *ngIf="this.todo && idUser == this.todo.criador" vertical="bottom" horizontal="begin" slot="fixed" color="danger">
+    <ion-fab-button [routerLink]="" (click)="deletar()" >
+      <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <ion-fab *ngIf="this.todo && idUser == this.todo.criador" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button [routerLink]="['/resumo-insert']" (click)="setarId()" routerDirection="forward">
       <ion-icon ios="ios-create" md="md-create"></ion-icon>

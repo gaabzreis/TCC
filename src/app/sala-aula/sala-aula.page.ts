@@ -25,17 +25,17 @@ export class SalaAulaPage implements OnInit {
 
   ngOnInit() {
     
-    console.log(this.idUser)
 
     this.provider.getAll().subscribe(res => {
       this.salitas = res
       
       this.salasP = this.salitas.filter(x => {
-        if(x.adm == this.idUser || (x.integrantes != undefined && x.integrantes.find(y => y == this.idUser))){
+        if(x.adm == this.idUser || (x.integrantes.find(y => y.idIntegrante == this.idUser))){
           return x
         }
       })
-      
+      console.log(this.idUser)
+      console.log(this.salasP)
       this.todasSalasSemUsuario()
       
       
@@ -46,10 +46,10 @@ export class SalaAulaPage implements OnInit {
     //por favor de certo!
     
     if(obj.integrantes == undefined){
-      obj.integrantes = [this.idUser]
+      obj.integrantes = [{idIntegrante: this.idUser, pontos: 0}]
     }
-    else if(!obj.integrantes.find(x => x == this.idUser)){
-      obj.integrantes.push(this.idUser) 
+    else if(!obj.integrantes.find(x => x.idIntegrante == this.idUser)){
+      obj.integrantes.push({idIntegrante: this.idUser, pontos: 0}) 
     }
     
     this.provider.update(obj.id, obj)
@@ -84,17 +84,17 @@ export class SalaAulaPage implements OnInit {
 
   confirmadoSair(obj){
     if(obj.adm == this.idUser){
-      if(obj.integrantes.length == 0){
+      if(obj.integrantes.length == 1){
         this.provider.delete(obj.id)
         return 0
       }
       else{
-        obj.adm = obj.integrantes[0]
+        obj.adm = obj.integrantes[1]
         obj.integrantes.splice(0,1)
       }
     }
     else if(obj.integrantes.length > 0){
-      obj.integrantes = obj.integrantes.filter(x => x != this.idUser)
+      obj.integrantes = obj.integrantes.filter(x => x.idIntegrante != this.idUser)
       if(obj.monitores){
         if(obj.monitores.find(x => x == this.idUser)){
           obj.monitores = obj.monitores.filter(x => x != this.idUser)
@@ -109,6 +109,7 @@ export class SalaAulaPage implements OnInit {
 
     
     this.provider.update(obj.id, obj)
+    console.log(obj)
   }
 
   async delete(obj){
@@ -142,7 +143,7 @@ export class SalaAulaPage implements OnInit {
 
   todasSalasSemUsuario(){
     this.salasT = this.salitas.filter(x => {
-      if(x.adm != this.idUser && (x.integrantes == undefined || !x.integrantes.find(y => y == this.idUser))){
+      if(x.adm != this.idUser && (x.integrantes == undefined || !x.integrantes.find(y => y.idIntegrante == this.idUser))){
         return x
       }
     })
@@ -161,7 +162,7 @@ export class SalaAulaPage implements OnInit {
     }
     else{
       this.salasT = this.salitas.filter(x => {
-        return x.descricao.indexOf(ev.target.value) >=0 && x.adm != this.idUser && !x.integrantes.find(y => y == this.idUser) 
+        return x.descricao.indexOf(ev.target.value) >=0 && x.adm != this.idUser && !x.integrantes.find(y => y.idIntegrante == this.idUser) 
       })
     }
     
