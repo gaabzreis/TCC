@@ -20,6 +20,8 @@ export class SalaAulaPage implements OnInit {
   salitas: sala[]
   idUser = sessionStorage.getItem('idUser')
   semNada = false
+  inscritas = "true";
+
   constructor(private provider: SalaAulaService, public router :Router,
      public toastController: ToastController, public alertController: AlertController, private barcodeScanner: BarcodeScanner) { }
 
