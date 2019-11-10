@@ -3,7 +3,6 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { CalendarioService, atividade } from '../../services/calendario.service';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { sala, SalaAulaService } from '../../services/sala-aula.service';
-import undefined = require('firebase/empty-import');
 import { ModalController } from '@ionic/angular';
 import { CalendarNewPage } from '../calendar-new/calendar-new.page'
 
