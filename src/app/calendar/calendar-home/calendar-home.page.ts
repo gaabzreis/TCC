@@ -66,7 +66,6 @@ export class CalendarHomePage implements OnInit {
   };
 
   async onEventSelected(event) {
-    console.log(event)
     const modal = await this.modalController.create({
       component: CalendarNewPage,
       componentProps: {
@@ -146,8 +145,10 @@ export class CalendarHomePage implements OnInit {
 
     this.providerCalendar.getAll().subscribe( res => {
       let atv = res.filter(x => x.idUser == this.idUser)
-
-      let diaAtv = atv.filter(x => new Date(x.dateTime).getUTCDate() == event.getUTCDate())
+      let diaAtv = atv.filter(x => {
+        let data = new Date(x.dateTime)
+        return data.getDate() == event.getDate() && data.getMonth() == event.getMonth() && data.getFullYear() == event.getFullYear()
+      })
       diaAtv.forEach((x) => {
         this.atvSource.push({
           title: x.title,
