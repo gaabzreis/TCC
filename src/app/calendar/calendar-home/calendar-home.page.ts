@@ -25,6 +25,7 @@ export class CalendarHomePage implements OnInit {
     noEventsLabel: 'Nenhuma atividade',
     allDayLabel: ''
   };
+  segmentType = "aula";
 
   constructor (
     private db: AngularFireStorage,

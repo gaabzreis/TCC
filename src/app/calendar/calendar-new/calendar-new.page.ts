@@ -5,7 +5,6 @@ import { Config, ConfigUserService } from '../../services/config-user.service'
 import { ToastController, ModalController, Platform } from '@ionic/angular';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx'
 import { ActivatedRoute } from '@angular/router';
-import undefined = require('firebase/empty-import');
 
 @Component({
   selector: 'app-calendar-new',

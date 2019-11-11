@@ -1,28 +1,26 @@
 .tituloAtividade {
-  width: 234px;
   height: 26px;
-  font-family: SFProText;
+  font-family: SFProText Heavy;
   font-size: 22px;
-  font-weight: 900;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
   color: #f47f54;
-  margin-top: -5px;
+  margin-bottom: 5px;
 }
 
 .nomeDiciplina {
-  width: 120px;
   height: 18px;
-  font-family: SFProText;
+  font-family: SFProText Regular;
   font-size: 15px;
-  font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
   color: #6b6b6b;
+  margin-left: 10px;
+  margin-bottom: 5px;
 }
 
 .linha {
@@ -40,4 +38,8 @@
   font-size: 20px;
   margin-top: -5px;
   border-radius: 0px 0px 15px 15px;
+}
+
+.segment-button-checked{
+  color: #f0525d !important;
 }
