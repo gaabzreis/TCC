@@ -146,7 +146,7 @@ export class QuizInsertPage implements OnInit {
     if(this.routeres.snapshot.params["sala-aula"] == undefined){
       conteudo.id = sessionStorage.getItem('editQuiz')
       this.provider.update(conteudo.id, conteudo).then(res => {
-        this.rotas.navigate(['/quiz', this.idSala]);
+        this.rotas.navigate(['/menu-sala/quiz', this.idSala]);
       })
     }
     else{
