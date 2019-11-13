@@ -12,8 +12,8 @@
    
         <ion-menu-toggle *ngIf="p.url">
           <ion-item [routerLink]="p.url" routerDirection="root" routerLinkActive="active">
-            <ion-icon [name]="p.icon" slot="start"></ion-icon>
-            <ion-label>
+              <img height="20px" style="margin-right: 15px;" [src]="p.icon">
+            <ion-label style="color: #6b6b6b;">
               {{ p.title }}
             </ion-label>
           </ion-item>

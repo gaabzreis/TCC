@@ -1,37 +1,60 @@
 <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color="danger">
       <ion-buttons slot="start">
-        <ion-back-button [defaultHref]="['/menu-sala/resumo', idSala]"></ion-back-button>
+        <ion-back-button text="" [defaultHref]="['/menu-sala/resumo', idSala]"></ion-back-button>
       </ion-buttons>
-      <ion-title>Inserir novo resumo</ion-title>
+      <!-- <ion-title>Inserir novo resumo</ion-title> -->
       <ion-buttons slot="primary" >
         <ion-button (click)="help()" >
-            <ion-icon ios="ios-help" md="md-help" ></ion-icon>
+            <ion-icon name="help-circle-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
 <ion-content>
-    <div style="padding: 10px; text-align: center; margin-bottom: 10px;">
-      <h1>Inserir novo resumo</h1>
+
+    <div class="ion-text-center bordaSuperior">
+        <img class="chapeu" src="../../assets/chapeu.png">
     </div>
-    <ion-item>
-      <ion-label position="floating" >Data</ion-label>
-      <ion-datetime display-format="DD/MM/YYYY" [(ngModel)]="data"></ion-datetime>
+    
+  <div style="margin-top: 100px;">
+    <!-- Formulario -->
+    
+    <div class="tituloCriar">
+      <p>Criar resumo</p>
+    </div>
+
+    <ion-item lines="none">
+      <ion-input class="campoInput" placeholder="Título" [(ngModel)]="titulo"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label position="floating">Título</ion-label>
-      <ion-input [(ngModel)]="titulo"></ion-input>
+    
+    <ion-item lines="none">
+      <ion-input class="campoInput" placeholder="Tag" [(ngModel)]="tag"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label position="floating">Tag</ion-label>
-      <ion-input [(ngModel)]="tag"></ion-input>
+
+    <ion-item lines="none">
+      <ion-datetime class="campoInput" placeholder="Data" display-format="DD/MM/YYYY" [(ngModel)]="data"></ion-datetime>
     </ion-item>
-    <ion-item>
-      <ion-label position="floating">Conteúdo</ion-label>
-      <ion-textarea rows="5" [(ngModel)]="conteudo"></ion-textarea>
+    
+    <ion-item lines="none">
+      <ion-textarea class="campoInput" style="height: 105px;" placeholder="Conteúdo" rows="5" [(ngModel)]="conteudo"></ion-textarea>
     </ion-item>
+
+    <div>
+        <ion-toggle color="success" class="toggle" mode="md" [(ngModel)]="pepperoni"></ion-toggle>
+        <span class="compartilhar">Compartilhar</span>
+    </div>
+
+    <div class="ion-text-center" style="margin-top: 70px;">
+        <!-- Botoes -->
+        <ion-button class="btAzulPiscina" (click)="acessarCamera()">Inserir imagem</ion-button>
+        <ion-button class="btSalvar" (click)="salvar()">Salvar</ion-button>
+    </div>
+
+  </div>
+  
+    <!--
     <ion-segment color="primary" [(ngModel)]="tipo">
         <ion-segment-button href="#p" value="p">
           <ion-label>Compartilhado</ion-label>
@@ -39,29 +62,6 @@
         <ion-segment-button href="#i" value="i">
           <ion-label>Individual</ion-label>
         </ion-segment-button>
-      </ion-segment>
-     
-   
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button (click)="acessarCamera()">
-        <ion-icon name="camera"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
-
-  <!-- Alteracao Paulo -->
-      <!-- <ion-button (click)="openGallery()" expand="block">
-        Escolher foto
-      </ion-button>
-
-      <ion-item>
-        <ion-label>Upload progresso: {{ uploadPercent | async }}</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label class="ion-text-wrap">URL download: {{ downloadURL | async }}</ion-label>
-      </ion-item>
-      <img [src]="downloadURL | async" *ngIf="downloadURL | async"> -->
-  <!-- FIM Alteracao Paulo -->
+      </ion-segment> -->
+  
 </ion-content>
-<ion-footer>
-    <ion-button expand="block" color="success" style="margin: 10px;" (click)="salvar()" >Salvar</ion-button>
-</ion-footer>

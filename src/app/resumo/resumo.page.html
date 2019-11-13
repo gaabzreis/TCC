@@ -1,11 +1,10 @@
 <ion-header>
-  <ion-toolbar  color="primary">
+  <ion-toolbar  color="danger">
     
     <ion-buttons slot="start" >
         <ion-menu-button ></ion-menu-button>
       
     </ion-buttons>
-    <ion-title>Summboard  </ion-title>
     <ion-buttons slot="primary" *ngIf="adm && sala">
       <div *ngIf="sala.solicitacao">
         <div *ngIf="adm != 'sim' || sala.solicitacao.length > 0">
@@ -20,11 +19,13 @@
 </ion-header>
 
 <ion-content padding class="mec" color="light">
+
+  <div></div>
        
-  <h1 *ngIf="sala">{{sala.descricao}}</h1>
+  <h1 style="color: #6b6b6b; font-size: 22px; font-family: SFProText Bold;" *ngIf="sala">{{sala.descricao}}</h1>
     <ion-item class="input">
       <ion-label><ion-icon name="search"></ion-icon></ion-label>
-      <ion-searchbar animated Placeholder="Procurar" (keyup)="pesquisar($event)"></ion-searchbar>
+      <ion-searchbar sty animated Placeholder="Procurar" (keyup)="pesquisar($event)"></ion-searchbar>
     </ion-item>
     <div style="text-align: center;
     border: 1px solid red;

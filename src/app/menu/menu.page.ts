@@ -9,19 +9,19 @@ export class MenuPage implements OnInit {
   
   pages = [
     {
-      title: 'Home',
+      title: 'Calendário',
       url: '/menu/calendar-home',
-      icon: 'home'
+      icon: '../assets/menuHome.png'
     },
     {
       title: 'Salas de aula',
       url: '/menu/sala-aula',
-      icon: 'book'
+      icon: '../assets/menuSalas.png'
     },
     {
       title: 'Kanban',
       url: '/menu/kanban',
-      icon: 'list-box'
+      icon: '../assets/menuKanban.png'
     },
     {
       title: 'Ranking geral',
@@ -31,7 +31,7 @@ export class MenuPage implements OnInit {
     {
       title: 'Perfil',
       url: '/menu/user-perfil',
-      icon: 'person'
+      icon: '../assets/menuUserProfile.png'
     },
     {
       title: 'Sair',

@@ -2,6 +2,7 @@
 // http://ionicframework.com/docs/theming/
 
 @import './fonts.scss';
+@import './formulario.scss';
 
 /** Paleta de cores do SummBoard. **/
 $colors: (
@@ -37,7 +38,7 @@ $colors: (
   --ion-color-tertiary-tint: #7e57ff;
 
   /** success **/
-  --ion-color-success: #10dc60;
+  --ion-color-success: #76ccd0; //76ccd0
   --ion-color-success-rgb: 16, 220, 96;
   --ion-color-success-contrast: #ffffff;
   --ion-color-success-contrast-rgb: 255, 255, 255;
@@ -140,3 +141,7 @@ $colors: (
 }
 
 .weekview-allday-table, .dayview-allday-table { display: none; } init-position-scroll { &.weekview-normal-event-container { margin-top: 37px; } &.dayview-normal-event-container { margin-top: 0px; } }
+
+.datetime-text {
+  color: rgba(112, 112, 112, 1) !important;
+}
