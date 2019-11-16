@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="danger">
       <ion-buttons slot="start">
         <ion-button (click)="fecharModal()">
           <ion-icon slot="icon-only" name="close"></ion-icon>
@@ -13,39 +13,35 @@
 </ion-header>
 
 <ion-content>
-<ng-container>
-<ion-item>
-<ion-label position="stacked">Nome:</ion-label>
-<ion-input [(ngModel)]="nome"></ion-input>
-</ion-item>
-</ng-container>
+    <div class="ion-text-center bordaSuperior">
+        <img class="chapeu" src="../../assets/chapeu.png">
+    </div>
+    <div style="margin-top: 100px;">
+    <ion-item lines="none">
+        <ion-input class="campoInput" placeholder="Nome" [(ngModel)]="nome"></ion-input>
+    </ion-item>
 
-<ion-item>
-  <ion-label position="stacked">Disciplina:</ion-label>
-  <ion-select [(ngModel)]="disciplina">
+<ion-item lines="none">
+    <ion-label>Selecione a disciplina</ion-label>
+  <ion-select placeholder="Disciplina" [(ngModel)]="disciplina" class="campoInput">
     <ion-select-option placeholder="Clique para selecionar"
      *ngFor="let disciplina of listaDisciplinas" [value]="disciplina.id">
      {{ disciplina.descricao }}</ion-select-option>
   </ion-select>
 </ion-item>
-
-<ion-item>
-  <ion-label position="stacked">Entrega:</ion-label>
-  <ion-datetime [(ngModel)]="dataEntrega" 
-  displayFormat="DDDD, DD MMM" ></ion-datetime>
-</ion-item>
-
-<ion-item>
-<ion-label position="stacked">Descrição:</ion-label>
-<ion-textarea [(ngModel)]="descricao" rows="6" ></ion-textarea>
-</ion-item>
+<ion-item lines="none">
+    <ion-datetime class="campoInput" placeholder="Entrega" display-format="DD/MM/YYYY" [(ngModel)]="dataEntrega"></ion-datetime>
+  </ion-item>
+  <ion-item lines="none">
+      <ion-textarea class="campoInput" style="height: auto;" placeholder="Descrição" rows="6" [(ngModel)]="nome"></ion-textarea>
+  </ion-item>
 
 <ion-item>
 <ion-label position="stacked">Quadro:</ion-label>
 </ion-item>
 
 <ion-item>
-  <ion-segment [(ngModel)]="quadro">
+  <ion-segment color="danger" [(ngModel)]="quadro">
     <ion-segment-button value="para-fazer" checked>
       <ion-label>Para fazer</ion-label>
     </ion-segment-button>
@@ -57,6 +53,6 @@
     </ion-segment-button>
   </ion-segment>
 </ion-item>
-
+</div>
 
 </ion-content>

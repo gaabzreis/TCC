@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color="danger">
       <ion-buttons slot="start">
         <ion-back-button [defaultHref]="['/menu-sala/quiz/', idSala]"></ion-back-button>
       </ion-buttons>
@@ -8,58 +8,63 @@
   </ion-header>
 
 <ion-content>
-    <div style="padding: 10px; text-align: center; margin-bottom: 10px;">
-      <h1>Inserir nova Pergunta</h1>
+    <div class="ion-text-center bordaSuperior">
+        <img class="chapeu" src="../../assets/chapeu.png">
     </div>
-    
-    <ion-item *ngIf="!temTag">
-        <ion-label>Selecione a tag</ion-label>
-        <ion-select multiple="false" cancelText="Cancelar" okText="Selecionar" [(ngModel)]="tagSelecionada" >
-          <ion-select-option [(value)]="item.tag" *ngFor="let item of todasTags" >{{item.tag}}</ion-select-option>
-        </ion-select>
-       
-    </ion-item>
-    <ion-item *ngIf="temTag">
-        <ion-label position="floating">Tag</ion-label>
-        <ion-input [(ngModel)]="tag" placeholder="Questão em uma palavra (EX. Limites)"></ion-input>
-    </ion-item>
-    <ion-item *ngIf="!temTag">
-        <label>Para criar uma nova tag clique aqui</label>
-          <ion-button slot="end" (click)="addTag(true)">
-            <ion-icon slot="icon-only" name="add"></ion-icon>
-          </ion-button>
-          
-    </ion-item>
-    <ion-item *ngIf="temTag">
-        <label>Para selecionar uma tag clique aqui</label>
-          <ion-button slot="end" (click)="addTag(false)">
-            <ion-icon slot="icon-only" name="checkbox"></ion-icon>
-          </ion-button>
-          
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Título</ion-label>
-      <ion-input [(ngModel)]="titulo" placeholder="Título da questão (EX. Cálculo)"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Pergunta</ion-label>
-      <ion-textarea lines="2" [(ngModel)]="pergunta"></ion-textarea>
-    </ion-item>
-    <div style="text-align: center; margin-top: 50px; font-weight: 600; height: 50px;">
-        <ion-label >Respostas</ion-label>
-        <ion-button (click)="removeContador()" style="float: right;" color="danger"><ion-icon name="remove"></ion-icon></ion-button>
-        <ion-button (click)="addContador()" style="float: right;" color="success"><ion-icon name="add"></ion-icon></ion-button>
-    </div>
-    
-    <div *ngFor="let teste of valores">
+    <div style="margin-top: 100px;">
+        <div class="tituloCriar">
+          <p>Inserir nova Pergunta</p>
+        </div>
+        <ion-item lines="none" *ngIf="!temTag">
+            <ion-label>Selecione a tag</ion-label>
+            <ion-select class="campoInput" multiple="false" cancelText="Cancelar" okText="Selecionar" [(ngModel)]="tagSelecionada" >
+              <ion-select-option [(value)]="item.tag" *ngFor="let item of todasTags" >{{item.tag}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item lines="none" *ngIf="temTag">
+            <ion-input class="campoInput" [(ngModel)]="tag" placeholder="Tag"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!temTag">
+            <label>Para criar uma nova tag clique aqui</label>
+              <ion-button slot="end" (click)="addTag(true)" color="success">
+                <ion-icon slot="icon-only" name="add" ></ion-icon>
+              </ion-button>
+              
+        </ion-item>
+        <ion-item *ngIf="temTag">
+            <label>Para selecionar uma tag clique aqui</label>
+              <ion-button slot="end" (click)="addTag(false)" color="success">
+                <ion-icon slot="icon-only" name="checkbox"></ion-icon>
+              </ion-button>
+              
+        </ion-item>
+
+        <ion-item lines="none">
+            <ion-input class="campoInput" placeholder="Título" [(ngModel)]="titulo"></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+            <ion-input class="campoInput" placeholder="Pergunta" [(ngModel)]="pergunta"></ion-input>
+        </ion-item>
+        <div style="text-align: center; margin-top: 50px; font-weight: 600; height: 50px;">
+            <ion-label >Respostas</ion-label>
+            <ion-button (click)="removeContador()" style="float: right;" color="danger"><ion-icon name="remove"></ion-icon></ion-button>
+            <ion-button (click)="addContador()" style="float: right;" color="success"><ion-icon name="add"></ion-icon></ion-button>
+        </div>
+        <div *ngFor="let teste of valores">
       
-      <ion-item>
-        <ion-checkbox slot="start" color="success" [(ngModel)]="respostas[teste - 1].acerto"></ion-checkbox>
-        <ion-label position="floating">Resposta {{teste}}</ion-label>
-        
-        <ion-input [(ngModel)]="respostas[teste - 1].descricao" ></ion-input>
-    </ion-item>
-  </div>
+            <ion-item lines="none">
+              <ion-checkbox slot="start" color="success" [(ngModel)]="respostas[teste - 1].acerto"></ion-checkbox>
+              <!-- <ion-label position="floating">Resposta {{teste}}</ion-label> -->
+              
+              <ion-input placeholder="Resposta {{ teste }}" [(ngModel)]="respostas[teste - 1].descricao" ></ion-input>
+          </ion-item>
+        </div>
+    </div>
+    
+    
+    
+   
     
 </ion-content>
 <ion-footer>

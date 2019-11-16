@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color="danger">
       <ion-buttons slot="start">
         <ion-back-button [defaultHref]="['/forum-list', idForum]" ></ion-back-button>
       </ion-buttons>
@@ -8,13 +8,19 @@
   </ion-header>
 
 <ion-content>
-    <div style="padding: 10px; text-align: center; margin-bottom: 10px;">
-      <h1>Inserir uma nova resposta</h1>
+    <div class="ion-text-center bordaSuperior">
+        <img class="chapeu" src="../../assets/chapeu.png">
     </div>
-    <ion-item>
-      <ion-label position="floating" >Resposta</ion-label>
-      <ion-textarea rows="10" [(ngModel)]="resposta"></ion-textarea>
-    </ion-item>
+    <div style="margin-top: 100px;">
+
+        <div class="tituloCriar">
+          <p>Inserir uma nova resposta</p>
+        </div>
+        <ion-item lines="none">
+          <ion-textarea placeholder="Resposta" style="height: auto;" class="campoInput" rows="10" [(ngModel)]="resposta"></ion-textarea>
+        </ion-item>
+    </div>
+    
 </ion-content>
 <ion-footer>
     <ion-button expand="block" color="success" style="margin: 10px;" (click)="salvar()" >Salvar</ion-button>
