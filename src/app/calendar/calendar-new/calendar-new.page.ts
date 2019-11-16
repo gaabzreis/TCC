@@ -96,7 +96,7 @@ export class CalendarNewPage implements OnInit {
               let config = ret.filter(x => x.idUser == this.idUser)
               this.config = config[0]
               let Texto = new Date(this.dataEntrega)
-              Texto.setDate(Texto.getDate() - parseInt(this.config.qtdDias.toString()))
+              // Texto.setDate(Texto.getDate() - parseInt(this.config.qtdDias.toString()))
               let stringCodificada = ("00" + Texto.getDate()).slice(-2) + "/" + ("00" + (Texto.getMonth() + 1)).slice(-2)
               this.localnotification.schedule({
                 id: 1,
