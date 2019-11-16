@@ -1,16 +1,21 @@
 <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color="danger">
       
       <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        
+          <ion-menu-button></ion-menu-button>  
       </ion-buttons>
-      <ion-title>Salas de Aula</ion-title>
+
     </ion-toolbar>
 </ion-header>
 
-<ion-content padding="">
-  <h1>Usuários inscritos</h1>
+<ion-content>
+
+    <div class="ion-text-center bordaSuperior">
+        <p class="titulo">Usuários inscritos</p>
+    </div>
+
+  <div padding>
+
   <div style="text-align: center;
   border: 1px solid red;
   padding: 44px;
@@ -29,4 +34,5 @@
       </ion-label>
       <ion-icon name="close-circle" slot="end" (click)="excluirSala(us)"></ion-icon>
   </ion-item>
+</div>
 </ion-content>
