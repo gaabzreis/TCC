@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="danger">
       <ion-buttons slot="start">
         <ion-button (click)="fecharModal()">
           <ion-icon slot="icon-only" name="close"></ion-icon>
@@ -13,12 +13,15 @@
 </ion-header>
 
 <ion-content>
-  <ng-container style="margin-top: 50px;">
-    <ion-item>
-      <ion-label position="stacked">Quantos dias antes gostaria de ser notificado <br>sobre a atividade?</ion-label>
-      <ion-input [(ngModel)]="qtdDias"></ion-input>
+    <div class="ion-text-center bordaSuperior">
+        <img class="chapeu" src="../../assets/chapeu.png">
+    </div>
+    <div style="margin-top: 100px;">
+    <ion-item lines="none">
+        <ion-label position="stacked">Quantos dias antes gostaria de ser notificado <br>sobre a atividade?</ion-label>
+      <ion-input class="campoInput" placeholder="Quantos dias antes na notificação" [(ngModel)]="qtdDias"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item >
       <ion-segment [(ngModel)]="permiteNoti">
         <ion-segment-button value="true" checked>
           <ion-label>Permito <br> notificação</ion-label>
@@ -28,8 +31,5 @@
         </ion-segment-button>
       </ion-segment>
     </ion-item>
-  
-</ng-container>
-
-
+    </div>
 </ion-content>
