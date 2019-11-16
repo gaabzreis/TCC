@@ -1,17 +1,17 @@
 <ion-header>
   <ion-toolbar color="danger">
     
-    <ion-buttons slot="primary">
+    <!-- <ion-buttons slot="primary">
       <ion-button (click)="addNewEvent()">
           <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
-    </ion-buttons>
+    </ion-buttons> -->
 
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
-    <ion-segment [(ngModel)]="segmentType" color="tertiary" style="width: 90%; margin-left: 18px; margin-top: 10px; margin-bottom: 10px;">
+    <ion-segment [(ngModel)]="segmentType" color="tertiary" style="width: 90%; margin-left: -3px; margin-top: 10px; margin-bottom: 10px;">
         <ion-segment-button value="aula" checked>
           <ion-label>Aulas</ion-label>
         </ion-segment-button>
@@ -84,6 +84,12 @@
     (onTimeSelected)="onTimeSelected($event)"
     step="30">
   </calendar>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button style="--background: #f0525d; --background-activated: #fa525d;" (click)="addNewEvent()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 
 
 </ion-content>

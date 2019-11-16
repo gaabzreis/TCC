@@ -17,7 +17,11 @@ export class ConfigurarNotificacaoPage implements OnInit {
   insert : Config
   editando : boolean = false
   id : string
-  constructor(private provider : ConfigUserService, private toastController: ToastController, private modalController : ModalController) { }
+
+  constructor(
+    private provider : ConfigUserService, 
+    private toastController: ToastController, 
+    private modalController : ModalController) { }
 
   ngOnInit() {
     this.provider.getAll().subscribe(res => {
@@ -37,6 +41,9 @@ export class ConfigurarNotificacaoPage implements OnInit {
     })
   }
 
+  mostrarNotificacao(){
+
+  }
 
   async salvarConfig(){
     const toast = await this.toastController.create({

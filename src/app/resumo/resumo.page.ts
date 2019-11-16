@@ -131,7 +131,7 @@ export class ResumoPage implements OnInit {
       this.elQrCode = teste.createImgTag(10)
       
       const alert = await this.alertController.create({
-        header: 'Qr Code',
+        header: 'QR Code',
         message: this.elQrCode,
         buttons: [
            {

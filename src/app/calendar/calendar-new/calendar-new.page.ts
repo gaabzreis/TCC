@@ -3,7 +3,7 @@ import { atividade, CalendarioService } from '../../services/calendario.service'
 import { sala, SalaAulaService } from '../../services/sala-aula.service'
 import { Config, ConfigUserService } from '../../services/config-user.service'
 import { ToastController, ModalController, Platform } from '@ionic/angular';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx'
+import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx'
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -101,9 +101,10 @@ export class CalendarNewPage implements OnInit {
               this.localnotification.schedule({
                 id: 1,
                 title: this.titulo,
-                text: "Atividade para entregar dia " + stringCodificada,
+                text: "Atividade para dia " + stringCodificada,
                 trigger: {
-                  at: new Date(this.dataEntrega)
+                  in: 10, unit: ELocalNotificationTriggerUnit.SECOND
+                  // at: new Date(this.dataEntrega)
                 }
               })
             })
