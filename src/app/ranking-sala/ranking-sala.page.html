@@ -1,24 +1,26 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="danger">
     
     <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
-      
     </ion-buttons>
-    <ion-title>Ranking da sala de aula</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding="">
-<h1>Ranking da sala</h1>
+<ion-content>
 
+    <div class="ion-text-center bordaSuperior">
+        <p class="titulo">Ranking da sala</p>
+    </div>
 
-<ion-item *ngFor="let us of usuarios; index as b" [attr.data-index]="b" >
-   
-    <ion-label>
-      <h3>{{b + 1}}º</h3>
-      <p>{{us.nome}} </p>
-    </ion-label>
-    <p>{{us.pontos}}</p>
-</ion-item>
+    <div padding>
+      <ion-item *ngFor="let us of usuarios; index as b" [attr.data-index]="b" >
+          <ion-label>
+            <h3>{{b + 1}}º</h3>
+            <p>{{us.nome}} </p>
+          </ion-label>
+          <p>{{us.pontos}} pts</p>
+        </ion-item>
+    </div>
+
 </ion-content>

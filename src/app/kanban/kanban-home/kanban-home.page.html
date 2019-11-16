@@ -1,11 +1,5 @@
 <ion-header>
   <ion-toolbar color="danger">
-    
-    <ion-buttons slot="primary">
-      <ion-button (click)="presentModal()">
-          <ion-icon slot="icon-only" name="add"></ion-icon>
-      </ion-button>
-    </ion-buttons>
 
     <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
@@ -41,9 +35,20 @@
               Feito
             </ion-col>
           </ion-row>
+          <ion-row style="text-align: center;">
+            <ion-col>
+              <div *ngIf="indexSlide == 0" style="background-color: white; height: 3px; margin-top: 10px;"></div>
+            </ion-col>
+            <ion-col>
+              <div *ngIf="indexSlide == 1" style="background-color: white; height: 3px; margin-top: 10px;"></div>
+            </ion-col>
+            <ion-col>
+              <div *ngIf="indexSlide == 2" style="background-color: white; height: 3px; margin-top: 10px;"></div>
+            </ion-col>
+          </ion-row>
       </ion-grid>
 
-      <ion-slides>
+      <ion-slides (ionSlideDidChange)="slideChanged()" #slides>
           <ion-slide>
               <ion-card class="kanban">
               <ion-list class="padding" *ngFor="let atividade of paraFazer">
@@ -86,112 +91,11 @@
               </ion-card>
           </ion-slide>
       </ion-slides>
-        
-            
-  <!-- <ion-slides pager="true">
-      <ion-slide>
-        <ion-card class="kanban" *ngIf="nomesDisciplinas">
-            <ion-card-header>
-              <ion-card-subtitle *ngIf="paraFazer.length == 0">Sem atividades</ion-card-subtitle>
-                <ion-card-subtitle *ngIf="paraFazer.length == 1">{{paraFazer.length + " atividade"}}</ion-card-subtitle>
-                <ion-card-subtitle *ngIf="paraFazer.length > 1">{{paraFazer.length + " atividades"}}</ion-card-subtitle>
-              <ion-card-title>PARA FAZER</ion-card-title>
-            </ion-card-header>
-          
-            
-            <ion-card-content *ngIf="nomesDisciplinas">
-                <ion-list *ngFor="let atividade of paraFazer">
-                  <ion-item no-padding (click)="openDetails(atividade)" (press)="onPress($event, atividade.id, atividade.quadro)">
-                    <ion-grid>
-                        <ion-row>
-                            <ion-col size="8" style="padding-left: 0px">
-                                <h3>{{getNome(atividade.idDisciplina)[0].nomeDisciplina}}</h3>
-                            </ion-col>  
-                              <ion-col size="4" style="padding-right: 0px; text-align: right">
-                                  <h3>{{atividade.dataEntrega}}</h3>
-                              </ion-col>
-                          </ion-row>
-                      <ion-row>
-                          <ion-label>
-                              <h2>{{atividade.nome}}</h2>
-                            </ion-label>
-                      </ion-row>
-                    </ion-grid>  
-                   </ion-item>
-                </ion-list>
-            </ion-card-content>
 
-          </ion-card>
-      </ion-slide>
-
-      <ion-slide>
-          <ion-card class="kanban">
-              <ion-card-header>
-                <ion-card-subtitle *ngIf="emAndamento.length == 0">Sem atividades</ion-card-subtitle>
-                <ion-card-subtitle *ngIf="emAndamento.length == 1">{{emAndamento.length + " atividade"}}</ion-card-subtitle>
-                <ion-card-subtitle *ngIf="emAndamento.length > 1">{{emAndamento.length + " atividades"}}</ion-card-subtitle>
-                <ion-card-title>EM ANDAMENTO</ion-card-title>
-              </ion-card-header>
-            
-              <ion-card-content>
-                <ion-list *ngFor="let atividade of emAndamento">
-                  <ion-item no-padding (click)="openDetails(atividade)" (press)="onPress($event, atividade.id, atividade.quadro)">
-                    <ion-grid>
-                        <ion-row>
-                            <ion-col size="8" style="padding-left: 0px">
-                              <h3>{{getNome(atividade.idDisciplina)[0].nomeDisciplina}}</h3>
-                            </ion-col>  
-                              <ion-col size="4" style="padding-right: 0px; text-align: right">
-                                  <h3>{{atividade.dataEntrega}}</h3>
-                              </ion-col>
-                          </ion-row>
-                      <ion-row>
-                          <ion-label>
-                              <h2>{{atividade.nome}}</h2>
-                            </ion-label>
-                      </ion-row>
-                    </ion-grid>  
-                   </ion-item>
-                </ion-list>
-            </ion-card-content>
-
-            </ion-card>
-        </ion-slide>
-
-        <ion-slide>
-            <ion-card class="kanban">
-                <ion-card-header>
-                  <ion-card-subtitle *ngIf="feito.length == 0">Sem atividades</ion-card-subtitle>
-                <ion-card-subtitle *ngIf="feito.length == 1">{{feito.length + " atividade"}}</ion-card-subtitle>
-                <ion-card-subtitle *ngIf="feito.length > 1">{{feito.length + " atividades"}}</ion-card-subtitle>
-                  <ion-card-title>FEITO</ion-card-title>
-                </ion-card-header>
-               
-                <ion-card-content>
-                  <ion-list *ngFor="let atividade of feito">
-                    <ion-item no-padding (click)="openDetails(atividade)" (press)="onPress($event, atividade.id, atividade.quadro)">
-                      <ion-grid>
-                          <ion-row>
-                              <ion-col size="8" style="padding-left: 0px">
-                                <h3>{{getNome(atividade.idDisciplina)[0].nomeDisciplina}}</h3>
-                              </ion-col>  
-                                <ion-col size="4" style="padding-right: 0px; text-align: right">
-                                    <h3>{{atividade.dataEntrega}}</h3>
-                                </ion-col>
-                            </ion-row>
-                        <ion-row>
-                            <ion-label>
-                                <h2>{{atividade.nome}}</h2>
-                              </ion-label>
-                        </ion-row>
-                      </ion-grid>  
-                     </ion-item>
-                  </ion-list>
-              </ion-card-content>
-
-              </ion-card>
-          </ion-slide>
-
-  </ion-slides> -->
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+          <ion-fab-button style="--background: #f0525d; --background-activated: #fa525d;" (click)="presentModal()">
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
   
 </ion-content>

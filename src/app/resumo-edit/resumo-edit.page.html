@@ -1,34 +1,44 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="danger">
     <ion-buttons slot="start">
-      <ion-back-button [defaultHref]="['/menu-sala/resumo', todo.idSala]" ></ion-back-button>
+      <ion-back-button text="" [defaultHref]="['/menu-sala/resumo', todo.idSala]" ></ion-back-button>
     </ion-buttons>
-    <ion-title *ngIf="this.todo">{{this.todo.tag}}</ion-title>
+    <!-- <ion-title *ngIf="this.todo">{{this.todo.tag}}</ion-title> -->
   </ion-toolbar>
 </ion-header>
  
-<ion-content padding *ngIf="this.todo">
-  <h1 style="text-align: center;">{{this.todo.titulo}}</h1>
+<ion-content *ngIf="this.todo">
 
-  <h3>Resumo escrito</h3>
-  <hr>
-  <p>{{this.todo.conteudo}}</p>
-  <br><br>
-  <h3>Foto do resumo</h3>
-  <hr>
+  <div class="ion-text-center bordaSuperior">
+      <p class="titulo">{{this.todo.tag}}</p>
+  </div>
+
+  <div padding>
+
+  <h1 style="color: #6b6b6b; font-size: 22px; font-family: SFProText Bold;">{{this.todo.titulo}}</h1>
+
+  <p class="resumoEscrito">{{this.todo.conteudo}}</p>
+
+  
+  <h1 style="color: #6b6b6b; font-size: 22px; font-family: SFProText Bold;">Foto do resumo</h1>
+
   <div class="one" [innerHtml]="htmlToAdd">
       <!-- <div *ngFor="let item of fotos" class="foto"></div> -->
       <!-- <img [src]="fotoURL | async" *ngIf="fotoURL | async"> -->
   </div>
   
-  <ion-fab *ngIf="this.todo && idUser == this.todo.criador" vertical="bottom" horizontal="begin" slot="fixed" color="danger">
-    <ion-fab-button [routerLink]="" (click)="deletar()" >
+  <ion-fab style="margin-bottom: 70px;" *ngIf="this.todo && idUser == this.todo.criador" vertical="bottom" horizontal="end" slot="fixed" color="danger">
+    <ion-fab-button style="--background: #febf50; --background-activated: #ffb127;" [routerLink]="" (click)="deletar()" >
       <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
   <ion-fab *ngIf="this.todo && idUser == this.todo.criador" vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button [routerLink]="['/resumo-insert']" (click)="setarId()" routerDirection="forward">
+    <ion-fab-button style="--background: #f0525d; --background-activated: #fa525d;" [routerLink]="['/resumo-insert']" (click)="setarId()" routerDirection="forward">
       <ion-icon ios="ios-create" md="md-create"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+</div>
+
 </ion-content>

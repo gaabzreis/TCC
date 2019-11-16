@@ -1,34 +1,38 @@
 <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color="danger">
       <ion-buttons slot="start">
-        <ion-back-button [defaultHref]="['/menu-sala/forum/', forum.idSala]"></ion-back-button>
+        <ion-back-button text="" [defaultHref]="['/menu-sala/forum/', forum.idSala]"></ion-back-button>
       </ion-buttons>
-      <ion-title>Fórum</ion-title>
     </ion-toolbar>
   </ion-header>
 
 <ion-content>
+
+    <div class="ion-text-center bordaSuperior">
+        <p class="titulo">Pergunta</p>
+    </div>
+
     <div *ngIf="forum">
-      <div style="padding: 10px; text-align: center; margin-bottom: 10px;">
-        <h1 style="text-align: left">{{forum.pergunta}}</h1>
+      <div padding>
+        <h1 style="margin-top: 0%; color: #6b6b6b; font-size: 22px; font-family: SFProText Bold;">{{forum.pergunta}}</h1>
       </div>
       
-      <ion-list *ngIf="forum.respostas">
-          <ion-item *ngFor="let item of forum.respostas; let i = index">
-            <ion-card-header>
-              <ion-card-title>
-                  <ion-icon class="iconeSeta" name="arrow-dropup" (click)="maisLikes(i, 1)"></ion-icon><br>
-                  <span style="margin-left:16px">{{item.likes}}</span><br>
-                  <ion-icon class="iconeSeta" name="arrow-dropdown" (click)="maisLikes(i, -1)"></ion-icon><br>
-              </ion-card-title>
-            </ion-card-header>
-          
-            <ion-card-content>
-              {{item.resposta}}
-            </ion-card-content>
-          </ion-item>
+      <ion-list lines="none" *ngIf="forum.respostas">
+        <ion-item *ngFor="let item of forum.respostas; let i = index">
+          <ion-card-header style="padding-left: 0%;">
+            <ion-card-title>
+                <ion-icon class="iconeSeta" name="md-arrow-dropup" (click)="maisLikes(i, 1)"></ion-icon><br>
+                <p style="width: 44px; text-align: center; margin: 0;">{{item.likes}}</p>
+                <ion-icon class="iconeSeta" name="md-arrow-dropdown" (click)="maisLikes(i, -1)"></ion-icon><br>
+            </ion-card-title>
+          </ion-card-header>
         
-        </ion-list>
+          <ion-card-content class="cardContent">
+            {{item.resposta}}
+          </ion-card-content>
+          <div style="width: 346px; height: 1px; border: solid 1px #d4d4d4; position: absolute; margin-top: 22%;"></div>
+        </ion-item>
+      </ion-list>
       
         <div style="text-align: center;
   border: 1px solid red;
@@ -42,7 +46,7 @@
   </div>   
       </div>
       <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-          <ion-fab-button [routerLink]="['/resp-insert', idForum]" routerDirection="forward">
+          <ion-fab-button style="--background: #f0525d; --background-activated: #fa525d;" [routerLink]="['/resp-insert', idForum]" routerDirection="forward">
             <ion-icon name="add"></ion-icon>
           </ion-fab-button>
         </ion-fab>

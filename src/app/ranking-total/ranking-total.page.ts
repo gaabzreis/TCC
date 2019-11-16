@@ -40,7 +40,7 @@ export class RankingTotalPage implements OnInit {
       if(pontosUlt.pontos == undefined){
         pontosUlt.pontos = 0
       }
-      this.diferenca = pontosUlt.pontos - pontosUser[0].pontos
+      this.diferenca = pontosUser[0].pontos - pontosUlt.pontos
     })
 
   }

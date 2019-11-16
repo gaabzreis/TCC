@@ -5,13 +5,13 @@
         <ion-menu-button ></ion-menu-button>
       
     </ion-buttons>
-    <ion-title>Salas de Aula</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="mec">
-    <div style="background-color: #F0525D; border-radius: 0px 0px 25px 25px;" class="ion-text-center">
-        <img class="chapeu" src="../../assets/chapeu.png">
+  
+    <div class="ion-text-center bordaSuperior">
+        <p class="titulo">Sala de aula</p>
     </div>
 
     <ion-segment [(ngModel)]="inscritas" color="danger" style="width: 90%; margin-left: 18px; margin-top: 10px; margin-bottom: 10px;">
@@ -106,14 +106,14 @@
       </ion-list>
     </div>
 
-  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
-    <ion-fab-button color="danger" (click)="scanCode()" routerDirection="forward">
+  <ion-fab style="margin-bottom: 70px;" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button style="--background: #febf50; --background-activated: #ffb127;" (click)="scanCode()" routerDirection="forward">
       <ion-icon name="qr-scanner"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="danger" [routerLink]="['/sala-insert']" routerDirection="forward">
+    <ion-fab-button style="--background: #f0525d; --background-activated: #fa525d;" [routerLink]="['/sala-insert']" routerDirection="forward">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

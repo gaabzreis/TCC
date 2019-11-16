@@ -1,59 +1,55 @@
 <ion-header>
-  <ion-toolbar  color="primary">
+  <ion-toolbar color="danger">
     
     <ion-buttons slot="start" >
         <ion-menu-button></ion-menu-button>
       
     </ion-buttons>
-    <ion-title>Summboard</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding class="mec" color="light">
-  <!-- <h1 *ngIf="sala">{{sala.descricao}}</h1> -->
-    <ion-item class="input">
-      <ion-label><ion-icon name="search"></ion-icon></ion-label>
-      <ion-searchbar animated Placeholder="Procurar" (keyup)="pesquisar($event)"></ion-searchbar>
-    </ion-item>
-    <h2>Perguntas fórum</h2>
-    <div style="text-align: center;
-    border: 1px solid red;
-    padding: 44px;
-    font-size: 15px;
-    font-weight: 600;
-    color: red;
-    border-radius: 9px;
-    margin-top: 35px;" *ngIf="!foruns || foruns.length == 0  ">
-        Que Pena! Não há fóruns de dúvidas para serem gerados! Crie um para esclarecer suas dúvidas
-    </div>   
-    <ion-list color="light">
- 
-        <ng-container *ngIf="!foruns">
-          <div *ngFor="let n of [0,1,2]" padding>
-            <ion-skeleton-text></ion-skeleton-text>
-            <p>
-              <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
-            </p>
-          </div>
-        </ng-container>
-        
-          <ion-card  *ngFor="let item of foruns" (click)="verForum(item.id)">
-              <ion-card-header>
-                <ion-card-subtitle>Pergunta</ion-card-subtitle>
-                <ion-card-title>{{ item.pergunta }}</ion-card-title>
-              </ion-card-header>
+<ion-content class="mec" color="light">
+
+    <div class="ion-text-center bordaSuperior">
+        <p class="titulo">Fórum</p>
+    </div>
+
+    <div padding>
+
+        <ion-searchbar class="searchBar" lines="none" animated Placeholder="Pesquisar fórum" (keyup)="pesquisar($event)"></ion-searchbar>
+    
+        <div style="text-align: center;
+        border: 1px solid red;
+        padding: 44px;
+        font-size: 15px;
+        font-weight: 600;
+        color: red;
+        border-radius: 9px;
+        margin-top: 35px;" *ngIf="!foruns || foruns.length == 0  ">
+            Que Pena! Não há fóruns de dúvidas para serem gerados! Crie um para esclarecer suas dúvidas
+        </div>   
+        <ion-list style="background: transparent;">
+            <ng-container *ngIf="!foruns">
+              <div *ngFor="let n of [0,1,2]" padding>
+                <ion-skeleton-text></ion-skeleton-text>
+                <p>
+                  <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+                </p>
+              </div>
+            </ng-container>
             
-              <ion-card-content >
-                  <ion-label>Quantidade de respostas: {{(item.respostas == undefined ? 0 : item.respostas.length)}}</ion-label> 
-              </ion-card-content>
-            </ion-card>
-        
-    </ion-list>
-      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button [routerLink]="['/forum-insert', idSala]" routerDirection="forward">
-          <ion-icon name="add"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
-  
+            <div class="forumCard" *ngFor="let item of foruns" (click)="verForum(item.id)">
+              <p class="perguntaForum">{{ item.pergunta }}</p>
+              <p class="respostaCount">Respostas: {{(item.respostas == undefined ? 0 : item.respostas.length)}}</p>
+            </div>
+    
+        </ion-list>
+          <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+            <ion-fab-button color="danger" [routerLink]="['/forum-insert', idSala]" routerDirection="forward">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+    </div>
+
 </ion-content>
 

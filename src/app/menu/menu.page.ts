@@ -26,7 +26,7 @@ export class MenuPage implements OnInit {
     {
       title: 'Ranking geral',
       url: '/menu/ranking-total',
-      icon: 'podium'
+      icon: '../assets/rankingGeral.png'
     },
     {
       title: 'Perfil',
@@ -36,7 +36,7 @@ export class MenuPage implements OnInit {
     {
       title: 'Sair',
       url: '../login',
-      icon: 'log-out'
+      icon: '../assets/sair.png'
     }
   ];
  

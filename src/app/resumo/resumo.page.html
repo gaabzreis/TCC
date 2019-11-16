@@ -18,15 +18,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding class="mec" color="light">
+<ion-content color="light">
 
-  <div></div>
+    <div class="ion-text-center bordaSuperior">
+        <p class="titulo">Resumos</p>
+    </div>
+
+    <div padding>
        
   <h1 style="color: #6b6b6b; font-size: 22px; font-family: SFProText Bold;" *ngIf="sala">{{sala.descricao}}</h1>
-    <ion-item class="input">
-      <ion-label><ion-icon name="search"></ion-icon></ion-label>
-      <ion-searchbar sty animated Placeholder="Procurar" (keyup)="pesquisar($event)"></ion-searchbar>
-    </ion-item>
+      
+    <ion-searchbar class="searchBar" sty animated Placeholder="Procurar" (keyup)="pesquisar($event)"></ion-searchbar>
+    
     <div style="text-align: center;
     border: 1px solid red;
     padding: 44px;
@@ -37,7 +40,7 @@
     margin-top: 35px;" *ngIf="!dia || dia.length == 0  ">
         Que Pena! Não há resumos para serem mostrados! Crie um para auxiliar seus colegas
     </div>
-    <ion-list color="light">
+    <ion-list style="background-color: transparent;">
  
         <ng-container *ngIf="!dia">
           <div *ngFor="let n of [0,1,2]" padding>
@@ -48,16 +51,14 @@
           </div>
         </ng-container>
         
-          <ion-card  *ngFor="let item of dia">
-              <ion-card-header>
-                <!-- <ion-card-subtitle>Data</ion-card-subtitle> -->
-                <ion-card-title>{{ item.data }}</ion-card-title>
+          <ion-card class="card" *ngFor="let item of dia">
+              <ion-card-header style="padding-bottom: 0px;">
+                <ion-card-title style="color: #fbfbfb; font-family: SFProText Medium;font-size: 17px;">{{ item.data }}</ion-card-title>
               </ion-card-header>
             
-              <ion-card-content >
-                    
+              <ion-card-content style="padding-top: 10px;">
                 <ion-col size="2" *ngFor="let mensa of item.mensagens">
-                    <div style="display: inline-block" button [routerLink]="['/resumo-edit', mensa.id]">
+                    <div style="display: inline-block; margin-top: 10px; font-family: SFProText Medium; font-size: 17px;" button [routerLink]="['/resumo-edit', mensa.id]">
                       <ion-icon name="folder"></ion-icon>
                       {{mensa.tag}}
                     </div>
@@ -68,16 +69,17 @@
      
       </ion-list>
       
-      <ion-fab vertical="bottom" horizontal="start" slot="fixed" (click)="encodedText()">
-        <ion-fab-button  routerDirection="forward">
+      <ion-fab style="margin-bottom: 70px;" vertical="bottom" horizontal="end" slot="fixed" (click)="encodedText()">
+        <ion-fab-button style="--background: #febf50; --background-activated: #ffb127;" routerDirection="forward">
           <ion-icon ios="ios-barcode" md="md-barcode"></ion-icon>
         </ion-fab-button>
       </ion-fab>
       <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="addNovo()">
-        <ion-fab-button routerDirection="forward">
+        <ion-fab-button style="--background: #f0525d; --background-activated: #fa525d;" routerDirection="forward">
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>
       </ion-fab>
   
+    </div>
 </ion-content>
 

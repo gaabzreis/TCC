@@ -7,30 +7,44 @@ ion-content ion-item:first-child .ranking,ion-content ion-item:first-child .rank
     height: 100%;
 }
 
+.titulo {
+    font-family: SFProText Bold;
+    font-size: 22px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: white;
+    padding-top: 10px;
+    margin-top: 0px;
+}
 
 .primeiro{
     position: absolute;
-    margin-top: 93px;
-    margin-left: 35%;
-    width: 98px;
-    font-weight: 600;
-    font-size: 16px;
+    margin-top: 25px;
+    margin-left: 33%;
+    width: 100px;
     text-align: center;
+    color: #6b6b6b;
+    font-family: SFProText Heavy;
 }
 
 .segundo{
     position: absolute;
-    margin-top: 110px;
-    width: 115px;
+    margin-top: 93px;
+    width: 120px;
     text-align: center;
-    margin-left: 3%;
-    font-weight: 700;
+    color: #6b6b6b;
+    font-family: SFProText Heavy;
 }
 
 .terceiro{
     position: absolute;
     margin-top: 135px;
-    margin-left: 63%;
+    margin-left: 232px;
     width: 112px;
     text-align: center;
+    color: #6b6b6b;
+    font-family: SFProText Heavy;
 }

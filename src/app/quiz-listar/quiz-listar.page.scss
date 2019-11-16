@@ -1,9 +1,30 @@
 .tituloQuestionario{
-    margin-top: 10px;
     font-size: 25px;
     text-align: center;
-    font-weight: bold;
+    font-size: 22px;
+    font-family: SFProText Bold;
+    color: #6b6b6b;
 }
+.divItem {
+    margin-top: 35px;
+}
+.divItem:first-child { 
+    margin-top: 10px;
+ }
+
+ .titulo {
+    font-family: SFProText Bold;
+    font-size: 22px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: white;
+    padding-top: 10px;
+    margin-top: 0px;
+}
+
 hr {
     height: 2px !important;
     width: 500px !important;
@@ -13,6 +34,7 @@ hr {
     opacity: 1 !important;
     visibility: visible !important;
   }
+  
 .tagQuestionario{
     font-size: 15px;
     color: grey;
@@ -22,9 +44,36 @@ hr {
 }
 .perguntaQuestionario{
     text-align: justify;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+    font-family: SFProText Medium;
+    font-size: 17px;
+    color: #6b6b6b;
 }
 
 .item.sc-ion-label-md-h, .item .sc-ion-label-md-h{
     white-space: initial !important;
+}
+
+.listaRespostas{
+
+}
+
+.itemResposta{
+    --background: #f47f54;
+    color: #fbfbfb;
+}
+
+.list-ios{
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.gostei {
+    padding: 5px;
+    color: white;
+    width: 84px;
+    border-radius: 5px 0px 0px 5px;
+    background: #febf50;
+    float: right;
+    font-family: SFProDisplay Bold;
 }

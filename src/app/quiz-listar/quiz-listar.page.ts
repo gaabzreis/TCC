@@ -32,6 +32,8 @@ export class QuizListarPage implements OnInit {
   usuario: User
   sala: sala
   usuarioVoto: User
+  buttonColor: string = '#f47f54';
+
   constructor(private router: Router, 
               public alertController: AlertController, 
               private route: ActivatedRoute, 
@@ -49,6 +51,13 @@ export class QuizListarPage implements OnInit {
       this.sala = res
     })
     this.loadTodo()
+  }
+
+  marcarItem () {
+    if (this.buttonColor == '#f47f54')
+      this.buttonColor = '#76ccd0';
+      else
+      this.buttonColor = '#f47f54';
   }
 
   async loadTodo() {

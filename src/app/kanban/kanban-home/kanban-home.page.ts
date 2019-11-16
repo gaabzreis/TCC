@@ -6,6 +6,8 @@ import { ModalController, PopoverController } from '@ionic/angular';
 import * as moment from "moment"; 
 import { PopoverItensComponent } from '../popover-itens/popover-itens.component';
 import { Router } from '@angular/router';
+import {IonSlides} from '@ionic/angular';
+import {ViewChild} from '@angular/core';
 
 export interface nomeDisciplina {
   idSala: string
@@ -17,7 +19,10 @@ export interface nomeDisciplina {
   templateUrl: './kanban-home.page.html',
   styleUrls: ['./kanban-home.page.scss'],
 })
+
 export class KanbanHomePage {
+
+  @ViewChild('slides', { read: IonSlides }) slides: IonSlides;
 
   idUser: string
   paraFazer: atividade[]
@@ -25,6 +30,7 @@ export class KanbanHomePage {
   feito: atividade[]
   nomesDisciplinas: nomeDisciplina[]
   kanbanSelecionado: string = "paraFazer"
+  indexSlide: number = 0;
 
   public progressClick: number = 0;
   protected interval: any;
@@ -83,6 +89,12 @@ export class KanbanHomePage {
       if (x.idSala == id) {
         return x.nomeDisciplina
       }
+    })
+  }
+
+  slideChanged() {
+    this.slides.getActiveIndex().then( index => {
+      this.indexSlide = index;
     })
   }
 

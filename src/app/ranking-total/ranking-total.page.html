@@ -1,30 +1,42 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="danger">
     
     <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
-      
     </ion-buttons>
-    <ion-title>Ranking da sala de aula</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding="">
-<h1>Ranking geral de alunos</h1>
+<ion-content>
+
+  <div class="ion-text-center bordaSuperior">
+      <p class="titulo">Ranking geral</p>
+  </div>
+
+  <div padding style="margin-top: -15px;">
+    <div class="primeiro">
+        <label>{{usuarios[0].nome}}</label>
+      </div>
+      <div class="segundo">
+        <label>{{usuarios[1].nome}}</label>
+      </div>
+      <div class="terceiro">
+        <label>{{usuarios[2].nome}}</label>
+      </div>
+      <img src="../../assets/podium.png" width="400px" style="margin-top: 40px;">
+      <div>
+        <!-- <span style="font-family: SFProText Heavy;">Diferença entre o último ganhador: {{diferenca}}</span> -->
+      </div>
+
+      <ion-item *ngFor="let us of usuarios; index as b" [attr.data-index]="b" >
+          <ion-label>
+            <h3>{{b + 1}}º</h3>
+            <p>{{us.nome}} </p>
+          </ion-label>
+          <p>{{us.pontos}} pts</p>
+        </ion-item>
 
 
-<div class="primeiro">
-  <label>{{usuarios[0].nome}}</label>
-</div>
-<div class="segundo">
-  <label>{{usuarios[1].nome}}</label>
-</div>
-<div class="terceiro">
-  <label>{{usuarios[2].nome}}</label>
-</div>
-<img src="../../assets/podium.png" width="400px" style="margin-top: 100px;">
-<div>
-  <label>A diferença entre você e o último ganhador é de: </label>
-  <div>{{diferenca}}</div>
-</div>
+  </div>
+
 </ion-content>

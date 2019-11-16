@@ -1,8 +1,8 @@
 <ion-menu contentId="content-sala" class="fontmenu">
  
     <ion-header>
-      <ion-toolbar color="primary">
-        <ion-title>Menu</ion-title>
+      <ion-toolbar color="danger">
+        <ion-title>SALA DE AULA</ion-title>
       </ion-toolbar>
     </ion-header>
    
@@ -10,8 +10,8 @@
       <div>
         <ion-menu-toggle >
             <ion-item onclick="location.href = '/menu/sala-aula'">
-              <ion-icon name="arrow-back" slot="start"></ion-icon>
-              <ion-label>
+              <ion-icon style="color: #febf50;" name="arrow-back" slot="start"></ion-icon>
+              <ion-label style="color: #6b6b6b;">
                 Voltar
               </ion-label>
             </ion-item>
@@ -22,8 +22,8 @@
         <!-- Standard Menu Item -->
         <ion-menu-toggle *ngIf="p.url">
           <ion-item [routerLink]="p.url" routerDirection="root" routerLinkActive="active">
-            <ion-icon [name]="p.icon" slot="start"></ion-icon>
-            <ion-label>
+            <ion-icon style="color: #febf50;" [name]="p.icon" slot="start"></ion-icon>
+            <ion-label style="color: #6b6b6b;">
               {{ p.title }}
             </ion-label>
           </ion-item>
@@ -31,9 +31,9 @@
         <!-- Item with Children -->
    
         <ion-item button *ngIf="p.children?.length > 0" (click)="p.open = !p.open" [class.parent-active]="p.open" detail="false">
-          <ion-icon slot="start" name="arrow-forward" *ngIf="!p.open"></ion-icon>
-          <ion-icon slot="start" name="arrow-down" *ngIf="p.open"></ion-icon>
-          <ion-label>{{ p.title }}</ion-label>
+          <ion-icon style="color: #febf50;" slot="start" name="arrow-forward" *ngIf="!p.open"></ion-icon>
+          <ion-icon style="color: #febf50;" slot="start" name="arrow-down" *ngIf="p.open"></ion-icon>
+          <ion-label style="color: #6b6b6b;">{{ p.title }}</ion-label>
         </ion-item>
    
         <!-- Children List for clicked Item -->
@@ -41,8 +41,8 @@
           <ion-menu-toggle>
             <ion-item *ngFor="let sub of p.children" class="sub-item" [routerLink]="sub.url" routerDirection="root"
               routerLinkActive="active">
-              <ion-icon [name]="sub.icon" slot="start"></ion-icon>
-              <ion-label>
+              <ion-icon style="color: #febf50;" [name]="sub.icon" slot="start"></ion-icon>
+              <ion-label style="color: #6b6b6b;">
                 {{ sub.title }}
               </ion-label>
             </ion-item>
