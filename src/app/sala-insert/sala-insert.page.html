@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="danger">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/menu/sala-aula"></ion-back-button>
     </ion-buttons>
@@ -9,66 +9,68 @@
 </ion-header>
 
 <ion-content>
-  <div style="padding: 10px; text-align: center; margin-bottom: 10px;">
-    <h1 *ngIf="!salaEdicao">Inserir nova sala de aula</h1>
-    <h1 *ngIf="salaEdicao">Editar sala de aula</h1>
+  <div class="ion-text-center bordaSuperior">
+      <img class="chapeu" src="../../assets/chapeu.png">
   </div>
-  <ion-item>
-    <ion-label position="floating">Nome aula</ion-label>
-    <ion-input [(ngModel)]="descricao"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Nome da sala</ion-label>
-    <ion-input [(ngModel)]="sala"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Universidade</ion-label>
-    <ion-input [(ngModel)]="universidade"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Início aula</ion-label>
-    <ion-datetime [(ngModel)]="inicioAula" display-format="DD/MM/YYYY"></ion-datetime>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating" >Periodo</ion-label>
-    <ion-input [(ngModel)]="periodo"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating" >Professor</ion-label>
-    <ion-input [(ngModel)]="professor"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating" >Qtd. duração (em meses)</ion-label>
-    <ion-input [(ngModel)]="qtdMeses"></ion-input>
-  </ion-item>
-   <div style="text-align: center; margin-top: 50px; font-weight: 600; height: 50px;">
-     <ion-label>Dias/Horários das aulas</ion-label>
-    <ion-button (click)="removePoint()" style="float: right;" color="danger"><ion-icon name="remove"></ion-icon></ion-button>
-    <ion-button (click)="addPoint()" style="float: right;" color="success"><ion-icon name="add"></ion-icon></ion-button>
+  <div style="margin-top: 100px;">
+      <!-- Formulario -->
+      
+      <div class="tituloCriar">
+        <p *ngIf="!salaEdicao">Criar sala de aula</p>
+        <p *ngIf="salaEdicao">Editar sala de aula</p>
+      </div>
+
+      <ion-item lines="none">
+        <ion-input class="campoInput" placeholder="Nome aula" [(ngModel)]="descricao"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-input class="campoInput" placeholder="Nome da sala" [(ngModel)]="sala"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-input class="campoInput" placeholder="Universidade" [(ngModel)]="universidade"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-datetime class="campoInput" placeholder="Início aula" display-format="DD/MM/YYYY" [(ngModel)]="inicioAula"></ion-datetime>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-input class="campoInput" placeholder="Período" [(ngModel)]="periodo"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-input class="campoInput" placeholder="Professor" [(ngModel)]="professor"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-input class="campoInput" placeholder="Qtd. duração (em meses)" [(ngModel)]="qtdMeses"></ion-input>
+      </ion-item>
+      <div style="text-align: center; margin-top: 50px; font-weight: 600; height: 50px;">
+          <ion-label>Dias/Horários das aulas</ion-label>
+         <ion-button (click)="removePoint()" style="float: right;" color="danger"><ion-icon name="remove"></ion-icon></ion-button>
+         <ion-button (click)="addPoint()" style="float: right;" color="success"><ion-icon name="add"></ion-icon></ion-button>
+       </div>
+       <div *ngFor="let i of valores">
+          <ion-item>
+            <ion-label>Dias da semana</ion-label>
+            <ion-select placeholder="Selecione o dia" [(ngModel)]="horarios[i - 1].diaSemana" >
+              <ion-select-option value="seg">Segunda</ion-select-option>
+              <ion-select-option value="ter">Terça</ion-select-option>
+              <ion-select-option value="qua">Quarta</ion-select-option>
+              <ion-select-option value="qui">Quinta</ion-select-option>
+              <ion-select-option value="sex">Sexta</ion-select-option>
+              <ion-select-option value="sab">Sábado</ion-select-option>
+              <ion-select-option value="dom">Domingo</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item lines="none">
+              <ion-datetime display-format="HH:mm" placeholder="Horário inicio" [(ngModel)]="horarios[i - 1].horarioI"></ion-datetime>
+          </ion-item>
+          <ion-item lines="none">
+              <ion-datetime display-format="HH:mm" placeholder="Horário Fim" [(ngModel)]="horarios[i - 1].horarioF"></ion-datetime>
+          </ion-item>
+          <hr>
+        </div>
   </div>
-  <div *ngFor="let i of valores">
-    <ion-item>
-      <ion-label>Dias da semana</ion-label>
-      <ion-select placeholder="Selecione o dia" [(ngModel)]="horarios[i - 1].diaSemana" >
-        <ion-select-option value="seg">Segunda</ion-select-option>
-        <ion-select-option value="ter">Terça</ion-select-option>
-        <ion-select-option value="qua">Quarta</ion-select-option>
-        <ion-select-option value="qui">Quinta</ion-select-option>
-        <ion-select-option value="sex">Sexta</ion-select-option>
-        <ion-select-option value="sab">Sábado</ion-select-option>
-        <ion-select-option value="dom">Domingo</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating" >Horário início</ion-label>
-      <ion-datetime display-format="HH:mm" [(ngModel)]="horarios[i - 1].horarioI"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating" >Horário fim</ion-label>
-      <ion-datetime display-format="HH:mm" [(ngModel)]="horarios[i - 1].horarioF"></ion-datetime>
-    </ion-item>
-    <hr>
-  </div>
+  
+   
+  
 </ion-content>
 <ion-footer>
   <ion-button expand="block" color="success" style="margin: 10px;" (click)="salvar()" >Salvar</ion-button>

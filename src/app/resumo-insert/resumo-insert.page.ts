@@ -33,6 +33,8 @@ export class ResumoInsertPage implements OnInit {
   blob: Blob
   usuario: User
   sala: sala
+
+  type : boolean = true
   
 
   constructor(
@@ -55,6 +57,7 @@ export class ResumoInsertPage implements OnInit {
     this.salaProvider.getByFilter(this.idSala).subscribe(res => {
       this.sala = res
     })
+    console.log(this.idResumo)
     if (this.idResumo != null) {
       
 
@@ -64,7 +67,9 @@ export class ResumoInsertPage implements OnInit {
         this.data = res.data.split("/")[2] + "-" + res.data.split("/")[1] + "-" + res.data.split('/')[0]
         this.idSala = res.idSala
         this.conteudo = res.conteudo
-        this.tipo = res.tipo
+        this.type = res.tipo == "p"
+
+        console.log(res.tipo)
         this.criador = res.criador
       })
     }
@@ -92,7 +97,8 @@ export class ResumoInsertPage implements OnInit {
     if(this.data.indexOf("-") > -1){
       this.data = this.data.split('-')[2].substr(0,2) + "/"+ this.data.split('-')[1] + "/"+ this.data.split('-')[0]
     }
-
+    this.tipo = (this.type ? "p" : "i" )
+    console.log(this.tipo)
     let todo;
     if (this.idResumo != null) {
       todo = {

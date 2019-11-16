@@ -13,8 +13,8 @@
       <p class="titulo">Ranking geral</p>
   </div>
 
-  <div padding style="margin-top: -15px;">
-    <div class="primeiro">
+  <div padding style="margin-top: -15px;" *ngIf="usuarios.length > 0">
+    <div class="primeiro" >
         <label>{{usuarios[0].nome}}</label>
       </div>
       <div class="segundo">
@@ -24,10 +24,10 @@
         <label>{{usuarios[2].nome}}</label>
       </div>
       <img src="../../assets/podium.png" width="400px" style="margin-top: 40px;">
-      <div>
+    <div>
         <!-- <span style="font-family: SFProText Heavy;">Diferença entre o último ganhador: {{diferenca}}</span> -->
       </div>
-
+      <div *ngIf="usuarios">
       <ion-item *ngFor="let us of usuarios; index as b" [attr.data-index]="b" >
           <ion-label>
             <h3>{{b + 1}}º</h3>
@@ -35,7 +35,7 @@
           </ion-label>
           <p>{{us.pontos}} pts</p>
         </ion-item>
-
+      </div>
 
   </div>
 

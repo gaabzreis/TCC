@@ -103,13 +103,6 @@ export class ResumoPage implements OnInit {
     this.router.navigate(['/resumo-edit']);
   }
 
-  editContact(contact: any) {
-    // Maneira 1
-    this.router.navigate(['/home']);
-
-    // Maneira 2
-    // this.navCtrl.push('ContactEditPage', { key: contact.key });
-  }
 
   pesquisar(ev){
     if(ev.target.value == ""){
