@@ -39,6 +39,7 @@ export class QuizPage implements OnInit {
       
       this.todo = res.filter(x => x.criador != this.idUser && x.idSala == this.idSala);
       this.minhasPerguntas = res.filter(x => x.criador == this.idUser && x.idSala == this.idSala)
+      console.log(this.minhasPerguntas.length)
       loading.dismiss();
       this.somenteTag = this.todo.reduce((prev, atual) => {
         if(prev.find(x => x.tag == atual.tag)){

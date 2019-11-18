@@ -34,18 +34,19 @@
     </div>
   </ng-container>
  <div *ngIf="salasP">
-    <div style="text-align: center;
-      border: 2px solid #F0525D;
-      padding: 44px;
-      font-size: 15px;
-      font-weight: 600;
-      color: #F0525D;
-      border-radius: 9px 9px 0px 0px;"
-      *ngIf="!salasP || salasP.length == 0  ">
-          Que Pena! Não há salas de aula em que você esteja inscrito! Arraste as salas para o lado e se inscreva!
-      </div>   
+     
 
     <div *ngIf="inscritas == 'true'">
+        <div style="text-align: center;
+        border: 2px solid #F0525D;
+        padding: 44px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #F0525D;
+        border-radius: 9px 9px 0px 0px;"
+        *ngIf="!salasP || salasP.length == 0  ">
+            Que Pena! Não há salas de aula em que você esteja inscrito! Arraste as salas para o lado e se inscreva!
+        </div> 
       <ion-list *ngFor="let salaP of salasP">
         <ion-item-sliding id="item100" >
           <ion-item class="ltDisciplinas" detail="false" (click)="redirectSala(salaP.adm, salaP.id, salaP.monitores)" [routerLink]="['/menu-sala/resumo', salaP.id]">
@@ -87,6 +88,16 @@
     </ng-container>
 
   <div *ngIf="salasT && inscritas == 'false'">
+      <div style="text-align: center;
+      border: 2px solid #F0525D;
+      padding: 44px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #F0525D;
+      border-radius: 9px 9px 0px 0px;"
+      *ngIf="!salasT || salasT.length == 0  ">
+          Que Pena! Não há salas de aula em que você não esteja inscrito! Espere seus colegas cadastrarem novas salas
+      </div> 
       <ion-list *ngFor="let salaT of salasT; let i = index">
       
         <ion-item-sliding id="item100">
