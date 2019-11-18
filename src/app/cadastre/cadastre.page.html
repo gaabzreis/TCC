@@ -1,32 +1,51 @@
-<ion-content padding color="medium">
-  <h1 style="text-align: center; font-weight: 600; margin-top: 10%; margin-bottom: 10%;">Summboard</h1>
-  <ion-item color="light" style="margin: 5px; border-radius:5px; " >
-      <ion-label position="floating">Login</ion-label>
-      <ion-input [(ngModel)]="login"></ion-input>
-  </ion-item>
-  <ion-item color="light" style="margin: 5px; border-radius:5px; " >
-      <ion-label position="floating">Nome</ion-label>
-      <ion-input [(ngModel)]="nome"></ion-input>
-  </ion-item>
-  <ion-item class="item"  style="margin: 5px; ">
-      <ion-label position="floating">Curso</ion-label>
-      <ion-input type="text" [(ngModel)]="curso" ></ion-input>
-  </ion-item>
-  <ion-item class="item"  style="margin: 5px; ">
-      <ion-label position="floating">Instituição</ion-label>
-      <ion-input type="text" [(ngModel)]="instituicao" ></ion-input>
-  </ion-item>
-  <ion-item class="item"  style="margin: 5px; ">
-      <ion-label position="floating">E-mail</ion-label>
-      <ion-input type="text" [(ngModel)]="email" ></ion-input>
-  </ion-item>
-  <ion-item class="item"  style="margin: 5px; ">
-      <ion-label position="floating">Senha</ion-label>
-      <ion-input type="password" [(ngModel)]="senha" ></ion-input>
-  </ion-item>
-  <ion-item class="item"  style="margin: 5px; ">
-      <ion-label position="floating">Confirme a senha</ion-label>
-      <ion-input type="password" [(ngModel)]="confiSenha" ></ion-input>
-  </ion-item>
-  <ion-button expand="block" color="dark" style="margin: 10px;" (click)="cadastrar()" >Cadastrar</ion-button>
+<ion-header>
+    <ion-toolbar color="danger">
+        <ion-buttons slot="start">
+        <ion-back-button text="" [defaultHref]="['/login']"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+    </ion-header>
+
+<ion-content color="medium">
+
+    <div class="ion-text-center bordaSuperior">
+        <p class="titulo">Cadastro</p>
+    </div>
+
+    <div padding>
+
+    <ion-item color="light" style="margin: 5px; border-radius:5px; " >
+        <ion-label position="floating">Login</ion-label>
+        <ion-input [(ngModel)]="login"></ion-input>
+    </ion-item>
+    <ion-item color="light" style="margin: 5px; border-radius:5px; " >
+        <ion-label position="floating">Nome</ion-label>
+        <ion-input [(ngModel)]="nome"></ion-input>
+    </ion-item>
+    <ion-item class="item"  style="margin: 5px; ">
+        <ion-label position="floating">Curso</ion-label>
+        <ion-input type="text" [(ngModel)]="curso" ></ion-input>
+    </ion-item>
+    <ion-item class="item"  style="margin: 5px; ">
+        <ion-label position="floating">Instituição</ion-label>
+        <ion-input type="text" [(ngModel)]="instituicao" ></ion-input>
+    </ion-item>
+    <ion-item class="item"  style="margin: 5px; ">
+        <ion-label position="floating">E-mail</ion-label>
+        <ion-input type="text" [(ngModel)]="email" ></ion-input>
+    </ion-item>
+    <ion-item class="item"  style="margin: 5px; ">
+        <ion-label position="floating">Senha</ion-label>
+        <ion-input type="password" [(ngModel)]="senha" ></ion-input>
+    </ion-item>
+    <ion-item class="item"  style="margin: 5px; ">
+        <ion-label position="floating">Confirme a senha</ion-label>
+        <ion-input type="password" [(ngModel)]="confiSenha" ></ion-input>
+    </ion-item>
+    
+    </div>
 </ion-content>
+
+<ion-footer>
+    <ion-button expand="block" color="success" style="margin: 10px;" (click)="cadastrar()" >Cadastrar</ion-button>
+</ion-footer>

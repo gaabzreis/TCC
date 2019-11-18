@@ -26,15 +26,12 @@
       </div>
       <div class="respostas" *ngFor="let resps of item.respostas;index as i" [attr.data-index]="i">
         <ion-list class="listaRespostas" lines="none">
-          <ion-item (click)="marcarItem()" [(ngModel)]="respostas[b][i].marcado" [ngStyle]="{'--background': buttonColor}" class="itemResposta">
-              <ion-label>{{resps.descricao}}</ion-label>
-          </ion-item>
-          <!-- <ion-radio-group>
+          <ion-radio-group>
               <ion-item>
                   <ion-label>{{resps.descricao}} </ion-label>
                 <ion-checkbox slot="start" color="success"  [(ngModel)]="respostas[b][i].marcado"></ion-checkbox>
               </ion-item>
-          </ion-radio-group> -->
+          </ion-radio-group>
         </ion-list>
         
       </div>

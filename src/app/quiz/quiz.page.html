@@ -28,7 +28,7 @@
 
     <div padding>
 
-  <h1 style="text-align: left; color: #6b6b6b; font-size: 22px; font-family: SFProText Bold;">Tag</h1>
+  <h1 style="text-align: left; color: #6b6b6b; font-size: 22px; font-family: SFProText Bold;">Tag(s)</h1>
   
   <ion-item lines="none" class="espaco">
     <ion-label>Selecione a(s) tag(s)</ion-label>
@@ -44,7 +44,10 @@
       <ion-select-option [(value)]="item" *ngFor="let item of qtdQuiz">{{item}}</ion-select-option>
     </ion-select>
   </ion-item>
-  <ion-button shape="round" class="gerarQuiz" fill="outline" *ngIf="tagSelect && index" [routerLink]="['/quiz-listar', tagSelect + '@' + index + '@' + idSala ]">Gerar quiz</ion-button>
+  <div class="ion-text-center" style="margin-top: 70px;">
+      <ion-button class="btSalvar" *ngIf="tagSelect && index" [routerLink]="['/quiz-listar', tagSelect + '@' + index + '@' + idSala ]">Gerar quiz</ion-button>
+  </div>
+  
   </div>   
 
   <br>
