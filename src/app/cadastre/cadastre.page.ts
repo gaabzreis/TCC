@@ -93,7 +93,7 @@ export class CadastrePage implements OnInit {
         this.provider.addUser(conteudo).then((res) => {
           toast.present();
           sessionStorage.setItem('idUser',res.id)
-          this.router.navigate(["menu/home"])
+          this.router.navigate(["calendar-home"]);
         })
       }
     

@@ -15,13 +15,13 @@
 
   <div padding style="margin-top: -15px;" *ngIf="usuarios.length > 0">
     <div class="primeiro" >
-        <label>{{usuarios[0].nome}}</label>
+        <label>{{usuarios[0].nome.split(' ')[0]}}</label>
       </div>
       <div class="segundo">
-        <label>{{usuarios[1].nome}}</label>
+        <label>{{usuarios[1].nome.split(' ')[0]}}</label>
       </div>
       <div class="terceiro">
-        <label>{{usuarios[2].nome}}</label>
+        <label>{{usuarios[2].nome.split(' ')[0]}}</label>
       </div>
       <img src="../../assets/podium.png" width="400px" style="margin-top: 40px;">
     <div>
