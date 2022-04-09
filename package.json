@@ -55,7 +55,7 @@
     "hammerjs": "^2.0.8",
     "ionic2-calendar": "^0.5.7",
     "mathjs": "^5.10.3",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "ngx-qrcode2": "0.0.9",
     "ngx-qrcode3": "^0.3.0",
     "phonegap-plugin-barcodescanner": "^8.1.0",
